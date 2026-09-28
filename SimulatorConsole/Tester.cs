@@ -7,7 +7,7 @@ using FlightLib;
 
 namespace SimulatorConsole
 {
-    class Program
+    class Tester
     {
 
         static void Main(string[] args)
