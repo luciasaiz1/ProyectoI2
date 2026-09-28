@@ -62,7 +62,7 @@ namespace FlightLib
 
         // METODO VUELO HA LLEGADO A SU DESTINO
 
-        public bool EstaDestino()
+        public bool HasArrived()
         {
             bool resultado = false;
             if (currentPosition == finalPosition)
@@ -94,7 +94,7 @@ namespace FlightLib
             // 2 DECIMALES
             Console.WriteLine("Velocidad: {0:F2}", velocidad);
             Console.WriteLine("Posición actual: ({0:F2},{1:F2})", currentPosition.GetX(), currentPosition.GetY());
-            if (this.EstaDestino())
+            if (this.HasArrived())
             {
                 Console.WriteLine("Ha llegado al destino");
             }
