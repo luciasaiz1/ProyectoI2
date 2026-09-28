@@ -31,7 +31,7 @@ namespace FlightLib
         // setter del atributo velocidad
         { this.velocidad = velocidad; }
 
-        public void Mover(double tiempo)
+        public void Move(double tiempo)
         // Mueve el vuelo a la posición correspondiente a viajar durante el tiempo que se recibe como parámetro
         {
             //Calculamos la distancia recorrida en el tiempo dado

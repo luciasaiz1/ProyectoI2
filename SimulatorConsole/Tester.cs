@@ -71,7 +71,7 @@ namespace SimulatorConsole
 
                 while (i < ciclos)
                 {
-                    lista.Mover(ciclos);
+                    lista.Move(ciclos);
 
 
                     lista.EscribeConsola();
