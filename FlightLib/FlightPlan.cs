@@ -12,6 +12,7 @@ namespace FlightLib
         // Atributos
 
         string id; // identificador
+        Position initialPosition; //posicion inicial
         Position currentPosition; // posicion actual
         Position finalPosition; // posicion final
         double velocidad;
@@ -20,16 +21,65 @@ namespace FlightLib
         public FlightPlan(string id, double cpx, double cpy, double fpx, double fpy, double velocidad)
         {
             this.id = id;
+            this.initialPosition = new Position(cpx, cpy);
             this.currentPosition = new Position(cpx, cpy);
             this.finalPosition = new Position(fpx, fpy);
             this.velocidad = velocidad;
         }
 
-        // Metodos
+        //Getters i Setters
+        public void SetId(string id)
+        {
+            this.id = id;
+        }
+
+        public string GetId()
+        {
+            return this.id;
+        }
+
+        public void SetInitialPosition(Position initialPosition)
+        {
+            this.initialPosition = initialPosition;
+        }
+
+        public Position GetInitialPosition()
+        {
+            return this.initialPosition;
+        }
+
+        public void SetCurrentPosition(Position currentPosition)
+        {
+            this.currentPosition=currentPosition;
+        }
+
+        public Position GetCurrentPosition()
+        {
+            return this.currentPosition;
+        }
+
+        public void SetFinalPosition(Position finalPosition)
+        {
+            this.finalPosition = finalPosition;
+        }
+
+        public Position GetFinalPosition()
+        {
+            return this.finalPosition;
+        }
 
         public void SetVelocidad(double velocidad)
-        // setter del atributo velocidad
-        { this.velocidad = velocidad; }
+        {
+            this.velocidad = velocidad;
+        }
+
+        public double GetVelocidad()
+        {
+            return this.velocidad;
+        }
+
+
+        // Metodos
 
         public void Move(double tiempo)
         // Mueve el vuelo a la posición correspondiente a viajar durante el tiempo que se recibe como parámetro
@@ -82,6 +132,18 @@ namespace FlightLib
             return conflicto;
         }
 
+        public void Restart()
+        {
+            //mueve el avión a la posición inicial
+            this.currentPosition = new Position(this.initialPosition.GetX(), this.initialPosition.GetY());
+        }
+
+        public double Distance(FlightPlan plan)
+        {
+            //devuelve la distancia con el plan de vuelo recibido como argumento
+            double distance = this.currentPosition.Distancia(plan.GetCurrentPosition());
+            return distance;
+        }
 
 
         public void EscribeConsola()
