@@ -72,6 +72,9 @@
     <Compile Include="Simulador.Designer.cs">
       <DependentUpon>Simulador.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="DistanciaSeguridad.resx">
+      <DependentUpon>DistanciaSeguridad.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FlightPlanAdder.resx">
       <DependentUpon>FlightPlanAdder.cs</DependentUpon>
     </EmbeddedResource>
@@ -87,6 +90,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Simulador.resx">
+      <DependentUpon>Simulador.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
