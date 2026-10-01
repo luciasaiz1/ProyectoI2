@@ -17,14 +17,17 @@ namespace FlightLib
         Position finalPosition; // posicion final
         double velocidad;
 
+        string company; //compañia aerea
+
         // Constructures
-        public FlightPlan(string id, double cpx, double cpy, double fpx, double fpy, double velocidad)
+        public FlightPlan(string id, double cpx, double cpy, double fpx, double fpy, double velocidad, string company)
         {
             this.id = id;
             this.initialPosition = new Position(cpx, cpy);
             this.currentPosition = new Position(cpx, cpy);
             this.finalPosition = new Position(fpx, fpy);
             this.velocidad = velocidad;
+            this.company = company;
         }
 
         //Getters i Setters
@@ -78,12 +81,27 @@ namespace FlightLib
             return this.velocidad;
         }
 
+        public void SetCompany(string company)
+        {
+            this.company = company;
+        }
+        public string GetCompany()
+        {
+            return this.company;
+        }
+
 
         // Metodos
 
         public void Move(double tiempo)
         // Mueve el vuelo a la posición correspondiente a viajar durante el tiempo que se recibe como parámetro
         {
+
+            //Si el avion ya llego a su destin, no se mueve
+            if (this.HasArrived())
+            {
+                return;
+            }
             //Calculamos la distancia recorrida en el tiempo dado
             double distancia = tiempo * this.velocidad / 60;
 
@@ -117,6 +135,7 @@ namespace FlightLib
             bool resultado = false;
             if (currentPosition == finalPosition)
                 resultado = true;
+           
 
             return resultado;
         }
@@ -125,7 +144,7 @@ namespace FlightLib
         // DETECTAR CONFLICTO
         public bool Conflicto(FlightPlan b, double DistanciaSeguridad)
         {
-            bool conflicto = true;
+            bool conflicto = false;
             if (this.currentPosition.Distancia(b.currentPosition) < DistanciaSeguridad)
                 conflicto = true;
             

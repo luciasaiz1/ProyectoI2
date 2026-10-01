@@ -59,7 +59,13 @@ namespace Windows
 
         private void SimuladorToolStripMenuItem_Click(object sender, EventArgs e)
         {
-           
+            //proteccion: si faltan parametros, avisamos y no abrimos el simulador
+            if (this.tiempoCiclo <= 0 || this.distanciaSeguridad <= 0)
+            {
+                MessageBox.Show("Introduce primero la distancia de seguridad y el tiempo de ciclo (menu: Parametros)");
+                return;
+            }
+
             if (this.plan1 != null && this.plan2 != null)
             {
               

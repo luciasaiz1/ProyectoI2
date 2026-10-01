@@ -1,6 +1,7 @@
 ﻿using FlightLib;
 using System;
 using System.Drawing;
+using System.Drawing.Text;
 using System.Windows.Forms;
 
 namespace Windows
@@ -12,7 +13,14 @@ namespace Windows
         private double distanciaSeguridad;
         private double tiempoCiclo;
 
-        
+        //dibujo de los aviones como atributos de la clase Simulador
+        private PictureBox pic1;
+        private PictureBox pic2;
+        private const int TAM_AVION = 25;
+
+        //CONSTRUCTOR
+
+
         public Simulador(FlightPlan plan1, FlightPlan plan2, double distancia, double ciclo)
         {
             InitializeComponent();
@@ -22,11 +30,11 @@ namespace Windows
             this.distanciaSeguridad = distancia;
             this.tiempoCiclo = ciclo;
 
-            
+
             this.plan1.Restart();
             this.plan2.Restart();
 
-          
+
             label_info.Text = "Distancia de Seguridad: " + this.distanciaSeguridad + " | Tiempo ciclo: " + this.tiempoCiclo;
 
             MostrarAvionesIniciales();
@@ -34,11 +42,13 @@ namespace Windows
 
         private void MostrarAvionesIniciales()
         {
-            Position pos1 = plan1.GetInitialPosition(); 
+            Position pos1 = plan1.GetInitialPosition();
 
-            PictureBox pic1 = new PictureBox();
-            pic1.Size = new Size(25, 25); 
+            pic1 = new PictureBox();
+            pic1.Size = new Size(25, 25);
             pic1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pic1.BackColor = Color.Transparent;
+
 
             try
             {
@@ -49,18 +59,21 @@ namespace Windows
                 pic1.BackColor = Color.Blue;
             }
 
-            int x1 = (int)pos1.GetX();
-            int y1 = (int)pos1.GetY();
-            pic1.Location = new Point(x1, y1);
+            ColocarAvion(pic1, plan1);
 
             pictureBox_espacioAereo.Controls.Add(pic1);
             pic1.BringToFront();
 
-            Position pos2 = plan2.GetInitialPosition(); 
+            pic1.Cursor = Cursors.Hand; //la manita cuando se pasa el raton por encima
+            pic1.Click += pic1_Click;
 
-            PictureBox pic2 = new PictureBox();
+            Position pos2 = plan2.GetInitialPosition();
+
+            pic2 = new PictureBox();
             pic2.Size = new Size(25, 25);
             pic2.SizeMode = PictureBoxSizeMode.StretchImage;
+            pic2.BackColor = Color.Transparent;
+
 
             try
             {
@@ -71,12 +84,82 @@ namespace Windows
                 pic2.BackColor = Color.Red;
             }
 
-            int x2 = (int)pos2.GetX();
-            int y2 = (int)pos2.GetY();
-            pic2.Location = new Point(x2, y2);
+            ColocarAvion(pic2, plan2);
 
             pictureBox_espacioAereo.Controls.Add(pic2);
             pic2.BringToFront();
+
+            pic2.Cursor = Cursors.Hand;//la manita cuando se pasa el raton por encima
+            pic2.Click += pic2_Click; //cuando se hace click en pic2, ejecuta el pic2_Click
         }
+
+        private void ColocarAvion(PictureBox pic, FlightPlan plan)
+        {
+            Position pos = plan.GetCurrentPosition();
+
+            //Restamos la mitad del tamañno del avión para centrarlo en la posición
+            int x = (int)pos.GetX() - TAM_AVION / 2;
+            int y = (int)pos.GetY() - TAM_AVION / 2;
+            pic.Location = new Point(x, y);
+        }
+
+        private void button_mover_Click(object sender, EventArgs e)
+        {
+
+            //1. Moveremos los aviones en el plan de vuelo con los calculos de FlightLib
+            plan1.Move(tiempoCiclo);
+            plan2.Move(tiempoCiclo);
+
+            //2. Movemos los dibujos a sus nuevas posiciones
+            ColocarAvion(pic1, plan1);
+            ColocarAvion(pic2, plan2);
+
+            //3. Comprobaremos si hay conflicto entre los aviones
+            Conflictolabel.BackColor = Color.Beige;
+
+            if (plan1.Conflicto(plan2, distanciaSeguridad))
+            {
+                Conflictolabel.Text = "¡CONFLICTO! Distancias:" + plan1.Distance(plan2).ToString("F2"); //where ToString("F2") muestra dos decimales
+
+                Conflictolabel.ForeColor = Color.Red;
+
+            }
+
+            else
+            {
+                Conflictolabel.Text = "Sin conflicto. Distancia:" + plan1.Distance(plan2).ToString("F2");
+                Conflictolabel.ForeColor = Color.Green;
+            }
+
+
+            //4. Si los aviones han llegado a su destino terminamos la simulacion
+
+            if (plan1.HasArrived() && plan2.HasArrived())
+            {
+                button_mover.Enabled = false; //where  Enabled = false pone el boton en gris para que no se pueda clicar sobre él.
+                MessageBox.Show("¡Los dos vuelos han llegado a su destino! ✈️ ");
+
+
+            }
+        }
+
+            private void pic1_Click(object sender, EventArgs e)
+        {
+            InfoVuelo info = new InfoVuelo(plan1);
+            info.ShowDialog();
+        }
+
+        private void pic2_Click(object sender, EventArgs e)
+        {
+            InfoVuelo info = new InfoVuelo(plan2);
+            info.ShowDialog();
+        }
+
+
+
+
+
     }
-}
+
+       
+    }
