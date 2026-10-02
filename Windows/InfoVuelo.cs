@@ -19,21 +19,21 @@ namespace Windows
 
             //Plan de vuelo que ha de mostrar
         
-            Position Origen = plan.GetInitialPosition();
-            Position Destino = plan.GetFinalPosition();
-            Position Actual = plan.GetCurrentPosition();
+            Position origen = plan.GetInitialPosition();
+            Position destino = plan.GetFinalPosition();
+            Position actual = plan.GetCurrentPosition();
 
             label_id.Text = plan.GetId();
             label_compania.Text = plan.GetCompany();
-            label_velocidad.Text = "Velocidad" + " : " + plan.GetVelocidad();
-            label_origen.Text = Origen.GetX() + " , " + Origen.GetY();
-            label_destino.Text = Destino.GetX() + " , " + Destino.GetY();
-            label_actual.Text = Actual.GetX().ToString("F2")+ " , " + Actual.GetY().ToString("F2");
+            label_velocidad.Text = Convert.ToString(plan.GetVelocidad());
+            label_origen.Text = origen.GetX() + " , " + origen.GetY();
+            label_destino.Text = destino.GetX() + " , " + destino.GetY();
+            label_actual.Text = actual.GetX()+ " , " + actual.GetY();
 
             if (plan.HasArrived())
-                label_estado.Text = "Estado: Ha llegado a su destino";
+                label_estado.Text = "Ha llegado a su destino";
             else
-                label_estado.Text = "Estado: en vuelo ";
+                label_estado.Text = "En vuelo ";
 
             //el titulo de la ventana muestra el id del vuelo
             this.Text = "Vuelo " + plan.GetId();

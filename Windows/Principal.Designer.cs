@@ -43,7 +43,8 @@
             this.opcionesToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(818, 28);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
+            this.menuStrip1.Size = new System.Drawing.Size(614, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -54,39 +55,40 @@
             this.distanciaDeSeguridadYTiempoDeCicloToolStripMenuItem,
             this.SimuladorToolStripMenuItem});
             this.opcionesToolStripMenuItem.Name = "opcionesToolStripMenuItem";
-            this.opcionesToolStripMenuItem.Size = new System.Drawing.Size(85, 24);
+            this.opcionesToolStripMenuItem.Size = new System.Drawing.Size(69, 20);
             this.opcionesToolStripMenuItem.Text = "Opciones";
             this.opcionesToolStripMenuItem.Click += new System.EventHandler(this.opcionesToolStripMenuItem_Click);
             // 
             // introducirDatosToolStripMenuItem
             // 
             this.introducirDatosToolStripMenuItem.Name = "introducirDatosToolStripMenuItem";
-            this.introducirDatosToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.introducirDatosToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.introducirDatosToolStripMenuItem.Text = "Introducir datos";
             this.introducirDatosToolStripMenuItem.Click += new System.EventHandler(this.introducirDatosToolStripMenuItem_Click);
             // 
             // distanciaDeSeguridadYTiempoDeCicloToolStripMenuItem
             // 
             this.distanciaDeSeguridadYTiempoDeCicloToolStripMenuItem.Name = "distanciaDeSeguridadYTiempoDeCicloToolStripMenuItem";
-            this.distanciaDeSeguridadYTiempoDeCicloToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.distanciaDeSeguridadYTiempoDeCicloToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.distanciaDeSeguridadYTiempoDeCicloToolStripMenuItem.Text = "Parámetros";
             this.distanciaDeSeguridadYTiempoDeCicloToolStripMenuItem.Click += new System.EventHandler(this.distanciaDeSeguridadYTiempoDeCicloToolStripMenuItem_Click);
             // 
             // SimuladorToolStripMenuItem
             // 
             this.SimuladorToolStripMenuItem.Name = "SimuladorToolStripMenuItem";
-            this.SimuladorToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.SimuladorToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.SimuladorToolStripMenuItem.Text = "Simulador";
             this.SimuladorToolStripMenuItem.Click += new System.EventHandler(this.SimuladorToolStripMenuItem_Click);
             // 
             // Principal
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.Info;
-            this.ClientSize = new System.Drawing.Size(818, 427);
+            this.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.ClientSize = new System.Drawing.Size(614, 347);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "Principal";
             this.Text = "Principal";
             this.menuStrip1.ResumeLayout(false);

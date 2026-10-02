@@ -39,7 +39,7 @@ namespace Windows
                 if (plan1 == null)
                 {
                     //Recogemos los datos que se han introducido
-                    plan1 = new FlightPlan(textBox_Id.Text, Convert.ToDouble(textBox_currentPositionX.Text), Convert.ToDouble(textBox_currentPositionY.Text), Convert.ToDouble(textBox_finalPositionX.Text), Convert.ToDouble(textBox_finalPositionY.Text), Convert.ToDouble(textBox_velocidad.Text), textBox1.Text = "");
+                    plan1 = new FlightPlan(textBox_Id.Text, Convert.ToDouble(textBox_currentPositionX.Text), Convert.ToDouble(textBox_currentPositionY.Text), Convert.ToDouble(textBox_finalPositionX.Text), Convert.ToDouble(textBox_finalPositionY.Text), Convert.ToDouble(textBox_velocidad.Text), name_company.Text);
                     MessageBox.Show("Primer plan de vuelo introducido! Introduce ahora el segundo plan de vuelo.");
 
                     //Vaciamos el TextBox para poder escribir los datos del segundo avión
@@ -49,14 +49,14 @@ namespace Windows
                     textBox_finalPositionX.Text = "";
                     textBox_finalPositionY.Text = "";
                     textBox_velocidad.Text = "";
-                    textBox1.Text = "";
+                    name_company.Text = "";
 
                 }
 
                 else if (plan2 == null)
                 {
                     //Hacemos lo mismo para el segundo plan de vuelo
-                    plan2 = new FlightPlan(textBox_Id.Text, Convert.ToDouble(textBox_currentPositionX.Text), Convert.ToDouble(textBox_currentPositionY.Text), Convert.ToDouble(textBox_finalPositionX.Text), Convert.ToDouble(textBox_finalPositionY.Text), Convert.ToDouble(textBox_velocidad.Text), textBox1.Text = "");
+                    plan2 = new FlightPlan(textBox_Id.Text, Convert.ToDouble(textBox_currentPositionX.Text), Convert.ToDouble(textBox_currentPositionY.Text), Convert.ToDouble(textBox_finalPositionX.Text), Convert.ToDouble(textBox_finalPositionY.Text), Convert.ToDouble(textBox_velocidad.Text), name_company.Text);
                     MessageBox.Show("Se han introducido los dos planes de vuelo!");
                     Close();
                 }
