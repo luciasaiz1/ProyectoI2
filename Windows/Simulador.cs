@@ -1,5 +1,6 @@
 ﻿using FlightLib;
 using System;
+using System.Data;
 using System.Drawing;
 using System.Drawing.Text;
 using System.Windows.Forms;
@@ -16,6 +17,8 @@ namespace Windows
         //dibujo de los aviones como atributos de la clase Simulador
         private PictureBox pic1;
         private PictureBox pic2;
+        private Graphics line1;
+        private Graphics line2;
         private const int TAM_AVION = 25;
 
         //CONSTRUCTOR
@@ -91,6 +94,8 @@ namespace Windows
 
             pic2.Cursor = Cursors.Hand;//la manita cuando se pasa el raton por encima
             pic2.Click += pic2_Click; //cuando se hace click en pic2, ejecuta el pic2_Click
+
+            pictureBox_espacioAereo.Paint += pictureBox_espacioAereo_Paint;
         }
 
         private void ColocarAvion(PictureBox pic, FlightPlan plan)
@@ -138,12 +143,54 @@ namespace Windows
             {
                 button_mover.Enabled = false; //where  Enabled = false pone el boton en gris para que no se pueda clicar sobre él.
                 MessageBox.Show("¡Los dos vuelos han llegado a su destino! ✈️ ");
+            }
 
+            pictureBox_espacioAereo.Invalidate();
+        }
 
+        private void pictureBox_espacioAereo_Paint(object sender, PaintEventArgs e)
+        {
+            Trajectories(plan1, e.Graphics);
+            Trajectories(plan2, e.Graphics);
+
+            Position p1 = plan1.GetCurrentPosition();
+            Position p2 = plan2.GetCurrentPosition();
+
+            SecurityDistance(plan1, plan2, e.Graphics, (float)p1.GetX(), (float)p1.GetY(), (float)distanciaSeguridad/2);
+            SecurityDistance(plan1, plan2, e.Graphics, (float)p2.GetX(), (float)p2.GetY(), (float)distanciaSeguridad/2);
+        }
+
+        private void Trajectories(FlightPlan plan, Graphics g)
+        {
+            using (Pen lapiz = new Pen(Color.White, 1))
+            {
+                Point initial = new Point(Convert.ToInt32(plan.GetInitialPosition().GetX()), Convert.ToInt32(plan.GetInitialPosition().GetY()));
+                Point final = new Point(Convert.ToInt32(plan.GetFinalPosition().GetX()), Convert.ToInt32(plan.GetFinalPosition().GetY()));
+                g.DrawLine(lapiz, initial, final);
+            }
+        }
+        private void SecurityDistance(FlightPlan plan1, FlightPlan plan2, Graphics g, float centroX, float centroY, float radio)
+        {
+            bool problems = plan1.Conflicto(plan2, this.distanciaSeguridad);
+            
+            if (problems)
+            {
+                using (Pen lapiz = new Pen(Color.Red, 2))
+                {
+                    g.DrawEllipse(lapiz, centroX - radio, centroY - radio, radio * 2, radio * 2);
+                }
+            }
+            else
+            {
+                using (Pen lapiz = new Pen(Color.White, 1))
+                {
+                    g.DrawEllipse(lapiz, centroX - radio, centroY - radio, radio * 2, radio * 2);
+                }
             }
         }
 
-            private void pic1_Click(object sender, EventArgs e)
+
+        private void pic1_Click(object sender, EventArgs e)
         {
             InfoVuelo info = new InfoVuelo(plan1);
             info.ShowDialog();
@@ -154,10 +201,6 @@ namespace Windows
             InfoVuelo info = new InfoVuelo(plan2);
             info.ShowDialog();
         }
-
-
-
-
 
     }
 

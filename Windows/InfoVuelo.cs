@@ -37,11 +37,11 @@ namespace Windows
 
             //el titulo de la ventana muestra el id del vuelo
             this.Text = "Vuelo " + plan.GetId();
-
-
-
         }
 
-        
+        private void button_cerrar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
