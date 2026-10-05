@@ -17,8 +17,6 @@ namespace Windows
         //dibujo de los aviones como atributos de la clase Simulador
         private PictureBox pic1;
         private PictureBox pic2;
-        private Graphics line1;
-        private Graphics line2;
         private const int TAM_AVION = 25;
 
         //CONSTRUCTOR
@@ -156,8 +154,8 @@ namespace Windows
             Position p1 = plan1.GetCurrentPosition();
             Position p2 = plan2.GetCurrentPosition();
 
-            SecurityDistance(plan1, plan2, e.Graphics, (float)p1.GetX(), (float)p1.GetY(), (float)distanciaSeguridad/2);
-            SecurityDistance(plan1, plan2, e.Graphics, (float)p2.GetX(), (float)p2.GetY(), (float)distanciaSeguridad/2);
+            SecurityDistance(e.Graphics, (float)p1.GetX(), (float)p1.GetY(), (float)distanciaSeguridad/2);
+            SecurityDistance(e.Graphics, (float)p2.GetX(), (float)p2.GetY(), (float)distanciaSeguridad/2);
         }
 
         private void Trajectories(FlightPlan plan, Graphics g)
@@ -169,7 +167,7 @@ namespace Windows
                 g.DrawLine(lapiz, initial, final);
             }
         }
-        private void SecurityDistance(FlightPlan plan1, FlightPlan plan2, Graphics g, float centroX, float centroY, float radio)
+        private void SecurityDistance(Graphics g, float centroX, float centroY, float radio)
         {
             bool problems = plan1.Conflicto(plan2, this.distanciaSeguridad);
             
