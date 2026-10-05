@@ -50,10 +50,7 @@ namespace Windows
                 this.distanciaSeguridad = form.GetDistanciaSeguridad();
                 this.tiempoCiclo = form.GetTiempoCiclo();
 
-                MessageBox.Show($"Datos guardados correctamente:\nDistancia: {this.distanciaSeguridad}\nTiempo de ciclo: {this.tiempoCiclo}",
-                                "Configuración actualizada",
-                                MessageBoxButtons.OK,
-                                MessageBoxIcon.Information);
+                MessageBox.Show($"Guardado. Distancia de Seguridad: {distanciaSeguridad}, Tiempo de Ciclo: {tiempoCiclo}");
             }
         }
 
