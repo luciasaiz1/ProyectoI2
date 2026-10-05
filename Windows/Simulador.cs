@@ -202,6 +202,57 @@ namespace Windows
             info.ShowDialog();
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (button1.Text == "Automatico")
+            {
+                button1.Text = "Parar";
+                reloj.Interval = 100;
+                reloj.Start();
+            }
+            else
+            {
+                button1.Text = "Automatico";
+                reloj.Stop();
+            }
+        }
+
+ 
+        private void reloj_Tick(object sender, EventArgs e)
+        {
+            plan1.Move(tiempoCiclo);
+            plan2.Move(tiempoCiclo);
+            ColocarAvion(pic1, plan1);
+            ColocarAvion(pic2, plan2);
+
+
+            Conflictolabel.BackColor = Color.Beige;
+
+            if (plan1.Conflicto(plan2, distanciaSeguridad))
+            {
+                Conflictolabel.Text = "¡CONFLICTO! Distancias:" + plan1.Distance(plan2).ToString("F2"); //where ToString("F2") muestra dos decimales
+
+                Conflictolabel.ForeColor = Color.Red;
+
+            }
+
+            else
+            {
+                Conflictolabel.Text = "Sin conflicto. Distancia:" + plan1.Distance(plan2).ToString("F2");
+                Conflictolabel.ForeColor = Color.Green;
+            }
+
+
+            //4. Si los aviones han llegado a su destino terminamos la simulacion
+
+            if (plan1.HasArrived() && plan2.HasArrived())
+            {
+                button_mover.Enabled = false; //where  Enabled = false pone el boton en gris para que no se pueda clicar sobre él.
+                MessageBox.Show("¡Los dos vuelos han llegado a su destino! ✈️ ");
+            }
+
+            pictureBox_espacioAereo.Invalidate();
+        }
     }
 
        
