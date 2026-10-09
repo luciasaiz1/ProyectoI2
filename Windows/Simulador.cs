@@ -251,6 +251,27 @@ namespace Windows
 
             pictureBox_espacioAereo.Invalidate();
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //Si la simulacion automatica esta en marcha, la pausamos mientras preguntamos
+            bool estabaEnAutomatico = reloj.Enabled;
+            reloj.Stop();
+
+            if (plan1.AnticiparConflicto(plan2, distanciaSeguridad, tiempoCiclo))
+            {
+                MessageBox.Show("¡ATENCIÓN! Si mantienen su velocidad, los vuelos " + plan1.GetId() + " y " + plan2.GetId() + "Entraran en conflicto (estarán a menos de " + distanciaSeguridad + " de distancia).", "Anticipar conflicto", MessageBoxButtons.OK, MessageBoxIcon.Warning); ;
+            }
+            else
+            {
+                MessageBox.Show("Los vuelos " + plan1.GetId() + "y" + plan2.GetId() + "No entraran en conflicto.", "Anticipar conflicto", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
+            //Si estaba en automatico, seguimos
+            if (estabaEnAutomatico)
+                reloj.Start();
+
+        }
     }
 
        

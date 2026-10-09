@@ -151,6 +151,47 @@ namespace FlightLib
             return conflicto;
         }
 
+        //ANTICIPAR CONFLICTO
+
+        public bool AnticiparConflicto(FlightPlan b, double distanciaSeguridad, double tiempoCiclo)
+        {
+
+            //1. Guardar ahora donde estan los dos aviones
+            Position guardadaA = this.currentPosition;
+            Position guardadaB = b.currentPosition;
+
+            //2. Usamos pasos 10 veces mas pequenos que el ciclo para no "saltarnos"  un conflicto
+            double paso = tiempoCiclo / 10;
+            bool conflicto = false;
+            int pasos = 0; //seguridad: evita un bucle infinito si una velocidad es cero
+
+            //3. Ensayo general: avanzamos hasta que haya conflicto o hasta que los dos lleguem
+            while (!conflicto && !(this.HasArrived() && b.HasArrived()) && pasos < 100000)
+            {
+                if (this.Conflicto(b,distanciaSeguridad))
+                {
+                    conflicto = true;
+                }
+                else
+                {
+                    this.Move(paso);
+                    b.Move(paso);
+                    pasos++;
+                }
+            }
+            if (!conflicto && this.Conflicto(b, distanciaSeguridad))
+            {
+                conflicto = true;
+            }
+            //5. Devolvemos los aviones a donde estaban antes de la simulación
+            this.currentPosition = guardadaA;
+            b.currentPosition = guardadaB;
+            return conflicto;
+        }
+
+        //4. comprobamos tambien la posicion final por si acaban demasiado cerca
+       
+        
         public void Restart()
         {
             //mueve el avión a la posición inicial
