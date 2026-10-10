@@ -189,9 +189,32 @@ namespace FlightLib
             return conflicto;
         }
 
+        // Baja la velocidad de este vuelo un 10% cada vez hasta que ya no haya conflicto.
+        // Devuelve true si lo consigue. Si no lo consigue (porque, por ejemplo, los dos vuelos empiezan muy juntos), deja la velocidad como estaba.
+        public bool ResolverConflicto(FlightPlan b, double distanciaSeguridad, double tiempoCiclo)
+        {
+            double velocidadOriginal = this.velocidad; // la guardamos por si no se puede resolver
+            int intentos = 0;
+            bool conflicto = this.AnticiparConflicto(b, distanciaSeguridad, tiempoCiclo); //este metodo devuelve true si hay conflicto, false si no lo hay
+
+            while (conflicto && intentos < 20) // maximo 20 intentos para no quedarnos en un bucle infinito
+            {
+                this.velocidad = this.velocidad * 0.9; // bajamos la velocidad un 10%
+                conflicto = this.AnticiparConflicto(b, distanciaSeguridad, tiempoCiclo); //devuelve true o false
+                intentos++;
+            }
+
+            if (conflicto)
+            {
+                this.velocidad = velocidadOriginal; // no se ha podido: dejamos la velocidad como estaba
+                return false;
+            }
+            return true;
+        }
+
         //4. comprobamos tambien la posicion final por si acaban demasiado cerca
-       
-        
+
+
         public void Restart()
         {
             //mueve el avión a la posición inicial

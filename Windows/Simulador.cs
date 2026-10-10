@@ -13,6 +13,7 @@ namespace Windows
         private FlightPlan plan2;
         private double distanciaSeguridad;
         private double tiempoCiclo;
+        private bool conflictoRevisado = false; // variable para controlar si ya hemos revisado el conflicto inicial
 
         //dibujo de los aviones como atributos de la clase Simulador
         private PictureBox pic1;
@@ -106,9 +107,34 @@ namespace Windows
             pic.Location = new Point(x, y);
         }
 
+        private void RevisarConflictoInicial()
+        {
+            if (conflictoRevisado)
+                return; // solo se pregunta la primera vez
+            conflictoRevisado = true;
+
+            if (plan1.AnticiparConflicto(plan2, distanciaSeguridad, tiempoCiclo))
+            {
+                DialogResult respuesta = MessageBox.Show("Los vuelos " + plan1.GetId() + " y " + plan2.GetId() + " entrarán en conflicto. ¿Quieres resolverlo?", "Conflicto", MessageBoxButtons.YesNo, MessageBoxIcon.Warning); 
+
+                if (respuesta == DialogResult.Yes)
+                {
+                    // bajamos la velocidad del vuelo 2 hasta que no haya conflicto
+                    if (plan2.ResolverConflicto(plan1, distanciaSeguridad, tiempoCiclo))
+                    {
+                        MessageBox.Show("Conflicto resuelto. Nueva velocidad del vuelo " + plan2.GetId() + ": " + plan2.GetVelocidad().ToString("F2")); //where ToString("F2") muestra dos decimales
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se ha podido resolver el conflicto. La simulación continuará igual.");
+                    }
+                }
+            }
+        }
+
         private void button_mover_Click(object sender, EventArgs e)
         {
-
+            RevisarConflictoInicial(); //Comprobamos si hay conflicto antes de mover los aviones
             //1. Moveremos los aviones en el plan de vuelo con los calculos de FlightLib
             plan1.Move(tiempoCiclo);
             plan2.Move(tiempoCiclo);
@@ -139,6 +165,7 @@ namespace Windows
 
             if (plan1.HasArrived() && plan2.HasArrived())
             {
+                button1.Enabled = false; // el boton se pone en gris para que no se pueda clicar sobre él.
                 button_mover.Enabled = false; //where  Enabled = false pone el boton en gris para que no se pueda clicar sobre él.
                 MessageBox.Show("¡Los dos vuelos han llegado a su destino! ✈️ ");
             }
@@ -204,13 +231,16 @@ namespace Windows
         {
             if (button1.Text == "Automatico")
             {
+                RevisarConflictoInicial(); //Comprobamos si hay conflicto antes de mover los aviones
                 button1.Text = "Parar";
+                button_mover.Enabled = false; //where  Enabled = false pone el boton en gris para que no se pueda clicar sobre él.
                 reloj.Interval = 100;
                 reloj.Start();
             }
             else
             {
                 button1.Text = "Automatico";
+                button_mover.Enabled = true; //where  Enabled = true pone el boton en color para que se pueda clicar sobre él.
                 reloj.Stop();
             }
         }
@@ -245,6 +275,8 @@ namespace Windows
 
             if (plan1.HasArrived() && plan2.HasArrived())
             {
+                reloj.Stop(); // paramos el reloj antes del messagebox para que no se ejecute otra vez el tick mientras se muestra el mensaje
+                button1.Enabled = false; // el boton se pone en gris para que no se pueda clicar sobre él.
                 button_mover.Enabled = false; //where  Enabled = false pone el boton en gris para que no se pueda clicar sobre él.
                 MessageBox.Show("¡Los dos vuelos han llegado a su destino! ✈️ ");
             }
@@ -260,11 +292,11 @@ namespace Windows
 
             if (plan1.AnticiparConflicto(plan2, distanciaSeguridad, tiempoCiclo))
             {
-                MessageBox.Show("¡ATENCIÓN! Si mantienen su velocidad, los vuelos " + plan1.GetId() + " y " + plan2.GetId() + "Entraran en conflicto (estarán a menos de " + distanciaSeguridad + " de distancia).", "Anticipar conflicto", MessageBoxButtons.OK, MessageBoxIcon.Warning); ;
+                MessageBox.Show("¡ATENCIÓN! Si mantienen su velocidad, los vuelos " + plan1.GetId() + " y " + plan2.GetId() + " entraran en conflicto (estarán a menos de " + distanciaSeguridad + " de distancia).", "Anticipar conflicto", MessageBoxButtons.OK, MessageBoxIcon.Warning); ;
             }
             else
             {
-                MessageBox.Show("Los vuelos " + plan1.GetId() + "y" + plan2.GetId() + "No entraran en conflicto.", "Anticipar conflicto", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Los vuelos " + plan1.GetId() + " y " + plan2.GetId() + " no entraran en conflicto.", "Anticipar conflicto", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
             //Si estaba en automatico, seguimos
