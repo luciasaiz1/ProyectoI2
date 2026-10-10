@@ -58,6 +58,18 @@
     <Compile Include="FlightPlanAdder.Designer.cs">
       <DependentUpon>FlightPlanAdder.cs</DependentUpon>
     </Compile>
+    <Compile Include="DatosVuelos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DatosVuelos.Designer.cs">
+      <DependentUpon>DatosVuelos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DistanciaVuelo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DistanciaVuelo.Designer.cs">
+      <DependentUpon>DistanciaVuelo.cs</DependentUpon>
+    </Compile>
     <Compile Include="InfoVuelo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -78,8 +90,14 @@
     <Compile Include="Simulador.Designer.cs">
       <DependentUpon>Simulador.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="DatosVuelos.resx">
+      <DependentUpon>DatosVuelos.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DistanciaSeguridad.resx">
       <DependentUpon>DistanciaSeguridad.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DistanciaVuelo.resx">
+      <DependentUpon>DistanciaVuelo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FlightPlanAdder.resx">
       <DependentUpon>FlightPlanAdder.cs</DependentUpon>

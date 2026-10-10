@@ -13,7 +13,8 @@ namespace Windows
         private FlightPlan plan2;
         private double distanciaSeguridad;
         private double tiempoCiclo;
-        private bool conflictoRevisado = false; // variable para controlar si ya hemos revisado el conflicto inicial
+        private bool conflictoRevisado = false; // variable para controlar si ya hemos REVISADO el conflicto inicial
+        private bool avisoMostrado = false; // variable para controlar si ya hemos MOSTRADO el aviso de conflicto
 
         //dibujo de los aviones como atributos de la clase Simulador
         private PictureBox pic1;
@@ -131,6 +132,21 @@ namespace Windows
                 }
             }
         }
+        private void AvisarConflicto()
+        {
+            if (avisoMostrado)
+                return; // ya hemos avisado de este conflicto
+            avisoMostrado = true;
+
+            // Paramos la simulacion automatica mientras sale el aviso (igual que en button2_Click)
+            bool estabaEnAutomatico = reloj.Enabled;
+            reloj.Stop();
+
+            MessageBox.Show("¡ALERTA! Los vuelos " + plan1.GetId() + " y " + plan2.GetId() + " han perdido la separación: están a menos de " + distanciaSeguridad + " de distancia.", "Pérdida de separación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+            if (estabaEnAutomatico)
+                reloj.Start();
+        }
 
         private void button_mover_Click(object sender, EventArgs e)
         {
@@ -151,13 +167,14 @@ namespace Windows
                 Conflictolabel.Text = "¡CONFLICTO! Distancias:" + plan1.Distance(plan2).ToString("F2"); //where ToString("F2") muestra dos decimales
 
                 Conflictolabel.ForeColor = Color.Red;
-
+                AvisarConflicto();
             }
 
             else
             {
                 Conflictolabel.Text = "Sin conflicto. Distancia:" + plan1.Distance(plan2).ToString("F2");
                 Conflictolabel.ForeColor = Color.Green;
+                avisoMostrado = false;
             }
 
 
@@ -261,13 +278,14 @@ namespace Windows
                 Conflictolabel.Text = "¡CONFLICTO! Distancias:" + plan1.Distance(plan2).ToString("F2"); //where ToString("F2") muestra dos decimales
 
                 Conflictolabel.ForeColor = Color.Red;
-
+                AvisarConflicto();
             }
 
             else
             {
                 Conflictolabel.Text = "Sin conflicto. Distancia:" + plan1.Distance(plan2).ToString("F2");
                 Conflictolabel.ForeColor = Color.Green;
+                avisoMostrado = false;
             }
 
 
@@ -303,6 +321,20 @@ namespace Windows
             if (estabaEnAutomatico)
                 reloj.Start();
 
+        }
+
+        private void button_datos_Click(object sender, EventArgs e)
+        {
+            // Pausamos la simulacion automatica mientras miramos los datos (igual que en button2_Click)
+            bool estabaEnAutomatico = reloj.Enabled;
+            reloj.Stop();
+
+            DatosVuelos form = new DatosVuelos(plan1, plan2);
+            form.ShowDialog();
+
+            // Si estaba en automatico, seguimos
+            if (estabaEnAutomatico)
+                reloj.Start();
         }
     }
 
