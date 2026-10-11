@@ -102,7 +102,7 @@ namespace Windows
         {
             Position pos = plan.GetCurrentPosition();
 
-            //Restamos la mitad del tamañno del avión para centrarlo en la posición
+            //Restamos la mitad del tamaño del avión para centrarlo en la posición
             int x = (int)pos.GetX() - TAM_AVION / 2;
             int y = (int)pos.GetY() - TAM_AVION / 2;
             pic.Location = new Point(x, y);
@@ -198,7 +198,7 @@ namespace Windows
             Position p1 = plan1.GetCurrentPosition();
             Position p2 = plan2.GetCurrentPosition();
 
-            SecurityDistance(e.Graphics, (float)p1.GetX(), (float)p1.GetY(), (float)distanciaSeguridad/2);
+            SecurityDistance(e.Graphics, (float)p1.GetX(), (float)p1.GetY(), (float)distanciaSeguridad/2); //distanciaSeguridad/2 porque el radio es la mitad de la distancia de seguridad
             SecurityDistance(e.Graphics, (float)p2.GetX(), (float)p2.GetY(), (float)distanciaSeguridad/2);
         }
 

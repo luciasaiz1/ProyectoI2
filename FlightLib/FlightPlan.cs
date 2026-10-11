@@ -183,7 +183,7 @@ namespace FlightLib
             {
                 conflicto = true;
             }
-            //5. Devolvemos los aviones a donde estaban antes de la simulación
+            //4. Devolvemos los aviones a donde estaban antes de la simulación
             this.currentPosition = guardadaA;
             b.currentPosition = guardadaB;
             return conflicto;
@@ -212,7 +212,6 @@ namespace FlightLib
             return true;
         }
 
-        //4. comprobamos tambien la posicion final por si acaban demasiado cerca
 
 
         public void Restart()

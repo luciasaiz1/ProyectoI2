@@ -17,6 +17,7 @@ namespace Windows
     {
         private FlightPlan plan1;
         private FlightPlan plan2;
+
         public DatosVuelos(FlightPlan plan1, FlightPlan plan2)
         {
 
