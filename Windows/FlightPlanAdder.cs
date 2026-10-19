@@ -83,7 +83,7 @@ namespace Windows
 
         private void button1_Click(object sender, EventArgs e)
         {
-            plan1 = new FlightPlan("A1", 0, 0, 200, 200, 10, "Compañia 1");
+            plan1 = new FlightPlan("A1", 0, 0, 200, 200, 20, "Compañia 1");
             plan2 = new FlightPlan("A2", 200, 0, 0, 200, 20, "Compañia 2");
             MessageBox.Show("Vuelos añadidos correctamente");
             Close();

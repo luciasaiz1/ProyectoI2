@@ -143,8 +143,6 @@ namespace Windows
             bool estabaEnAutomatico = reloj.Enabled;
             reloj.Stop();
 
-            MessageBox.Show("¡ALERTA! Los vuelos " + plan1.GetId() + " y " + plan2.GetId() + " han perdido la separación: están a menos de " + distanciaSeguridad + " de distancia.", "Pérdida de separación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
             if (estabaEnAutomatico)
                 reloj.Start();
         }
