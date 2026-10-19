@@ -345,6 +345,17 @@ namespace Windows
             if (estabaEnAutomatico)
                 reloj.Start();
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            plan1.Restart();
+            plan2.Restart();
+            conflictoRevisado = false;
+            avisoMostrado = false;
+            RevisarConflictoInicial();
+            ColocarAvion(pic1, plan1);
+            ColocarAvion(pic2, plan2);
+        }
     }
 
        

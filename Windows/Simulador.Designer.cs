@@ -37,6 +37,7 @@
             this.reloj = new System.Windows.Forms.Timer(this.components);
             this.button2 = new System.Windows.Forms.Button();
             this.button_datos = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_espacioAereo)).BeginInit();
             this.SuspendLayout();
             // 
@@ -122,12 +123,24 @@
             this.button_datos.UseVisualStyleBackColor = true;
             this.button_datos.Click += new System.EventHandler(this.button_datos_Click);
             // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(450, 473);
+            this.button3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(200, 30);
+            this.button3.TabIndex = 8;
+            this.button3.Text = "Reset";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
             // Simulador
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSteelBlue;
             this.ClientSize = new System.Drawing.Size(662, 553);
+            this.Controls.Add(this.button3);
             this.Controls.Add(this.button_datos);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
@@ -154,5 +167,6 @@
         private System.Windows.Forms.Timer reloj;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button_datos;
+        private System.Windows.Forms.Button button3;
     }
 }

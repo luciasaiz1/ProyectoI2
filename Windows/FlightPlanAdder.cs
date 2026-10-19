@@ -36,11 +36,25 @@ namespace Windows
         {
             try
             {
+                if (Convert.ToInt32(textBox_velocidad.Text) < 0)
+                {
+                    MessageBox.Show("La velocidad debe ser un valor positivo");
+                    return;
+                }
+                if (Convert.ToInt32(textBox_velocidad.Text) > 1000)
+                {
+                    MessageBox.Show("La velocidad debe ser un valor menor");
+                    return;
+                }
+                if (Convert.ToInt32(textBox_currentPositionX.Text) < 0 || Convert.ToInt32(textBox_currentPositionY.Text) < 0 || Convert.ToInt32(textBox_finalPositionX.Text) < 0 || Convert.ToInt32(textBox_finalPositionY.Text) < 0)
+                {
+                    MessageBox.Show("Las posiciones deben ser valores positivos");
+                    return;
+                }
                 if (plan1 == null)
                 {
                     //Recogemos los datos que se han introducido
                     plan1 = new FlightPlan(textBox_Id.Text, Convert.ToDouble(textBox_currentPositionX.Text), Convert.ToDouble(textBox_currentPositionY.Text), Convert.ToDouble(textBox_finalPositionX.Text), Convert.ToDouble(textBox_finalPositionY.Text), Convert.ToDouble(textBox_velocidad.Text), name_company.Text);
-                    MessageBox.Show("Primer plan de vuelo introducido! Introduce ahora el segundo plan de vuelo.");
 
                     //Vaciamos el TextBox para poder escribir los datos del segundo avión
                     textBox_Id.Text = "";
@@ -57,7 +71,7 @@ namespace Windows
                 {
                     //Hacemos lo mismo para el segundo plan de vuelo
                     plan2 = new FlightPlan(textBox_Id.Text, Convert.ToDouble(textBox_currentPositionX.Text), Convert.ToDouble(textBox_currentPositionY.Text), Convert.ToDouble(textBox_finalPositionX.Text), Convert.ToDouble(textBox_finalPositionY.Text), Convert.ToDouble(textBox_velocidad.Text), name_company.Text);
-                    MessageBox.Show("Se han introducido los dos planes de vuelo!");
+                    MessageBox.Show("Vuelos añadidos correctamente");
                     Close();
                 }
             }
@@ -65,6 +79,14 @@ namespace Windows
             {
                 MessageBox.Show("Error en los datos introducidos");
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            plan1 = new FlightPlan("A1", 0, 0, 200, 200, 10, "Compañia 1");
+            plan2 = new FlightPlan("A2", 200, 0, 0, 200, 20, "Compañia 2");
+            MessageBox.Show("Vuelos añadidos correctamente");
+            Close();
         }
     }
 }

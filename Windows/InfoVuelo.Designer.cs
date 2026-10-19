@@ -43,6 +43,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label_id
@@ -135,7 +136,7 @@
             this.button_cerrar.BackColor = System.Drawing.SystemColors.Control;
             this.button_cerrar.ForeColor = System.Drawing.SystemColors.ControlText;
             this.button_cerrar.Location = new System.Drawing.Point(91, 444);
-            this.button_cerrar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button_cerrar.Margin = new System.Windows.Forms.Padding(4);
             this.button_cerrar.Name = "button_cerrar";
             this.button_cerrar.Size = new System.Drawing.Size(160, 31);
             this.button_cerrar.TabIndex = 8;
@@ -232,12 +233,26 @@
             this.label6.Text = "Estado";
             this.label6.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
             // 
+            // label8
+            // 
+            this.label8.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.label8.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.label8.Location = new System.Drawing.Point(276, 136);
+            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(135, 45);
+            this.label8.TabIndex = 19;
+            this.label8.Text = "Click a la velocidad para cambiarla";
+            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // InfoVuelo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.ClientSize = new System.Drawing.Size(344, 487);
+            this.ClientSize = new System.Drawing.Size(439, 487);
+            this.Controls.Add(this.label8);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label5);
@@ -254,7 +269,7 @@
             this.Controls.Add(this.label_compania);
             this.Controls.Add(this.label_id);
             this.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "InfoVuelo";
             this.Text = "Informacion de Vuelo";
             this.ResumeLayout(false);
@@ -279,5 +294,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label8;
     }
 }
