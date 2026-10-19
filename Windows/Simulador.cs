@@ -40,6 +40,7 @@ namespace Windows
 
             label_info.Text = "Distancia de Seguridad: " + this.distanciaSeguridad + " | Tiempo ciclo: " + this.tiempoCiclo;
 
+            RevisarConflictoInicial();
             MostrarAvionesIniciales();
         }
 
@@ -230,18 +231,26 @@ namespace Windows
                 }
             }
         }
-
-
         private void pic1_Click(object sender, EventArgs e)
         {
             InfoVuelo info = new InfoVuelo(plan1);
             info.ShowDialog();
+            plan1.Restart();
+            plan2.Restart();
+            conflictoRevisado = false;
+            avisoMostrado = false;
+            RevisarConflictoInicial();
         }
 
         private void pic2_Click(object sender, EventArgs e)
         {
             InfoVuelo info = new InfoVuelo(plan2);
             info.ShowDialog();
+            plan1.Restart();
+            plan2.Restart();
+            conflictoRevisado = false;
+            avisoMostrado = false;
+            RevisarConflictoInicial();
         }
 
         private void button1_Click(object sender, EventArgs e)

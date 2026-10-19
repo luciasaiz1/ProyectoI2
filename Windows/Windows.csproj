@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CambioVelocidad.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CambioVelocidad.Designer.cs">
+      <DependentUpon>CambioVelocidad.cs</DependentUpon>
+    </Compile>
     <Compile Include="DistanciaSeguridad.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -90,6 +96,9 @@
     <Compile Include="Simulador.Designer.cs">
       <DependentUpon>Simulador.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="CambioVelocidad.resx">
+      <DependentUpon>CambioVelocidad.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DatosVuelos.resx">
       <DependentUpon>DatosVuelos.cs</DependentUpon>
     </EmbeddedResource>

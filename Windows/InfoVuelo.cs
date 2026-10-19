@@ -13,12 +13,14 @@ namespace Windows
 {
     public partial class InfoVuelo : Form
     {
+        private FlightPlan plan;
         public InfoVuelo(FlightPlan plan) //para crearme, darme un flight plan que lo llamaré plan
         {
             InitializeComponent();
+            this.plan = plan;
 
             //Plan de vuelo que ha de mostrar
-        
+
             Position origen = plan.GetInitialPosition();
             Position destino = plan.GetFinalPosition();
             Position actual = plan.GetCurrentPosition();
@@ -42,6 +44,14 @@ namespace Windows
         private void button_cerrar_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void label_velocidad_Click(object sender, EventArgs e)
+        {
+
+            CambioVelocidad vel = new CambioVelocidad(plan);
+            vel.ShowDialog();
+            Close();
         }
     }
 }
