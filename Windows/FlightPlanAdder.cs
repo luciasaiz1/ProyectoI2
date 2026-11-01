@@ -83,10 +83,12 @@ namespace Windows
 
         private void button1_Click(object sender, EventArgs e)
         {
-            plan1 = new FlightPlan("A1", 0, 0, 200, 200, 20, "Compañia 1");
-            plan2 = new FlightPlan("A2", 200, 0, 0, 200, 20, "Compañia 2");
+            plan1 = new FlightPlan("VY2986", 0, 200, 400, 200, 60, "Vueling");
+            plan2 = new FlightPlan("IB412", 200, 0, 200, 400, 60, "Iberia");
             MessageBox.Show("Vuelos añadidos correctamente");
             Close();
         }
+
+       
     }
 }

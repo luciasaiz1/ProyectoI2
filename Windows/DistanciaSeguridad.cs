@@ -84,7 +84,7 @@ namespace Windows
 
         private void button1_Click(object sender, EventArgs e)
         {
-            distanciaSeguridad = 20;
+            distanciaSeguridad = 40;
             tiempoCiclo = 10;
             this.DialogResult = DialogResult.OK;
             this.Close();

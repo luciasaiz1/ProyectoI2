@@ -1,6 +1,7 @@
 ﻿using FlightLib;
 using System;
 using System.Data;
+using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.Drawing.Text;
 using System.Windows.Forms;
@@ -117,7 +118,7 @@ namespace Windows
 
             if (plan1.AnticiparConflicto(plan2, distanciaSeguridad, tiempoCiclo))
             {
-                DialogResult respuesta = MessageBox.Show("Los vuelos " + plan1.GetId() + " y " + plan2.GetId() + " entrarán en conflicto. ¿Quieres resolverlo?", "Conflicto", MessageBoxButtons.YesNo, MessageBoxIcon.Warning); 
+                DialogResult respuesta = MessageBox.Show("Los vuelos " + plan1.GetId() + " y " + plan2.GetId() + " entrarán en conflicto. ¿Quieres resolverlo?", "Conflicto", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
                 if (respuesta == DialogResult.Yes)
                 {
@@ -151,6 +152,7 @@ namespace Windows
         {
             RevisarConflictoInicial(); //Comprobamos si hay conflicto antes de mover los aviones
             //1. Moveremos los aviones en el plan de vuelo con los calculos de FlightLib
+            bool conflictoEnCiclo = plan1.ConflictoDuranteCiclo(plan2, distanciaSeguridad, tiempoCiclo);
             plan1.Move(tiempoCiclo);
             plan2.Move(tiempoCiclo);
 
@@ -161,7 +163,7 @@ namespace Windows
             //3. Comprobaremos si hay conflicto entre los aviones
             Conflictolabel.BackColor = Color.Beige;
 
-            if (plan1.Conflicto(plan2, distanciaSeguridad))
+            if (conflictoEnCiclo)
             {
                 Conflictolabel.Text = "¡CONFLICTO! Distancias:" + plan1.Distance(plan2).ToString("F2"); //where ToString("F2") muestra dos decimales
 
@@ -229,26 +231,35 @@ namespace Windows
                 }
             }
         }
+
+        private void AbrirInfoVuelo(FlightPlan plan)
+        {
+            bool estabaEnAutomatico = reloj.Enabled;
+            reloj.Stop();
+
+            InfoVuelo info = new InfoVuelo(plan);
+            if (info.ShowDialog() == DialogResult.OK)
+            {
+                ReiniciarSimulacion();
+                conflictoRevisado = true;
+                ComprobarNuevasVelocidades();
+
+            }
+
+            else if(estabaEnAutomatico)
+            {
+                reloj.Start();
+            }
+        }
+
         private void pic1_Click(object sender, EventArgs e)
         {
-            InfoVuelo info = new InfoVuelo(plan1);
-            info.ShowDialog();
-            plan1.Restart();
-            plan2.Restart();
-            conflictoRevisado = false;
-            avisoMostrado = false;
-            RevisarConflictoInicial();
+            AbrirInfoVuelo(plan1);
         }
 
         private void pic2_Click(object sender, EventArgs e)
         {
-            InfoVuelo info = new InfoVuelo(plan2);
-            info.ShowDialog();
-            plan1.Restart();
-            plan2.Restart();
-            conflictoRevisado = false;
-            avisoMostrado = false;
-            RevisarConflictoInicial();
+            AbrirInfoVuelo(plan2);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -272,6 +283,7 @@ namespace Windows
  
         private void reloj_Tick(object sender, EventArgs e)
         {
+            bool conflictoEnCiclo = plan1.ConflictoDuranteCiclo(plan2, distanciaSeguridad, tiempoCiclo);
             plan1.Move(tiempoCiclo);
             plan2.Move(tiempoCiclo);
             ColocarAvion(pic1, plan1);
@@ -280,7 +292,7 @@ namespace Windows
 
             Conflictolabel.BackColor = Color.Beige;
 
-            if (plan1.Conflicto(plan2, distanciaSeguridad))
+            if (conflictoEnCiclo)
             {
                 Conflictolabel.Text = "¡CONFLICTO! Distancias:" + plan1.Distance(plan2).ToString("F2"); //where ToString("F2") muestra dos decimales
 
@@ -346,14 +358,51 @@ namespace Windows
 
         private void button3_Click(object sender, EventArgs e)
         {
+            ReiniciarSimulacion();
+        
+            conflictoRevisado = false;
+            
+            RevisarConflictoInicial();
+           
+        }
+
+        private void ReiniciarSimulacion()
+        {
+            reloj.Stop();
+
             plan1.Restart();
             plan2.Restart();
-            conflictoRevisado = false;
-            avisoMostrado = false;
-            RevisarConflictoInicial();
             ColocarAvion(pic1, plan1);
             ColocarAvion(pic2, plan2);
+
+            button1.Text = "Automatico";
+            button1.Enabled = true;
+            button_mover.Enabled = true;
+
+            avisoMostrado = false;
+            Conflictolabel.Text = "";
+
+            pictureBox_espacioAereo.Invalidate(); //redibuja trayectorias y circulos
+
+
         }
+
+        //Comprobemos si el cambio de velocidad elimina el conflicto
+        private void ComprobarNuevasVelocidades()
+        {
+            double dmin = plan1.DistanciaMinima(plan2, double.PositiveInfinity);
+
+                if (dmin < distanciaSeguridad)
+            {
+                MessageBox.Show("Con las nuevas velocidades TODAVÍA habrá conflicto. Distancia mínima prevista: " + dmin.ToString("F2") + "(seguridad: " + distanciaSeguridad + ")", "Resultado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+            else
+
+                MessageBox.Show("Con las nuevas velocidades ya no habrá conflicto. Distancia Mínima prevista: " + dmin.ToString("F2") + "(seguridad: " + distanciaSeguridad + ")", "Resultado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            
+        }
+
     }
 
        

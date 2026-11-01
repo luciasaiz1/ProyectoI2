@@ -33,6 +33,7 @@
             this.introducirDatosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.distanciaDeSeguridadYTiempoDeCicloToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.SimuladorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.label1 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -80,15 +81,28 @@
             this.SimuladorToolStripMenuItem.Text = "Simulador";
             this.SimuladorToolStripMenuItem.Click += new System.EventHandler(this.SimuladorToolStripMenuItem_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label1.Font = new System.Drawing.Font("TITUS Cyberbit Basic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label1.Location = new System.Drawing.Point(191, 163);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(253, 34);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "DECONFLICTING TOOL";
+            // 
             // Principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.BackColor = System.Drawing.Color.Indigo;
             this.ClientSize = new System.Drawing.Size(614, 347);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Principal";
             this.Text = "Principal";
             this.menuStrip1.ResumeLayout(false);
@@ -104,6 +118,7 @@
         private System.Windows.Forms.ToolStripMenuItem introducirDatosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem distanciaDeSeguridadYTiempoDeCicloToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem SimuladorToolStripMenuItem;
+        private System.Windows.Forms.Label label1;
     }
 }
 

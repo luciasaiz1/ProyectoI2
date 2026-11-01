@@ -27,7 +27,11 @@ namespace Windows
 
             label_id.Text = plan.GetId();
             label_compania.Text = plan.GetCompany();
-            label_velocidad.Text = Convert.ToString(plan.GetVelocidad());
+            numericUpDown_velocidad.DecimalPlaces = 2;
+            numericUpDown_velocidad.Minimum = 0.01m;
+            numericUpDown_velocidad.Maximum = 1000;
+            numericUpDown_velocidad.Value = (decimal)plan.GetVelocidad();
+            this.AcceptButton = button1_aplicar;
             label_origen.Text = origen.GetX() + " , " + origen.GetY();
             label_destino.Text = destino.GetX() + " , " + destino.GetY();
             label_actual.Text = actual.GetX()+ " , " + actual.GetY();
@@ -46,12 +50,21 @@ namespace Windows
             this.Close();
         }
 
-        private void label_velocidad_Click(object sender, EventArgs e)
+        private void button1_aplicar_Click(object sender, EventArgs e)
         {
+            double nueva = (double)numericUpDown_velocidad.Value;
 
-            CambioVelocidad vel = new CambioVelocidad(plan);
-            vel.ShowDialog();
-            Close();
+            //si no hemos cambiado la velocidad, solo cerramos (no reiniciamos la simulacion)
+            if (Math.Abs(nueva - plan.GetVelocidad()) < 0.005)
+            {
+                Close();
+                return;
+            }
+
+            plan.SetVelocidad(nueva);
+            this.DialogResult = DialogResult.OK; 
+
+            //Avisa al simulador que reinicie y compruebe y también cierra la ventana
         }
     }
 }
