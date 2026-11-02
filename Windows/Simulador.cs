@@ -57,7 +57,7 @@ namespace Windows
 
             try
             {
-                pic1.Image = new Bitmap("avion2D.png");
+                pic1.Image = new Bitmap("rombo.png");
             }
             catch (Exception)
             {
@@ -82,7 +82,7 @@ namespace Windows
 
             try
             {
-                pic2.Image = new Bitmap("avion2D.png");
+                pic2.Image = new Bitmap("rombo.png");
             }
             catch (Exception)
             {

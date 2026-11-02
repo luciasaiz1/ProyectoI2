@@ -36,12 +36,12 @@ namespace Windows
         {
             try
             {
-                if (Convert.ToInt32(textBox_velocidad.Text) < 0)
+                if (Convert.ToInt64(textBox_velocidad.Text) < 0)
                 {
                     MessageBox.Show("La velocidad debe ser un valor positivo");
                     return;
                 }
-                if (Convert.ToInt32(textBox_velocidad.Text) > 1000)
+                if (Convert.ToInt64(textBox_velocidad.Text) > 1000)
                 {
                     MessageBox.Show("La velocidad debe ser un valor menor");
                     return;
@@ -66,7 +66,6 @@ namespace Windows
                     name_company.Text = "";
 
                 }
-
                 else if (plan2 == null)
                 {
                     //Hacemos lo mismo para el segundo plan de vuelo

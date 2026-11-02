@@ -45,7 +45,7 @@ namespace Windows
 
         private bool EsValido(double numero)
         {
-            return numero > 0 && !double.IsInfinity(numero);
+            return numero > 0 && numero <= 100;
         }
 
         private void button_aceptar_Click(object sender, EventArgs e)
@@ -66,18 +66,12 @@ namespace Windows
                 }
                 else
                 {
-                    MessageBox.Show("Ambos valores deben ser números mayores que cero.",
-                                    "Error de validación",
-                                    MessageBoxButtons.OK,
-                                    MessageBoxIcon.Warning);
+                    MessageBox.Show("Ambos valores deben ser números mayores que cero y menores o iguales a 100.");
                 }
             }
             catch (FormatException)
             {
-                MessageBox.Show("Error en los datos: escribe únicamente números enteros o decimales (ej. 5 o 2.5).",
-                                "Error de formato",
-                                MessageBoxButtons.OK,
-                                MessageBoxIcon.Error);
+                MessageBox.Show("Error en los datos: escribe únicamente números enteros o decimales (ej. 5 o 2.5).");
 
             }
         }
