@@ -70,7 +70,7 @@ namespace Windows
                 {
                     //Hacemos lo mismo para el segundo plan de vuelo
                     plan2 = new FlightPlan(textBox_Id.Text, Convert.ToDouble(textBox_currentPositionX.Text), Convert.ToDouble(textBox_currentPositionY.Text), Convert.ToDouble(textBox_finalPositionX.Text), Convert.ToDouble(textBox_finalPositionY.Text), Convert.ToDouble(textBox_velocidad.Text), name_company.Text);
-                    MessageBox.Show("Vuelos añadidos correctamente");
+                 
                     Close();
                 }
             }
@@ -84,7 +84,6 @@ namespace Windows
         {
             plan1 = new FlightPlan("VY2986", 0, 200, 400, 200, 60, "Vueling");
             plan2 = new FlightPlan("IB412", 200, 0, 200, 400, 60, "Iberia");
-            MessageBox.Show("Vuelos añadidos correctamente");
             Close();
         }
 

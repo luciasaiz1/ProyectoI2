@@ -50,7 +50,6 @@ namespace Windows
                 this.distanciaSeguridad = form.GetDistanciaSeguridad();
                 this.tiempoCiclo = form.GetTiempoCiclo();
 
-                MessageBox.Show($"Guardado. Distancia de Seguridad: {distanciaSeguridad}, Tiempo de Ciclo: {tiempoCiclo}");
             }
         }
 
