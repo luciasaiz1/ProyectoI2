@@ -57,7 +57,7 @@ namespace Windows
 
             try
             {
-                pic1.Image = new Bitmap("rombo.png");
+                pic1.Image = Properties.Resources.rombo;
             }
             catch (Exception)
             {
@@ -82,7 +82,7 @@ namespace Windows
 
             try
             {
-                pic2.Image = new Bitmap("rombo.png");
+                pic2.Image = Properties.Resources.rombo;
             }
             catch (Exception)
             {
