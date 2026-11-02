@@ -43,12 +43,12 @@
             // 
             // pictureBox_espacioAereo
             // 
-            this.pictureBox_espacioAereo.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.pictureBox_espacioAereo.BackColor = System.Drawing.Color.MidnightBlue;
             this.pictureBox_espacioAereo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox_espacioAereo.Location = new System.Drawing.Point(32, 103);
-            this.pictureBox_espacioAereo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.pictureBox_espacioAereo.Location = new System.Drawing.Point(24, 84);
+            this.pictureBox_espacioAereo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pictureBox_espacioAereo.Name = "pictureBox_espacioAereo";
-            this.pictureBox_espacioAereo.Size = new System.Drawing.Size(400, 400);
+            this.pictureBox_espacioAereo.Size = new System.Drawing.Size(1185, 986);
             this.pictureBox_espacioAereo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox_espacioAereo.TabIndex = 0;
             this.pictureBox_espacioAereo.TabStop = false;
@@ -57,9 +57,10 @@
             // 
             this.label_info.AutoSize = true;
             this.label_info.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label_info.Location = new System.Drawing.Point(33, 69);
+            this.label_info.Location = new System.Drawing.Point(25, 56);
+            this.label_info.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label_info.Name = "label_info";
-            this.label_info.Size = new System.Drawing.Size(46, 18);
+            this.label_info.Size = new System.Drawing.Size(37, 15);
             this.label_info.TabIndex = 1;
             this.label_info.Text = "label1";
             this.label_info.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -69,19 +70,17 @@
             this.Conflictolabel.AutoSize = true;
             this.Conflictolabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.Conflictolabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.Conflictolabel.Location = new System.Drawing.Point(29, 27);
-            this.Conflictolabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.Conflictolabel.Location = new System.Drawing.Point(22, 21);
             this.Conflictolabel.Name = "Conflictolabel";
-            this.Conflictolabel.Size = new System.Drawing.Size(56, 16);
+            this.Conflictolabel.Size = new System.Drawing.Size(46, 13);
             this.Conflictolabel.TabIndex = 3;
             this.Conflictolabel.Text = "ERROR";
             // 
             // button_mover
             // 
-            this.button_mover.Location = new System.Drawing.Point(450, 114);
-            this.button_mover.Margin = new System.Windows.Forms.Padding(4);
+            this.button_mover.Location = new System.Drawing.Point(1294, 84);
             this.button_mover.Name = "button_mover";
-            this.button_mover.Size = new System.Drawing.Size(200, 30);
+            this.button_mover.Size = new System.Drawing.Size(175, 38);
             this.button_mover.TabIndex = 4;
             this.button_mover.Text = "Mover";
             this.button_mover.UseVisualStyleBackColor = true;
@@ -89,10 +88,10 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(450, 160);
-            this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button1.Location = new System.Drawing.Point(1294, 145);
+            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(200, 30);
+            this.button1.Size = new System.Drawing.Size(175, 39);
             this.button1.TabIndex = 5;
             this.button1.Text = "Automatico";
             this.button1.UseVisualStyleBackColor = true;
@@ -104,10 +103,9 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(450, 206);
-            this.button2.Margin = new System.Windows.Forms.Padding(4);
+            this.button2.Location = new System.Drawing.Point(1294, 204);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(200, 30);
+            this.button2.Size = new System.Drawing.Size(175, 39);
             this.button2.TabIndex = 6;
             this.button2.Text = "¿Habrá conflicto?";
             this.button2.UseVisualStyleBackColor = true;
@@ -115,9 +113,10 @@
             // 
             // button_datos
             // 
-            this.button_datos.Location = new System.Drawing.Point(450, 252);
+            this.button_datos.Location = new System.Drawing.Point(1294, 317);
+            this.button_datos.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button_datos.Name = "button_datos";
-            this.button_datos.Size = new System.Drawing.Size(200, 30);
+            this.button_datos.Size = new System.Drawing.Size(175, 44);
             this.button_datos.TabIndex = 7;
             this.button_datos.Text = "Datos de los vuelos";
             this.button_datos.UseVisualStyleBackColor = true;
@@ -125,21 +124,22 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(450, 473);
-            this.button3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button3.BackColor = System.Drawing.Color.RosyBrown;
+            this.button3.Location = new System.Drawing.Point(1294, 385);
+            this.button3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(200, 30);
+            this.button3.Size = new System.Drawing.Size(175, 29);
             this.button3.TabIndex = 8;
             this.button3.Text = "Reset";
-            this.button3.UseVisualStyleBackColor = true;
+            this.button3.UseVisualStyleBackColor = false;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // Simulador
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.ClientSize = new System.Drawing.Size(662, 553);
+            this.ClientSize = new System.Drawing.Size(1679, 1135);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button_datos);
             this.Controls.Add(this.button2);
@@ -148,7 +148,7 @@
             this.Controls.Add(this.Conflictolabel);
             this.Controls.Add(this.label_info);
             this.Controls.Add(this.pictureBox_espacioAereo);
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "Simulador";
             this.Text = "Simulador";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_espacioAereo)).EndInit();
