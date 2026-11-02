@@ -140,9 +140,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="avion2D.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <Content Include="rombo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
