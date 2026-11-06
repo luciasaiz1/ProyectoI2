@@ -15,21 +15,19 @@ namespace Windows
     
     public partial class DatosVuelos : Form
     {
-        private FlightPlan plan1;
-        private FlightPlan plan2;
+        private FlightPlanList llistaVuelos;
 
-        public DatosVuelos(FlightPlan plan1, FlightPlan plan2)
+        public DatosVuelos(FlightPlanList vuelos)
         {
 
             InitializeComponent();
 
-            this.plan1 = plan1;// guardamos los vuelos para usarlos al hacer clic
-            this.plan2 = plan2;
+            this.llistaVuelos = vuelos;
 
             dataGridView_vuelos.ReadOnly = true; // no se puede escribir dentro de la tabla
             dataGridView_vuelos.AllowUserToAddRows = false; // sin fila vacia al final (SIEMPRE antes de RowCount)
-            dataGridView_vuelos.ColumnCount = 6; // 6 columnas
-            dataGridView_vuelos.RowCount = 2; // 2 filas: una por vuelo
+            dataGridView_vuelos.ColumnCount = 6;
+            dataGridView_vuelos.RowCount = llistaVuelos.GetCount(); //tantas filas como vuelos hay en la lista
             dataGridView_vuelos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
 
             // Titulos de las columnas
@@ -40,9 +38,12 @@ namespace Windows
             dataGridView_vuelos.Columns[4].HeaderText = "Destino";
             dataGridView_vuelos.Columns[5].HeaderText = "Posición actual";
 
-            EscribirFila(0, plan1); // la fila 0 es el vuelo 1
-            EscribirFila(1, plan2); // la fila 1 es el vuelo 2
 
+            for (int i = 0; i < llistaVuelos.GetCount(); i++)
+            {
+                EscribirFila(i, llistaVuelos.GetFlightPlan(i));
+            }
+      
             // Cuando se hace clic en una celda se ejecuta dataGridView_vuelos_CellClick
             dataGridView_vuelos.CellClick += dataGridView_vuelos_CellClick;
         }
@@ -67,11 +68,27 @@ namespace Windows
             if (e.RowIndex < 0)
                 return; // si se hace clic en los titulos: no hacemos nada
 
-            DistanciaVuelo form;
-            if (e.RowIndex == 0)
-                form = new DistanciaVuelo(plan1, plan2); // fila 0: distancia del vuelo 1 al vuelo 2
-            else
-                form = new DistanciaVuelo(plan2, plan1); // fila 1: distancia del vuelo 2 al vuelo 1
+            //obtenemos el vuelo de la fila donde se hizo clic
+            FlightPlan vueloActual = llistaVuelos.GetFlightPlan(e.RowIndex);
+
+            //calculamos el índice del otro vuelo: cogemos el siguiente vuelo en la lista, y si nos pasamos, volvemos al primero
+            int indiceOtro = e.RowIndex + 1;
+
+            if (indiceOtro >= llistaVuelos.GetCount())
+            {
+                indiceOtro = 0;
+            }
+
+            FlightPlan otroVuelo = llistaVuelos.GetFlightPlan(indiceOtro);
+
+            //si solo hay un vuelo en la lista, no podemos calcular distancia con otro
+            if (llistaVuelos.GetCount() <= 1)
+            {
+                MessageBox.Show("Se necesitan al menos 2 vuelos en la lista para calcular distancias.");
+                return;
+            }
+
+            DistanciaVuelo form = new DistanciaVuelo(vueloActual, otroVuelo);
             form.ShowDialog();
         }
     }

@@ -14,8 +14,7 @@ namespace Windows
 {
     public partial class Principal : Form
     {
-        FlightPlan plan1;
-        FlightPlan plan2;
+        private FlightPlanList llistaVuelos = new FlightPlanList();
 
         private double distanciaSeguridad = 0;
         private double tiempoCiclo = 0;
@@ -25,19 +24,29 @@ namespace Windows
             InitializeComponent();
         }
 
-
         private void introducirDatosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FlightPlanAdder form = new FlightPlanAdder();
-            form.ShowDialog();
-           
-            plan1 = form.GetPlan1();
-            plan2 = form.GetPlan2();
-        }
+            // Obrim el navegador de fitxers de Windows per triar D'ENTRE ELS FITXERS QUE ACABEN EN .TXT 
+            OpenFileDialog openFile = new OpenFileDialog();
+            openFile.Filter = "Text Files (*.txt)|*.txt";
 
-        private void opcionesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
+            if (openFile.ShowDialog() == DialogResult.OK)
+            {
+                string rutaTriada = openFile.FileName;
 
+                bool cargadoCorrectamente = llistaVuelos.LeerDelFichero(rutaTriada);
+
+                if (cargadoCorrectamente && llistaVuelos.GetCount() > 0)
+                {
+                    // Si tot és correcte i s'han carregat vols
+                    MessageBox.Show("Se han cargado " + llistaVuelos.GetCount() + " vuelos correctamente desde el fichero!", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    // Si ha fallat el format o el fitxer no era vàlid
+                    MessageBox.Show("Atención: El fichero seleccionado no tiene el formato correcto o contine líneas erróneas. No se han podido cargar los vuelos.", "Error de formato", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
         }
 
 
@@ -62,16 +71,17 @@ namespace Windows
                 return;
             }
 
-            if (this.plan1 != null && this.plan2 != null)
+            if (llistaVuelos.GetCount() > 0)
             {
-              
-                Simulador formSim = new Simulador(this.plan1, this.plan2, this.distanciaSeguridad, this.tiempoCiclo);
+                // Passem la llista sencera al simulador en lloc de dos plans sueltos
+                Simulador formSim = new Simulador(llistaVuelos, this.distanciaSeguridad, this.tiempoCiclo);
                 formSim.ShowDialog();
             }
             else
             {
-                MessageBox.Show("Introduce primero los datos de los vuelos");
+                MessageBox.Show("Introduce o carga primero los datos de los vuelos desde un fichero.");
             }
+
         }
     }
 }

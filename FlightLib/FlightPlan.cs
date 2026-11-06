@@ -209,6 +209,7 @@ namespace FlightLib
             return Math.Sqrt(dx * dx + dy * dy);
         }
 
+
             //distancia minima entre vuelo y el vuelo b desde ahora hasta "horizonte" unidades de tiempo.
             //tiene dos fases: 1) los dos aviones vuelan. 
             //2) uno ya ha aterrizado y el otro sigue.
@@ -347,6 +348,5 @@ namespace FlightLib
             }
             Console.WriteLine("******************************");
         }
-        // CAMBIOS
     }
 }

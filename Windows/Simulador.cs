@@ -1,42 +1,39 @@
 ﻿using FlightLib;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.Drawing.Text;
 using System.Windows.Forms;
+using System.IO;
 
 namespace Windows
 {
     public partial class Simulador : Form
     {
-        private FlightPlan plan1;
-        private FlightPlan plan2;
+        private FlightPlanList llistaVuelos;
         private double distanciaSeguridad;
         private double tiempoCiclo;
         private bool conflictoRevisado = false; // variable para controlar si ya hemos REVISADO el conflicto inicial
         private bool avisoMostrado = false; // variable para controlar si ya hemos MOSTRADO el aviso de conflicto
+        private bool mensajeLlegadaMostrado = false; // variable para controlar si ya hemos MOSTRADO el mensaje de llegada de todos los vuelos
 
-        //dibujo de los aviones como atributos de la clase Simulador
-        private PictureBox pic1;
-        private PictureBox pic2;
+        // Llista de PictureBox per representar tants avions com tinguem
+        private List<PictureBox> llistaPictures = new List<PictureBox>();
         private const int TAM_AVION = 25;
 
         //CONSTRUCTOR
-
-
-        public Simulador(FlightPlan plan1, FlightPlan plan2, double distancia, double ciclo)
+        public Simulador(FlightPlanList vuelos, double distancia, double ciclo)
         {
             InitializeComponent();
 
-            this.plan1 = plan1;
-            this.plan2 = plan2;
+            this.llistaVuelos = vuelos;
             this.distanciaSeguridad = distancia;
             this.tiempoCiclo = ciclo;
 
 
-            this.plan1.Restart();
-            this.plan2.Restart();
+            this.llistaVuelos.RestartAll();
 
 
             label_info.Text = "Distancia de Seguridad: " + this.distanciaSeguridad + " | Tiempo ciclo: " + this.tiempoCiclo;
@@ -47,57 +44,52 @@ namespace Windows
 
         private void MostrarAvionesIniciales()
         {
-            Position pos1 = plan1.GetInitialPosition();
+            llistaPictures.Clear();
 
-            pic1 = new PictureBox();
-            pic1.Size = new Size(25, 25);
-            pic1.SizeMode = PictureBoxSizeMode.StretchImage;
-            pic1.BackColor = Color.Transparent;
-
-
-            try
+            for (int i = 0; i < llistaVuelos.GetCount(); i++)
             {
-                pic1.Image = Properties.Resources.rombo;
+                FlightPlan plan = llistaVuelos.GetFlightPlan(i);
+
+                PictureBox pic = new PictureBox();
+                pic.Size = new Size(TAM_AVION, TAM_AVION);
+                pic.SizeMode = PictureBoxSizeMode.StretchImage;
+                pic.BackColor = Color.Transparent;
+
+                try
+                {
+                    pic.Image = Properties.Resources.rombo;
+                }
+                catch (Exception)
+                {
+                    pic.BackColor = Color.Blue;
+                }
+
+                ColocarAvion(pic, plan);
+
+                pictureBox_espacioAereo.Controls.Add(pic);
+                pic.BringToFront();
+
+                pic.Cursor = Cursors.Hand;
+
+                pic.Tag = plan; //guardamos el plan de vuelo en la propiedad Tag del PictureBox para poder acceder a él más tarde
+                pic.Click += pic_Click; //guardamos el evento click para abrir la ventana de información del vuelo al hacer click en el PictureBox
+
+                llistaPictures.Add(pic);
             }
-            catch (Exception)
-            {
-                pic1.BackColor = Color.Blue;
-            }
-
-            ColocarAvion(pic1, plan1);
-
-            pictureBox_espacioAereo.Controls.Add(pic1);
-            pic1.BringToFront();
-
-            pic1.Cursor = Cursors.Hand; //la manita cuando se pasa el raton por encima
-            pic1.Click += pic1_Click;
-
-            Position pos2 = plan2.GetInitialPosition();
-
-            pic2 = new PictureBox();
-            pic2.Size = new Size(25, 25);
-            pic2.SizeMode = PictureBoxSizeMode.StretchImage;
-            pic2.BackColor = Color.Transparent;
-
-
-            try
-            {
-                pic2.Image = Properties.Resources.rombo;
-            }
-            catch (Exception)
-            {
-                pic2.BackColor = Color.Red;
-            }
-
-            ColocarAvion(pic2, plan2);
-
-            pictureBox_espacioAereo.Controls.Add(pic2);
-            pic2.BringToFront();
-
-            pic2.Cursor = Cursors.Hand;//la manita cuando se pasa el raton por encima
-            pic2.Click += pic2_Click; //cuando se hace click en pic2, ejecuta el pic2_Click
 
             pictureBox_espacioAereo.Paint += pictureBox_espacioAereo_Paint;
+        }
+
+        private void pic_Click(object sender, EventArgs e)
+        {
+            //"sender" nos dice qué PictureBox ha sido clicado
+            PictureBox picClicada = (PictureBox)sender;
+
+            //recuperamos el plan de vuelo que teníamos guardado en el Tag del PictureBox
+            FlightPlan avioSeleccionat = (FlightPlan)picClicada.Tag;
+
+            //abrimos la ventana de información de este avión
+            AbrirInfoVuelo(avioSeleccionat);
         }
 
         private void ColocarAvion(PictureBox pic, FlightPlan plan)
@@ -116,24 +108,34 @@ namespace Windows
                 return; // solo se pregunta la primera vez
             conflictoRevisado = true;
 
-            if (plan1.AnticiparConflicto(plan2, distanciaSeguridad, tiempoCiclo))
+            for (int i = 0; i < llistaVuelos.GetCount(); i++)
             {
-                DialogResult respuesta = MessageBox.Show("Los vuelos " + plan1.GetId() + " y " + plan2.GetId() + " entrarán en conflicto. ¿Quieres resolverlo?", "Conflicto", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-
-                if (respuesta == DialogResult.Yes)
+                for (int j = i + 1; j < llistaVuelos.GetCount(); j++)
                 {
-                    // bajamos la velocidad del vuelo 2 hasta que no haya conflicto
-                    if (plan2.ResolverConflicto(plan1, distanciaSeguridad, tiempoCiclo))
+                    FlightPlan p1 = llistaVuelos.GetFlightPlan(i);
+                    FlightPlan p2 = llistaVuelos.GetFlightPlan(j);
+
+                    if (p1.AnticiparConflicto(p2, distanciaSeguridad, tiempoCiclo))
                     {
-                        MessageBox.Show("Conflicto resuelto. Nueva velocidad del vuelo " + plan2.GetId() + ": " + plan2.GetVelocidad().ToString("F2")); //where ToString("F2") muestra dos decimales
-                    }
-                    else
-                    {
-                        MessageBox.Show("No se ha podido resolver el conflicto. La simulación continuará igual.");
+                        DialogResult respuesta = MessageBox.Show("Los vuelos " + p1.GetId() + " y " + p2.GetId() + " entrarán en conflicto. ¿Quieres resolverlo?", "Conflicto", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                        if (respuesta == DialogResult.Yes)
+                        {
+                            // Bajamos la velocidad del vuelo 2 hasta que no haya conflicto
+                            if (p2.ResolverConflicto(p1, distanciaSeguridad, tiempoCiclo))
+                            {
+                                MessageBox.Show("Conflicto resuelto. Nueva velocidad del vuelo " + p2.GetId() + ": " + p2.GetVelocidad().ToString("F2"));
+                            }
+                            else
+                            {
+                                MessageBox.Show("No se ha podido resolver el conflicto entre " + p1.GetId() + " y " + p2.GetId() + ". La simulación continuará igual.");
+                            }
+                        }
                     }
                 }
             }
         }
+
         private void AvisarConflicto()
         {
             if (avisoMostrado)
@@ -150,42 +152,78 @@ namespace Windows
 
         private void button_mover_Click(object sender, EventArgs e)
         {
-            RevisarConflictoInicial(); //Comprobamos si hay conflicto antes de mover los aviones
-            //1. Moveremos los aviones en el plan de vuelo con los calculos de FlightLib
-            bool conflictoEnCiclo = plan1.ConflictoDuranteCiclo(plan2, distanciaSeguridad, tiempoCiclo);
-            plan1.Move(tiempoCiclo);
-            plan2.Move(tiempoCiclo);
+            RevisarConflictoInicial();
+            
+            llistaVuelos.Move(tiempoCiclo);
+            for (int i = 0; i < llistaVuelos.GetCount(); i++)
+            {
+                //movemos los dibujos a sus nuevas posiciones
+                ColocarAvion(llistaPictures[i], llistaVuelos.GetFlightPlan(i));
+            }
+            
+            bool hayConflictoGeneral = false;
+            //se guarda la distancia mínima global entre todos los vuelos
+            double minDistanciaGlobal = double.MaxValue;
 
-            //2. Movemos los dibujos a sus nuevas posiciones
-            ColocarAvion(pic1, plan1);
-            ColocarAvion(pic2, plan2);
+            for (int i = 0; i < llistaVuelos.GetCount(); i++)
+            {
+                for (int j = i + 1; j < llistaVuelos.GetCount(); j++)
+                {
+                    FlightPlan p1 = llistaVuelos.GetFlightPlan(i);
+                    FlightPlan p2 = llistaVuelos.GetFlightPlan(j);
 
-            //3. Comprobaremos si hay conflicto entre los aviones
+                    double dist = p1.Distance(p2);
+                    if (dist < minDistanciaGlobal)
+                        minDistanciaGlobal = dist;
+
+                    if (p1.ConflictoDuranteCiclo(p2, distanciaSeguridad, tiempoCiclo))
+                    {
+                        hayConflictoGeneral = true;
+                    }
+                }
+            }
+
             Conflictolabel.BackColor = Color.Beige;
 
-            if (conflictoEnCiclo)
+            if (hayConflictoGeneral)
             {
-                Conflictolabel.Text = "¡CONFLICTO! Distancias:" + plan1.Distance(plan2).ToString("F2"); //where ToString("F2") muestra dos decimales
-
+                Conflictolabel.Text = "¡CONFLICTO! Distancia mín:" + minDistanciaGlobal.ToString("F2");
                 Conflictolabel.ForeColor = Color.Red;
                 AvisarConflicto();
             }
 
             else
             {
-                Conflictolabel.Text = "Sin conflicto. Distancia:" + plan1.Distance(plan2).ToString("F2");
+                if (llistaVuelos.GetCount() > 1)
+                    Conflictolabel.Text = "Sin conflicto. Distancia mín:" + minDistanciaGlobal.ToString("F2");
+                else
+                    Conflictolabel.Text = "Simulación activa (1 solo vuelo).";
+
                 Conflictolabel.ForeColor = Color.Green;
                 avisoMostrado = false;
             }
 
-
-            //4. Si los aviones han llegado a su destino terminamos la simulacion
-
-            if (plan1.HasArrived() && plan2.HasArrived())
+            //comprobamos si todos los vuelos han llegado a su destino y desactivamos los botones si es así
+            bool todosHanLlegado = true;
+            for (int i = 0; i < llistaVuelos.GetCount() && todosHanLlegado; i++)
             {
-                button1.Enabled = false; // el boton se pone en gris para que no se pueda clicar sobre él.
-                button_mover.Enabled = false; //where  Enabled = false pone el boton en gris para que no se pueda clicar sobre él.
-                MessageBox.Show("¡Los dos vuelos han llegado a su destino! ✈️ ");
+                //si algún avión no ha llegado, ponemos false
+                if (!llistaVuelos.GetFlightPlan(i).HasArrived())
+                {
+                    todosHanLlegado = false;
+                }
+            }
+
+            if (todosHanLlegado && llistaVuelos.GetCount() > 0)
+            {
+                button_automático.Enabled = false;
+                button_mover.Enabled = false;
+                reloj.Stop();
+                if (!mensajeLlegadaMostrado)
+                {
+                    mensajeLlegadaMostrado = true;
+                    MessageBox.Show("¡Todos los vuelos han llegado a su destino! ✈️ ");
+                }
             }
 
             pictureBox_espacioAereo.Invalidate();
@@ -193,14 +231,14 @@ namespace Windows
 
         private void pictureBox_espacioAereo_Paint(object sender, PaintEventArgs e)
         {
-            Trajectories(plan1, e.Graphics);
-            Trajectories(plan2, e.Graphics);
+            for (int i = 0; i < llistaVuelos.GetCount(); i++)
+            {
+                FlightPlan plan = llistaVuelos.GetFlightPlan(i);
+                Trajectories(plan, e.Graphics);
 
-            Position p1 = plan1.GetCurrentPosition();
-            Position p2 = plan2.GetCurrentPosition();
-
-            SecurityDistance(e.Graphics, (float)p1.GetX(), (float)p1.GetY(), (float)distanciaSeguridad/2); //distanciaSeguridad/2 porque el radio es la mitad de la distancia de seguridad
-            SecurityDistance(e.Graphics, (float)p2.GetX(), (float)p2.GetY(), (float)distanciaSeguridad/2);
+                Position p = plan.GetCurrentPosition();
+                SecurityDistance(e.Graphics, (float)p.GetX(), (float)p.GetY(), (float)distanciaSeguridad/2, plan); //distanciaSeguridad/2 porque el radio es la mitad de la distancia de seguridad
+            }
         }
 
         private void Trajectories(FlightPlan plan, Graphics g)
@@ -212,10 +250,20 @@ namespace Windows
                 g.DrawLine(lapiz, initial, final);
             }
         }
-        private void SecurityDistance(Graphics g, float centroX, float centroY, float radio)
+        private void SecurityDistance(Graphics g, float centroX, float centroY, float radio, FlightPlan avionActual)
         {
-            bool problems = plan1.Conflicto(plan2, this.distanciaSeguridad);
-            
+            bool problems = false;
+            int i = 0;
+
+            while (i < llistaVuelos.GetCount())
+            {
+                FlightPlan otro = llistaVuelos.GetFlightPlan(i);
+                if (avionActual != otro && avionActual.Conflicto(otro, this.distanciaSeguridad))
+                {
+                    problems = true;
+                }
+                i++;
+            }
             if (problems)
             {
                 using (Pen lapiz = new Pen(Color.Red, 2))
@@ -252,29 +300,19 @@ namespace Windows
             }
         }
 
-        private void pic1_Click(object sender, EventArgs e)
+        private void button_automático_Click(object sender, EventArgs e)
         {
-            AbrirInfoVuelo(plan1);
-        }
-
-        private void pic2_Click(object sender, EventArgs e)
-        {
-            AbrirInfoVuelo(plan2);
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            if (button1.Text == "Automatico")
+            if (button_automático.Text == "Automatico")
             {
                 RevisarConflictoInicial(); //Comprobamos si hay conflicto antes de mover los aviones
-                button1.Text = "Parar";
+                button_automático.Text = "Parar";
                 button_mover.Enabled = false; //where  Enabled = false pone el boton en gris para que no se pueda clicar sobre él.
                 reloj.Interval = 100;
                 reloj.Start();
             }
             else
             {
-                button1.Text = "Automatico";
+                button_automático.Text = "Automatico";
                 button_mover.Enabled = true; //where  Enabled = true pone el boton en color para que se pueda clicar sobre él.
                 reloj.Stop();
             }
@@ -283,57 +321,39 @@ namespace Windows
  
         private void reloj_Tick(object sender, EventArgs e)
         {
-            bool conflictoEnCiclo = plan1.ConflictoDuranteCiclo(plan2, distanciaSeguridad, tiempoCiclo);
-            plan1.Move(tiempoCiclo);
-            plan2.Move(tiempoCiclo);
-            ColocarAvion(pic1, plan1);
-            ColocarAvion(pic2, plan2);
-
-
-            Conflictolabel.BackColor = Color.Beige;
-
-            if (conflictoEnCiclo)
-            {
-                Conflictolabel.Text = "¡CONFLICTO! Distancias:" + plan1.Distance(plan2).ToString("F2"); //where ToString("F2") muestra dos decimales
-
-                Conflictolabel.ForeColor = Color.Red;
-                AvisarConflicto();
-            }
-
-            else
-            {
-                Conflictolabel.Text = "Sin conflicto. Distancia:" + plan1.Distance(plan2).ToString("F2");
-                Conflictolabel.ForeColor = Color.Green;
-                avisoMostrado = false;
-            }
-
-
-            //4. Si los aviones han llegado a su destino terminamos la simulacion
-
-            if (plan1.HasArrived() && plan2.HasArrived())
-            {
-                reloj.Stop(); // paramos el reloj antes del messagebox para que no se ejecute otra vez el tick mientras se muestra el mensaje
-                button1.Enabled = false; // el boton se pone en gris para que no se pueda clicar sobre él.
-                button_mover.Enabled = false; //where  Enabled = false pone el boton en gris para que no se pueda clicar sobre él.
-                MessageBox.Show("¡Los dos vuelos han llegado a su destino! ✈️ ");
-            }
-
-            pictureBox_espacioAereo.Invalidate();
+            //exactamente lo mismo que hacer click en el boton mover, es decir, movemos los aviones y comprobamos si hay conflicto
+            button_mover_Click(sender, e);
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void button_conflicto_Click(object sender, EventArgs e)
         {
             //Si la simulacion automatica esta en marcha, la pausamos mientras preguntamos
             bool estabaEnAutomatico = reloj.Enabled;
             reloj.Stop();
 
-            if (plan1.AnticiparConflicto(plan2, distanciaSeguridad, tiempoCiclo))
+            bool hayConflictoFuturo = false;
+            int i = 0;
+            while (i < llistaVuelos.GetCount())
             {
-                MessageBox.Show("¡ATENCIÓN! Si mantienen su velocidad, los vuelos " + plan1.GetId() + " y " + plan2.GetId() + " entraran en conflicto (estarán a menos de " + distanciaSeguridad + " de distancia).", "Anticipar conflicto", MessageBoxButtons.OK, MessageBoxIcon.Warning); ;
+                int j = i + 1;
+                while (j < llistaVuelos.GetCount())
+                {
+                    if (llistaVuelos.GetFlightPlan(i).AnticiparConflicto(llistaVuelos.GetFlightPlan(j), distanciaSeguridad, tiempoCiclo))
+                    {
+                        hayConflictoFuturo = true;
+                    }
+                    j++;
+                }
+                i++;
+            }
+
+            if (hayConflictoFuturo)
+            {
+                MessageBox.Show("¡ATENCIÓN! Si mantienen su velocidad, algunos vuelos entrarán en conflicto.", "Anticipar conflicto", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             else
             {
-                MessageBox.Show("Los vuelos " + plan1.GetId() + " y " + plan2.GetId() + " no entraran en conflicto.", "Anticipar conflicto", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Ningún vuelo entrará en conflicto con las velocidades actuales.", "Anticipar conflicto", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
             //Si estaba en automatico, seguimos
@@ -348,7 +368,7 @@ namespace Windows
             bool estabaEnAutomatico = reloj.Enabled;
             reloj.Stop();
 
-            DatosVuelos form = new DatosVuelos(plan1, plan2);
+            DatosVuelos form = new DatosVuelos(llistaVuelos);
             form.ShowDialog();
 
             // Si estaba en automatico, seguimos
@@ -356,7 +376,7 @@ namespace Windows
                 reloj.Start();
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void button_reset_Click(object sender, EventArgs e)
         {
             ReiniciarSimulacion();
         
@@ -370,13 +390,15 @@ namespace Windows
         {
             reloj.Stop();
 
-            plan1.Restart();
-            plan2.Restart();
-            ColocarAvion(pic1, plan1);
-            ColocarAvion(pic2, plan2);
+            llistaVuelos.RestartAll();
 
-            button1.Text = "Automatico";
-            button1.Enabled = true;
+            for (int i = 0; i < llistaVuelos.GetCount(); i++)
+            {
+                ColocarAvion(llistaPictures[i], llistaVuelos.GetFlightPlan(i));
+            }
+
+            button_automático.Text = "Automatico";
+            button_automático.Enabled = true;
             button_mover.Enabled = true;
 
             avisoMostrado = false;
@@ -386,24 +408,76 @@ namespace Windows
 
 
         }
-
-        //Comprobemos si el cambio de velocidad elimina el conflicto
+        
+        //Comprobamos si el cambio de velocidad elimina el conflicto
         private void ComprobarNuevasVelocidades()
         {
-            double dmin = plan1.DistanciaMinima(plan2, double.PositiveInfinity);
-
-                if (dmin < distanciaSeguridad)
+            double dminGlobal = double.MaxValue;
+            for (int i = 0; i < llistaVuelos.GetCount(); i++)
             {
-                MessageBox.Show("Con las nuevas velocidades TODAVÍA habrá conflicto. Distancia mínima prevista: " + dmin.ToString("F2") + "(seguridad: " + distanciaSeguridad + ")", "Resultado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                for (int j = i + 1; j < llistaVuelos.GetCount(); j++)
+                {
+                    double dmin = llistaVuelos.GetFlightPlan(i).DistanciaMinima(llistaVuelos.GetFlightPlan(j), double.PositiveInfinity);
+                    if (dmin < dminGlobal)
+                        dminGlobal = dmin;
+                }
             }
 
+            if (llistaVuelos.GetCount() > 1 && dminGlobal < distanciaSeguridad)
+            {
+                MessageBox.Show("Con las nuevas velocidades TODAVÍA habrá conflicto. Distancia mínima prevista: " + dminGlobal.ToString("F2") + " (seguridad: " + distanciaSeguridad + ")", "Resultado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
             else
-
-                MessageBox.Show("Con las nuevas velocidades ya no habrá conflicto. Distancia Mínima prevista: " + dmin.ToString("F2") + "(seguridad: " + distanciaSeguridad + ")", "Resultado", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            
+            {
+                MessageBox.Show("Con las nuevas velocidades ya no habrá conflicto. Distancia Mínima prevista: " + dminGlobal.ToString("F2") + " (seguridad: " + distanciaSeguridad + ")", "Resultado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }            
         }
 
-    }
+        // Guardar estado actual de la simulación en un fichero en cualquier momento de la simulación (última posición de los vuelos)
+        private void button_estadoActual_Click(object sender, EventArgs e)
+        {
+            bool estabaEnAutomatico = reloj.Enabled;
+            reloj.Stop();
 
-       
+            SaveFileDialog saveFile = new SaveFileDialog();
+            saveFile.Filter = "Text Files (*.txt)|*.txt";
+
+            if (saveFile.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    //para guardar el estado actual de la simulación
+                    FlightPlanList llistaTemporal = new FlightPlanList();
+
+                    for (int i = 0; i < llistaVuelos.GetCount(); i++)
+                    {
+                        FlightPlan planOriginal = llistaVuelos.GetFlightPlan(i);
+                        //cogemos los datos del plan original para crear un nuevo FlightPlan con la posición actual como punto de inicio
+                        string id = planOriginal.GetId();
+                        double xActual = planOriginal.GetCurrentPosition().GetX();
+                        double yActual = planOriginal.GetCurrentPosition().GetY();
+                        double xFinal = planOriginal.GetFinalPosition().GetX();
+                        double yFinal = planOriginal.GetFinalPosition().GetY();
+                        double velocitat = planOriginal.GetVelocidad();
+                        string companyia = planOriginal.GetCompany();
+
+                        FlightPlan planActualitzat = new FlightPlan(id, xActual, yActual, xFinal, yFinal, velocitat, companyia);
+
+                        llistaTemporal.AddFlightPlan(planActualitzat);
+                    }
+
+                    llistaTemporal.GuardarEnFichero(saveFile.FileName);
+
+                    MessageBox.Show("¡Estado de la simulación guardado correctamente en la última posición!");
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Error al guardar el fichero");
+                }
+            }
+
+            if (estabaEnAutomatico)
+                reloj.Start();
+        }
     }
+}
