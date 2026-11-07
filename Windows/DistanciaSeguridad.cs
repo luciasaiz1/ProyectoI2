@@ -13,6 +13,7 @@ namespace Windows
 {
     public partial class DistanciaSeguridad : Form
     {
+        private Estilo estilo = new Estilo();
         private double distanciaSeguridad;
         private double tiempoCiclo;
 

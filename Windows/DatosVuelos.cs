@@ -15,6 +15,7 @@ namespace Windows
     
     public partial class DatosVuelos : Form
     {
+        private Estilo estilo = new Estilo();
         private FlightPlanList llistaVuelos;
 
         public DatosVuelos(FlightPlanList vuelos)

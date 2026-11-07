@@ -14,6 +14,7 @@ namespace Windows
 {
     public partial class Login : Form
     {
+        private Estilo estilo = new Estilo();
         GestionUsuarios gestion = new GestionUsuarios();
         private string usuarioConectado = "";
         public Login()
@@ -105,6 +106,11 @@ namespace Windows
                 textBox_password.Focus();
             }
           
+        }
+
+        private void Login_Paint(object sender, PaintEventArgs e)
+        {
+            estilo.PintarFondo(e.Graphics, this.ClientRectangle);
         }
     }
 }

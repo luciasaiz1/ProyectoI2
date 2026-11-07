@@ -12,8 +12,10 @@ using System.Windows.Forms;
 
 namespace Windows
 {
+   
     public partial class CambiarPassword: Form
     {
+        private Estilo estilo = new Estilo();
         private GestionUsuarios gestion;
         public CambiarPassword(GestionUsuarios gestion)
         {

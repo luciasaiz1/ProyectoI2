@@ -14,6 +14,7 @@ namespace Windows
 {
     public partial class Principal : Form
     {
+        private Estilo estilo = new Estilo();
         private FlightPlanList listaVuelos = new FlightPlanList();
 
         private double distanciaSeguridad = 0;
@@ -31,6 +32,8 @@ namespace Windows
         {
             // Obrim el navegador de fitxers de Windows per triar D'ENTRE ELS FITXERS QUE ACABEN EN .TXT 
             OpenFileDialog openFile = new OpenFileDialog();
+            openFile.InitialDirectory = Application.StartupPath; //abre en la carpeta del programa donde estan los ficheros de ejemplo
+
             openFile.Filter = "Text Files (*.txt)|*.txt";
 
             if (openFile.ShowDialog() == DialogResult.OK)
@@ -85,6 +88,13 @@ namespace Windows
                 MessageBox.Show("Introduce o carga primero los datos de los vuelos desde un fichero.");
             }
 
+
+
+        }
+
+        private void Principal_Paint(object sender, PaintEventArgs e)
+        {
+            estilo.PintarFondo(e.Graphics, this.ClientRectangle);
         }
     }
 }

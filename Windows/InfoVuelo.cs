@@ -13,6 +13,7 @@ namespace Windows
 {
     public partial class InfoVuelo : Form
     {
+        private Estilo estilo = new Estilo();
         private FlightPlan plan;
         public InfoVuelo(FlightPlan plan) //para crearme, darme un flight plan que lo llamaré plan
         {

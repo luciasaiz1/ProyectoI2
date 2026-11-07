@@ -12,6 +12,7 @@ namespace Windows
 {
     public partial class Simulador : Form
     {
+        private Estilo estilo = new Estilo();
         private FlightPlanList llistaVuelos;
         private double distanciaSeguridad;
         private double tiempoCiclo;
@@ -478,6 +479,11 @@ namespace Windows
 
             if (estabaEnAutomatico)
                 reloj.Start();
+        }
+
+        private void Simulador_Paint(object sender, PaintEventArgs e)
+        {
+            estilo.PintarFondo(e.Graphics, this.ClientRectangle);
         }
     }
 }
