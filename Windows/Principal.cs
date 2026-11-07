@@ -96,5 +96,10 @@ namespace Windows
         {
             estilo.PintarFondo(e.Graphics, this.ClientRectangle);
         }
+
+        private void Principal_Resize(object sender, EventArgs e)
+        {
+            this.Invalidate();
+        }
     }
 }
