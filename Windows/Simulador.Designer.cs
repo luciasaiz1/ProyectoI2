@@ -44,12 +44,15 @@
             // 
             // pictureBox_espacioAereo
             // 
+            this.pictureBox_espacioAereo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox_espacioAereo.BackColor = System.Drawing.Color.MidnightBlue;
             this.pictureBox_espacioAereo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox_espacioAereo.Location = new System.Drawing.Point(20, 60);
             this.pictureBox_espacioAereo.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox_espacioAereo.Name = "pictureBox_espacioAereo";
-            this.pictureBox_espacioAereo.Size = new System.Drawing.Size(650, 600);
+            this.pictureBox_espacioAereo.Size = new System.Drawing.Size(650, 566);
             this.pictureBox_espacioAereo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox_espacioAereo.TabIndex = 0;
             this.pictureBox_espacioAereo.TabStop = false;
@@ -79,6 +82,7 @@
             // 
             // button_mover
             // 
+            this.button_mover.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button_mover.Location = new System.Drawing.Point(690, 60);
             this.button_mover.Name = "button_mover";
             this.button_mover.Size = new System.Drawing.Size(200, 40);
@@ -89,6 +93,7 @@
             // 
             // button_automático
             // 
+            this.button_automático.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button_automático.Location = new System.Drawing.Point(690, 110);
             this.button_automático.Margin = new System.Windows.Forms.Padding(2);
             this.button_automático.Name = "button_automático";
@@ -104,6 +109,7 @@
             // 
             // button_conflicto
             // 
+            this.button_conflicto.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button_conflicto.Location = new System.Drawing.Point(690, 230);
             this.button_conflicto.Name = "button_conflicto";
             this.button_conflicto.Size = new System.Drawing.Size(200, 40);
@@ -114,6 +120,7 @@
             // 
             // button_datos
             // 
+            this.button_datos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button_datos.Location = new System.Drawing.Point(690, 280);
             this.button_datos.Margin = new System.Windows.Forms.Padding(2);
             this.button_datos.Name = "button_datos";
@@ -125,6 +132,7 @@
             // 
             // button_reset
             // 
+            this.button_reset.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button_reset.BackColor = System.Drawing.Color.RosyBrown;
             this.button_reset.Location = new System.Drawing.Point(690, 160);
             this.button_reset.Margin = new System.Windows.Forms.Padding(2);
@@ -137,6 +145,7 @@
             // 
             // button_estadoActual
             // 
+            this.button_estadoActual.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button_estadoActual.Location = new System.Drawing.Point(690, 330);
             this.button_estadoActual.Margin = new System.Windows.Forms.Padding(2);
             this.button_estadoActual.Name = "button_estadoActual";
@@ -165,8 +174,7 @@
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Simulador";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Simulador de Tráfico Aéreo";
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.Simulador_Paint);
+            this.Resize += new System.EventHandler(this.Simulador_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_espacioAereo)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

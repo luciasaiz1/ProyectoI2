@@ -24,6 +24,10 @@ namespace Windows
         private List<PictureBox> llistaPictures = new List<PictureBox>();
         private const int TAM_AVION = 25;
 
+        private double escala = 1; //pixeles por cada unidad de las coordenadas
+        private double maxX = 1;
+        private double maxY = 1;
+
         //CONSTRUCTOR
         public Simulador(FlightPlanList vuelos, double distancia, double ciclo)
         {
@@ -40,6 +44,8 @@ namespace Windows
             label_info.Text = "Distancia de Seguridad: " + this.distanciaSeguridad + " | Tiempo ciclo: " + this.tiempoCiclo;
 
             RevisarConflictoInicial();
+            CalcularLimitesMundo();
+            CalcularEscala();
             MostrarAvionesIniciales();
         }
 
@@ -98,8 +104,8 @@ namespace Windows
             Position pos = plan.GetCurrentPosition();
 
             //Restamos la mitad del tamaño del avión para centrarlo en la posición
-            int x = (int)pos.GetX() - TAM_AVION / 2;
-            int y = (int)pos.GetY() - TAM_AVION / 2;
+            int x = (int)pixelPantalla(pos.GetX()) - TAM_AVION / 2;
+            int y = (int)pixelPantalla(pos.GetY()) - TAM_AVION / 2;
             pic.Location = new Point(x, y);
         }
 
@@ -238,7 +244,7 @@ namespace Windows
                 Trajectories(plan, e.Graphics);
 
                 Position p = plan.GetCurrentPosition();
-                SecurityDistance(e.Graphics, (float)p.GetX(), (float)p.GetY(), (float)distanciaSeguridad/2, plan); //distanciaSeguridad/2 porque el radio es la mitad de la distancia de seguridad
+                SecurityDistance(e.Graphics, pixelPantalla((float)p.GetX()),pixelPantalla((float)p.GetY()), pixelPantalla((float)distanciaSeguridad/2), plan); //distanciaSeguridad/2 porque el radio es la mitad de la distancia de seguridad
             }
         }
 
@@ -246,8 +252,8 @@ namespace Windows
         {
             using (Pen lapiz = new Pen(Color.White, 1))
             {
-                Point initial = new Point(Convert.ToInt32(plan.GetInitialPosition().GetX()), Convert.ToInt32(plan.GetInitialPosition().GetY()));
-                Point final = new Point(Convert.ToInt32(plan.GetFinalPosition().GetX()), Convert.ToInt32(plan.GetFinalPosition().GetY()));
+                Point initial = new Point((int)pixelPantalla(Convert.ToInt32(plan.GetInitialPosition().GetX())), (int)pixelPantalla(Convert.ToInt32(plan.GetInitialPosition().GetY())));
+                Point final = new Point((int)pixelPantalla(Convert.ToInt32(plan.GetFinalPosition().GetX())), (int)pixelPantalla(Convert.ToInt32(plan.GetFinalPosition().GetY())));
                 g.DrawLine(lapiz, initial, final);
             }
         }
@@ -481,9 +487,46 @@ namespace Windows
                 reloj.Start();
         }
 
+        private void CalcularLimitesMundo()
+        {
+            maxX = 1;
+            maxY = 1;
+            for(int i = 0; i< llistaVuelos.GetCount(); i++)
+            {
+                FlightPlan plan = llistaVuelos.GetFlightPlan(i);
+                maxX = Math.Max(maxX, Math.Max(plan.GetInitialPosition().GetX(), plan.GetFinalPosition().GetX()));
+                maxY = Math.Max(maxY, Math.Max(plan.GetInitialPosition().GetY(), plan.GetFinalPosition().GetY()));
+            }
+            maxX = maxX + 30; //margen para que los aviones del borde no queden cortados
+            maxY = maxY + 30;
+        }
+
+        private void CalcularEscala() //calcularemos cuantos pixeles corresponden a cada unidad, segun el tamaño actual de nuestro espacio aereo
+        {
+            double escalaX = pictureBox_espacioAereo.Width / maxX;
+            double escalaY = pictureBox_espacioAereo.Height / maxY;
+            escala = Math.Min(escalaX, escalaY); //la escala menor para que quepa tanto a lo ancho como largo
+        }
+
+        //Convierte una coordenada de nuestro espacio aereo en pixeles de pantalla
+        private float pixelPantalla(double coordenada)
+        {
+            return (float)(coordenada * escala); //la coordenada dvuelve la posicion en pixeles funcionando como parametro
+        }
         private void Simulador_Paint(object sender, PaintEventArgs e)
         {
             estilo.PintarFondo(e.Graphics, this.ClientRectangle);
+        }
+
+        private void Simulador_Resize(object sender, EventArgs e)
+        {
+            CalcularEscala();
+            for(int i = 0; i < llistaPictures.Count; i++)
+            {
+                ColocarAvion(llistaPictures[i], llistaVuelos.GetFlightPlan(i));
+            }
+            this.Invalidate();
+            pictureBox_espacioAereo.Invalidate();
         }
     }
 }

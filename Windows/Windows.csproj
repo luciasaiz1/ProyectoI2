@@ -175,6 +175,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="fichero vuelos con errores.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="fichero vuelos prueba.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

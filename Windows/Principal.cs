@@ -50,7 +50,7 @@ namespace Windows
                 else
                 {
                     // Si ha fallat el format o el fitxer no era vàlid
-                    MessageBox.Show("Atención: El fichero seleccionado no tiene el formato correcto o contine líneas erróneas. No se han podido cargar los vuelos.", "Error de formato", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("No se han podido cargar los vuelos. Revisa el fichero: \n\n" + listaVuelos.GetErroresLectura(), "Error de formato en el fichero", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
         }

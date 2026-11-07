@@ -42,13 +42,14 @@
             // 
             // button_registrar
             // 
+            this.button_registrar.BackColor = System.Drawing.Color.Lavender;
             this.button_registrar.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_registrar.Location = new System.Drawing.Point(45, 298);
             this.button_registrar.Name = "button_registrar";
             this.button_registrar.Size = new System.Drawing.Size(120, 42);
             this.button_registrar.TabIndex = 0;
             this.button_registrar.Text = "Registrar nuevo usuario";
-            this.button_registrar.UseVisualStyleBackColor = true;
+            this.button_registrar.UseVisualStyleBackColor = false;
             this.button_registrar.Click += new System.EventHandler(this.button_registrar_Click);
             // 
             // button_entrar
@@ -65,20 +66,22 @@
             // label_password
             // 
             this.label_password.AutoSize = true;
-            this.label_password.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_password.BackColor = System.Drawing.Color.Transparent;
+            this.label_password.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_password.Location = new System.Drawing.Point(158, 154);
             this.label_password.Name = "label_password";
-            this.label_password.Size = new System.Drawing.Size(85, 20);
+            this.label_password.Size = new System.Drawing.Size(90, 20);
             this.label_password.TabIndex = 2;
             this.label_password.Text = "Contraseña:";
             // 
             // label_usuario
             // 
             this.label_usuario.AutoSize = true;
-            this.label_usuario.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_usuario.BackColor = System.Drawing.Color.Transparent;
+            this.label_usuario.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_usuario.Location = new System.Drawing.Point(158, 99);
             this.label_usuario.Name = "label_usuario";
-            this.label_usuario.Size = new System.Drawing.Size(61, 20);
+            this.label_usuario.Size = new System.Drawing.Size(66, 20);
             this.label_usuario.TabIndex = 3;
             this.label_usuario.Text = "Usuario:";
             // 
@@ -100,7 +103,8 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(22, 256);
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Location = new System.Drawing.Point(31, 257);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(160, 26);
             this.label1.TabIndex = 6;
@@ -129,6 +133,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.Color.Transparent;
             this.label3.Font = new System.Drawing.Font("Segoe UI Historic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(225, 25);
             this.label3.Name = "label3";
