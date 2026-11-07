@@ -48,8 +48,9 @@
             // 
             // button_aceptar
             // 
+            this.button_aceptar.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_aceptar.Location = new System.Drawing.Point(46, 300);
-            this.button_aceptar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button_aceptar.Margin = new System.Windows.Forms.Padding(2);
             this.button_aceptar.Name = "button_aceptar";
             this.button_aceptar.Size = new System.Drawing.Size(205, 25);
             this.button_aceptar.TabIndex = 0;
@@ -60,6 +61,7 @@
             // label_Id
             // 
             this.label_Id.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label_Id.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_Id.Location = new System.Drawing.Point(21, 22);
             this.label_Id.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label_Id.Name = "label_Id";
@@ -71,6 +73,7 @@
             // label_currentPositionX
             // 
             this.label_currentPositionX.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label_currentPositionX.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_currentPositionX.Location = new System.Drawing.Point(21, 58);
             this.label_currentPositionX.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label_currentPositionX.Name = "label_currentPositionX";
@@ -78,11 +81,11 @@
             this.label_currentPositionX.TabIndex = 2;
             this.label_currentPositionX.Text = "Posición actual (x)";
             this.label_currentPositionX.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-         
             // 
             // label_finalPositionX
             // 
             this.label_finalPositionX.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label_finalPositionX.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_finalPositionX.Location = new System.Drawing.Point(21, 137);
             this.label_finalPositionX.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label_finalPositionX.Name = "label_finalPositionX";
@@ -94,6 +97,7 @@
             // label_velocidad
             // 
             this.label_velocidad.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label_velocidad.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_velocidad.Location = new System.Drawing.Point(21, 220);
             this.label_velocidad.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label_velocidad.Name = "label_velocidad";
@@ -104,39 +108,44 @@
             // 
             // textBox_Id
             // 
+            this.textBox_Id.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_Id.Location = new System.Drawing.Point(150, 23);
-            this.textBox_Id.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox_Id.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_Id.Name = "textBox_Id";
-            this.textBox_Id.Size = new System.Drawing.Size(116, 20);
+            this.textBox_Id.Size = new System.Drawing.Size(116, 22);
             this.textBox_Id.TabIndex = 5;
             // 
             // textBox_currentPositionX
             // 
+            this.textBox_currentPositionX.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_currentPositionX.Location = new System.Drawing.Point(150, 59);
-            this.textBox_currentPositionX.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox_currentPositionX.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_currentPositionX.Name = "textBox_currentPositionX";
-            this.textBox_currentPositionX.Size = new System.Drawing.Size(116, 20);
+            this.textBox_currentPositionX.Size = new System.Drawing.Size(116, 22);
             this.textBox_currentPositionX.TabIndex = 6;
             // 
             // textBox_finalPositionX
             // 
+            this.textBox_finalPositionX.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_finalPositionX.Location = new System.Drawing.Point(150, 138);
-            this.textBox_finalPositionX.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox_finalPositionX.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_finalPositionX.Name = "textBox_finalPositionX";
-            this.textBox_finalPositionX.Size = new System.Drawing.Size(116, 20);
+            this.textBox_finalPositionX.Size = new System.Drawing.Size(116, 22);
             this.textBox_finalPositionX.TabIndex = 7;
             // 
             // textBox_velocidad
             // 
+            this.textBox_velocidad.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_velocidad.Location = new System.Drawing.Point(150, 221);
-            this.textBox_velocidad.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox_velocidad.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_velocidad.Name = "textBox_velocidad";
-            this.textBox_velocidad.Size = new System.Drawing.Size(116, 20);
+            this.textBox_velocidad.Size = new System.Drawing.Size(116, 22);
             this.textBox_velocidad.TabIndex = 8;
             // 
             // label_currentPositionY
             // 
             this.label_currentPositionY.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label_currentPositionY.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_currentPositionY.Location = new System.Drawing.Point(21, 97);
             this.label_currentPositionY.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label_currentPositionY.Name = "label_currentPositionY";
@@ -147,23 +156,26 @@
             // 
             // textBox_currentPositionY
             // 
+            this.textBox_currentPositionY.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_currentPositionY.Location = new System.Drawing.Point(150, 97);
-            this.textBox_currentPositionY.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox_currentPositionY.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_currentPositionY.Name = "textBox_currentPositionY";
-            this.textBox_currentPositionY.Size = new System.Drawing.Size(116, 20);
+            this.textBox_currentPositionY.Size = new System.Drawing.Size(116, 22);
             this.textBox_currentPositionY.TabIndex = 10;
             // 
             // textBox_finalPositionY
             // 
+            this.textBox_finalPositionY.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_finalPositionY.Location = new System.Drawing.Point(150, 182);
-            this.textBox_finalPositionY.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox_finalPositionY.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_finalPositionY.Name = "textBox_finalPositionY";
-            this.textBox_finalPositionY.Size = new System.Drawing.Size(116, 20);
+            this.textBox_finalPositionY.Size = new System.Drawing.Size(116, 22);
             this.textBox_finalPositionY.TabIndex = 11;
             // 
             // label1
             // 
             this.label1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(21, 181);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
@@ -174,14 +186,16 @@
             // 
             // name_company
             // 
+            this.name_company.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.name_company.Location = new System.Drawing.Point(150, 257);
             this.name_company.Name = "name_company";
-            this.name_company.Size = new System.Drawing.Size(116, 20);
+            this.name_company.Size = new System.Drawing.Size(116, 22);
             this.name_company.TabIndex = 14;
             // 
             // label3
             // 
             this.label3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(21, 256);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
@@ -192,8 +206,9 @@
             // 
             // button1
             // 
+            this.button1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.Location = new System.Drawing.Point(46, 331);
-            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(205, 25);
             this.button1.TabIndex = 16;
@@ -223,7 +238,7 @@
             this.Controls.Add(this.label_currentPositionX);
             this.Controls.Add(this.label_Id);
             this.Controls.Add(this.button_aceptar);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FlightPlanAdder";
             this.Text = "FlightPlanAdder";
             this.ResumeLayout(false);

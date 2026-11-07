@@ -13,7 +13,6 @@ namespace Windows
 {
     public partial class InfoVuelo : Form
     {
-        private Estilo estilo = new Estilo();
         private FlightPlan plan;
         public InfoVuelo(FlightPlan plan) //para crearme, darme un flight plan que lo llamaré plan
         {
@@ -33,9 +32,9 @@ namespace Windows
             numericUpDown_velocidad.Maximum = 1000;
             numericUpDown_velocidad.Value = (decimal)plan.GetVelocidad();
             this.AcceptButton = button1_aplicar;
-            label_origen.Text = origen.GetX() + " , " + origen.GetY();
-            label_destino.Text = destino.GetX() + " , " + destino.GetY();
-            label_actual.Text = actual.GetX()+ " , " + actual.GetY();
+            label_origen.Text = origen.GetX().ToString("F2") + " , " + origen.GetY().ToString("F2");
+            label_destino.Text = destino.GetX().ToString("F2") + " , " + destino.GetY().ToString("F2");
+            label_actual.Text = actual.GetX().ToString("F2") + " , " + actual.GetY().ToString("F2");
 
             if (plan.HasArrived())
                 label_estado.Text = "Ha llegado a su destino";

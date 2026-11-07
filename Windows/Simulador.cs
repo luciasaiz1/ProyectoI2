@@ -143,7 +143,8 @@ namespace Windows
             }
         }
 
-        private void AvisarConflicto()
+        //Muestra una alarma con los vuelos que esten en conflicto
+        private void AvisarConflicto(string vuelosEnConflicto)
         {
             if (avisoMostrado)
                 return; // ya hemos avisado de este conflicto
@@ -151,7 +152,9 @@ namespace Windows
 
             // Paramos la simulacion automatica mientras sale el aviso (igual que en button2_Click)
             bool estabaEnAutomatico = reloj.Enabled;
-            reloj.Stop();
+            reloj.Stop(); //paramos mientras la alarma se muestra.
+
+            MessageBox.Show("¡ALARMA! Se ha perdido la distancia de seguridad (" + distanciaSeguridad + ") entre: \n\n" + vuelosEnConflicto, "Conflicto", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
             if (estabaEnAutomatico)
                 reloj.Start();
@@ -169,6 +172,8 @@ namespace Windows
             }
             
             bool hayConflictoGeneral = false;
+
+            string vuelosEnConflicto = "";
             //se guarda la distancia mínima global entre todos los vuelos
             double minDistanciaGlobal = double.MaxValue;
 
@@ -186,17 +191,19 @@ namespace Windows
                     if (p1.ConflictoDuranteCiclo(p2, distanciaSeguridad, tiempoCiclo))
                     {
                         hayConflictoGeneral = true;
+                        vuelosEnConflicto = vuelosEnConflicto + p1.GetId() + " y " + p2.GetId() + "\n";
+                        //si decidimos darle que no a solucionar conflicto y simulamos,
+                        //en el momento del cruce entre los vuelos que entrarán en conflicto saltará la alarma
                     }
                 }
             }
-
-            Conflictolabel.BackColor = Color.Beige;
 
             if (hayConflictoGeneral)
             {
                 Conflictolabel.Text = "¡CONFLICTO! Distancia mín:" + minDistanciaGlobal.ToString("F2");
                 Conflictolabel.ForeColor = Color.Red;
-                AvisarConflicto();
+                AvisarConflicto(vuelosEnConflicto
+                    );
             }
 
             else
@@ -409,7 +416,8 @@ namespace Windows
             button_mover.Enabled = true;
 
             avisoMostrado = false;
-            Conflictolabel.Text = "";
+            Conflictolabel.Text = "Simulación reiniciada. Pulsa \"Mover\" o \"Automatico\".";
+            Conflictolabel.ForeColor = Color.Purple;
 
             pictureBox_espacioAereo.Invalidate(); //redibuja trayectorias y circulos
 
@@ -513,11 +521,7 @@ namespace Windows
         {
             return (float)(coordenada * escala); //la coordenada dvuelve la posicion en pixeles funcionando como parametro
         }
-        private void Simulador_Paint(object sender, PaintEventArgs e)
-        {
-            estilo.PintarFondo(e.Graphics, this.ClientRectangle);
-        }
-
+        
         private void Simulador_Resize(object sender, EventArgs e)
         {
             CalcularEscala();
@@ -527,6 +531,11 @@ namespace Windows
             }
             this.Invalidate();
             pictureBox_espacioAereo.Invalidate();
+        }
+
+        private void Simulador_Paint(object sender, PaintEventArgs e)
+        {
+            estilo.PintarFondo(e.Graphics, this.ClientRectangle);
         }
     }
 }

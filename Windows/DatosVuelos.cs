@@ -92,6 +92,11 @@ namespace Windows
             DistanciaVuelo form = new DistanciaVuelo(vueloActual, otroVuelo);
             form.ShowDialog();
         }
+
+        private void DatosVuelos_Paint(object sender, PaintEventArgs e)
+        {
+            estilo.PintarFondo(e.Graphics, this.ClientRectangle);
+        }
     }
 
  }

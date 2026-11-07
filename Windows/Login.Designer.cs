@@ -35,7 +35,6 @@
             this.textBox_usuario = new System.Windows.Forms.TextBox();
             this.textBox_password = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.linkCambiarContrasena = new System.Windows.Forms.LinkLabel();
             this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
@@ -111,14 +110,6 @@
             this.label1.Text = "¿No tienes usuario? \r\npulsa \"Registrar nuevo usuario\".";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(404, 361);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(0, 13);
-            this.label2.TabIndex = 7;
-            // 
             // linkCambiarContrasena
             // 
             this.linkCambiarContrasena.AutoSize = true;
@@ -135,6 +126,7 @@
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.Transparent;
             this.label3.Font = new System.Drawing.Font("Segoe UI Historic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.BlueViolet;
             this.label3.Location = new System.Drawing.Point(225, 25);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(118, 42);
@@ -149,7 +141,6 @@
             this.ClientSize = new System.Drawing.Size(584, 361);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.linkCambiarContrasena);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBox_password);
             this.Controls.Add(this.textBox_usuario);
@@ -179,7 +170,6 @@
         private System.Windows.Forms.TextBox textBox_usuario;
         private System.Windows.Forms.TextBox textBox_password;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.LinkLabel linkCambiarContrasena;
         private System.Windows.Forms.Label label3;
     }

@@ -25,7 +25,7 @@ namespace Windows
         {
             InitializeComponent();
             this.usuario = usuario;
-            this.Text = "Deconflicting Tool - Usuario:" + usuario;
+            this.Text = "Deconflicting Tool - Menú principal ⋅ Usuario: " + usuario;
         }
 
         private void introducirDatosToolStripMenuItem_Click(object sender, EventArgs e)

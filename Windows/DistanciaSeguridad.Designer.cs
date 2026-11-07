@@ -39,7 +39,8 @@
             // label1
             // 
             this.label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label1.Location = new System.Drawing.Point(21, 24);
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(22, 27);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(125, 20);
@@ -50,7 +51,8 @@
             // label2
             // 
             this.label2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label2.Location = new System.Drawing.Point(172, 24);
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(173, 27);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(125, 20);
@@ -60,24 +62,27 @@
             // 
             // textBox_distancia
             // 
-            this.textBox_distancia.Location = new System.Drawing.Point(39, 66);
-            this.textBox_distancia.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox_distancia.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox_distancia.Location = new System.Drawing.Point(40, 69);
+            this.textBox_distancia.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_distancia.Name = "textBox_distancia";
-            this.textBox_distancia.Size = new System.Drawing.Size(84, 20);
+            this.textBox_distancia.Size = new System.Drawing.Size(84, 22);
             this.textBox_distancia.TabIndex = 2;
             // 
             // textBox_tiempoCiclo
             // 
-            this.textBox_tiempoCiclo.Location = new System.Drawing.Point(190, 66);
-            this.textBox_tiempoCiclo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox_tiempoCiclo.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox_tiempoCiclo.Location = new System.Drawing.Point(191, 69);
+            this.textBox_tiempoCiclo.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_tiempoCiclo.Name = "textBox_tiempoCiclo";
-            this.textBox_tiempoCiclo.Size = new System.Drawing.Size(84, 20);
+            this.textBox_tiempoCiclo.Size = new System.Drawing.Size(84, 22);
             this.textBox_tiempoCiclo.TabIndex = 3;
             // 
             // button_aceptar
             // 
-            this.button_aceptar.Location = new System.Drawing.Point(99, 104);
-            this.button_aceptar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button_aceptar.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_aceptar.Location = new System.Drawing.Point(100, 107);
+            this.button_aceptar.Margin = new System.Windows.Forms.Padding(2);
             this.button_aceptar.Name = "button_aceptar";
             this.button_aceptar.Size = new System.Drawing.Size(114, 25);
             this.button_aceptar.TabIndex = 4;
@@ -87,8 +92,9 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(99, 137);
-            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(100, 140);
+            this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(114, 25);
             this.button1.TabIndex = 5;
@@ -108,9 +114,11 @@
             this.Controls.Add(this.textBox_distancia);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Margin = new System.Windows.Forms.Padding(2);
+            this.MinimizeBox = false;
             this.Name = "DistanciaSeguridad";
-            this.Text = "DistanciaSeguridad";
+            this.Text = "Parámetros de simulación";
             this.ResumeLayout(false);
             this.PerformLayout();
 

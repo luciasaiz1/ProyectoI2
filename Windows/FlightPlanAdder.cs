@@ -14,7 +14,6 @@ namespace Windows
 {
     public partial class FlightPlanAdder : Form
     {
-        private Estilo estilo = new Estilo();
         FlightPlan plan1;
         FlightPlan plan2;
 

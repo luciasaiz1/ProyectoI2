@@ -15,6 +15,7 @@ namespace Windows
 {
     public partial class RegistrarNuevoUsuario : Form
     {
+        private Estilo estilo = new Estilo();
         private GestionUsuarios gestion;
         public RegistrarNuevoUsuario(GestionUsuarios gestion)
         {
@@ -76,6 +77,11 @@ namespace Windows
             return usuarioRegistrado;
         }
 
+        private void RegistrarNuevoUsuario_Paint(object sender, PaintEventArgs e)
+        {
+
+            estilo.PintarFondo(e.Graphics, this.ClientRectangle);
         }
+    }
     }
 

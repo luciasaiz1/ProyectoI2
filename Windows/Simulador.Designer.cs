@@ -39,6 +39,7 @@
             this.button_datos = new System.Windows.Forms.Button();
             this.button_reset = new System.Windows.Forms.Button();
             this.button_estadoActual = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_espacioAereo)).BeginInit();
             this.SuspendLayout();
             // 
@@ -72,13 +73,14 @@
             // Conflictolabel
             // 
             this.Conflictolabel.AutoSize = true;
-            this.Conflictolabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.Conflictolabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.Conflictolabel.BackColor = System.Drawing.Color.Transparent;
+            this.Conflictolabel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Conflictolabel.ForeColor = System.Drawing.Color.Purple;
             this.Conflictolabel.Location = new System.Drawing.Point(22, 21);
             this.Conflictolabel.Name = "Conflictolabel";
-            this.Conflictolabel.Size = new System.Drawing.Size(46, 13);
+            this.Conflictolabel.Size = new System.Drawing.Size(282, 17);
             this.Conflictolabel.TabIndex = 3;
-            this.Conflictolabel.Text = "ERROR";
+            this.Conflictolabel.Text = "Pulsa \"Mover\" o \"Automático\" para empezar";
             // 
             // button_mover
             // 
@@ -155,12 +157,26 @@
             this.button_estadoActual.UseVisualStyleBackColor = true;
             this.button_estadoActual.Click += new System.EventHandler(this.button_estadoActual_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.Indigo;
+            this.label1.Location = new System.Drawing.Point(687, 507);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(206, 60);
+            this.label1.TabIndex = 10;
+            this.label1.Text = "Para cambiar las velocidades \r\nde los aviones, clica sobre cada avión \r\npara abri" +
+    "r los datos del vuelo \r\ny editar la velocidad.";
+            // 
             // Simulador
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSteelBlue;
             this.ClientSize = new System.Drawing.Size(914, 671);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.button_estadoActual);
             this.Controls.Add(this.button_reset);
             this.Controls.Add(this.button_datos);
@@ -174,6 +190,7 @@
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Simulador";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.Simulador_Paint);
             this.Resize += new System.EventHandler(this.Simulador_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_espacioAereo)).EndInit();
             this.ResumeLayout(false);
@@ -193,5 +210,6 @@
         private System.Windows.Forms.Button button_datos;
         private System.Windows.Forms.Button button_reset;
         private System.Windows.Forms.Button button_estadoActual;
+        private System.Windows.Forms.Label label1;
     }
 }

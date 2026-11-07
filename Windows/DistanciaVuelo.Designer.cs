@@ -34,21 +34,26 @@
             // label_distancia
             // 
             this.label_distancia.AutoSize = true;
-            this.label_distancia.Location = new System.Drawing.Point(60, 34);
+            this.label_distancia.Location = new System.Drawing.Point(52, 32);
+            this.label_distancia.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label_distancia.Name = "label_distancia";
-            this.label_distancia.Size = new System.Drawing.Size(44, 16);
+            this.label_distancia.Size = new System.Drawing.Size(38, 15);
             this.label_distancia.TabIndex = 0;
             this.label_distancia.Text = "label1";
             // 
             // DistanciaVuelo
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.ClientSize = new System.Drawing.Size(482, 103);
+            this.ClientSize = new System.Drawing.Size(422, 97);
             this.Controls.Add(this.label_distancia);
+            this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Margin = new System.Windows.Forms.Padding(2);
+            this.MaximizeBox = false;
             this.Name = "DistanciaVuelo";
-            this.Text = "DistanciaVuelo";
+            this.Text = "Distancia entre vuelos";
             this.ResumeLayout(false);
             this.PerformLayout();
 

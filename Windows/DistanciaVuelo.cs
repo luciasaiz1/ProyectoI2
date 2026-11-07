@@ -14,7 +14,6 @@ namespace Windows
 {
     public partial class DistanciaVuelo : Form
     {
-        private Estilo estilo = new Estilo();
         public DistanciaVuelo(FlightPlan vuelo, FlightPlan otro)
         {
             InitializeComponent();

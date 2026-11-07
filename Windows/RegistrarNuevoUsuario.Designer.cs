@@ -41,23 +41,24 @@
             // palabrarecuperacion
             // 
             this.palabrarecuperacion.AutoSize = true;
-            this.palabrarecuperacion.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.palabrarecuperacion.Location = new System.Drawing.Point(169, 132);
+            this.palabrarecuperacion.BackColor = System.Drawing.Color.Transparent;
+            this.palabrarecuperacion.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.palabrarecuperacion.Location = new System.Drawing.Point(114, 120);
             this.palabrarecuperacion.Name = "palabrarecuperacion";
-            this.palabrarecuperacion.Size = new System.Drawing.Size(83, 34);
+            this.palabrarecuperacion.Size = new System.Drawing.Size(91, 34);
             this.palabrarecuperacion.TabIndex = 15;
             this.palabrarecuperacion.Text = "Palabra de \r\nrecuperación:";
             // 
             // textBox_recuperacion
             // 
-            this.textBox_recuperacion.Location = new System.Drawing.Point(308, 134);
+            this.textBox_recuperacion.Location = new System.Drawing.Point(253, 122);
             this.textBox_recuperacion.Name = "textBox_recuperacion";
             this.textBox_recuperacion.Size = new System.Drawing.Size(100, 20);
             this.textBox_recuperacion.TabIndex = 14;
             // 
             // textBox_usuario
             // 
-            this.textBox_usuario.Location = new System.Drawing.Point(308, 77);
+            this.textBox_usuario.Location = new System.Drawing.Point(253, 65);
             this.textBox_usuario.Name = "textBox_usuario";
             this.textBox_usuario.Size = new System.Drawing.Size(100, 20);
             this.textBox_usuario.TabIndex = 12;
@@ -65,18 +66,20 @@
             // label_usuario
             // 
             this.label_usuario.AutoSize = true;
-            this.label_usuario.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_usuario.Location = new System.Drawing.Point(168, 77);
+            this.label_usuario.BackColor = System.Drawing.Color.Transparent;
+            this.label_usuario.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_usuario.Location = new System.Drawing.Point(113, 65);
             this.label_usuario.Name = "label_usuario";
-            this.label_usuario.Size = new System.Drawing.Size(61, 20);
+            this.label_usuario.Size = new System.Drawing.Size(67, 20);
             this.label_usuario.TabIndex = 11;
             this.label_usuario.Text = "Usuario:";
             // 
             // label_password
             // 
             this.label_password.AutoSize = true;
+            this.label_password.BackColor = System.Drawing.Color.Transparent;
             this.label_password.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_password.Location = new System.Drawing.Point(168, 132);
+            this.label_password.Location = new System.Drawing.Point(113, 120);
             this.label_password.Name = "label_password";
             this.label_password.Size = new System.Drawing.Size(0, 20);
             this.label_password.TabIndex = 10;
@@ -84,16 +87,17 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(169, 199);
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(114, 187);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(114, 17);
+            this.label1.Size = new System.Drawing.Size(124, 17);
             this.label1.TabIndex = 16;
             this.label1.Text = "Nueva Contraseña:";
             // 
             // textBox_NuevaPassword
             // 
-            this.textBox_NuevaPassword.Location = new System.Drawing.Point(308, 199);
+            this.textBox_NuevaPassword.Location = new System.Drawing.Point(253, 187);
             this.textBox_NuevaPassword.Name = "textBox_NuevaPassword";
             this.textBox_NuevaPassword.Size = new System.Drawing.Size(100, 20);
             this.textBox_NuevaPassword.TabIndex = 17;
@@ -101,20 +105,21 @@
             // 
             // button_registrar
             // 
+            this.button_registrar.BackColor = System.Drawing.Color.Plum;
             this.button_registrar.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_registrar.Location = new System.Drawing.Point(244, 269);
+            this.button_registrar.Location = new System.Drawing.Point(189, 257);
             this.button_registrar.Name = "button_registrar";
             this.button_registrar.Size = new System.Drawing.Size(101, 29);
             this.button_registrar.TabIndex = 18;
             this.button_registrar.Text = "Registrarme";
-            this.button_registrar.UseVisualStyleBackColor = true;
+            this.button_registrar.UseVisualStyleBackColor = false;
             this.button_registrar.Click += new System.EventHandler(this.button_registrar_Click);
             // 
             // RegistrarNuevoUsuario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(584, 361);
+            this.ClientSize = new System.Drawing.Size(471, 315);
             this.Controls.Add(this.button_registrar);
             this.Controls.Add(this.textBox_NuevaPassword);
             this.Controls.Add(this.label1);
@@ -123,9 +128,12 @@
             this.Controls.Add(this.textBox_usuario);
             this.Controls.Add(this.label_usuario);
             this.Controls.Add(this.label_password);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
             this.Name = "RegistrarNuevoUsuario";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Registrar Nuevo Usuario";
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.RegistrarNuevoUsuario_Paint);
             this.ResumeLayout(false);
             this.PerformLayout();
 

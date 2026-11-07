@@ -104,7 +104,8 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Principal";
-            this.Text = "Principal";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Deconflicting Tool - Menú Principal";
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Principal_Paint);
             this.Resize += new System.EventHandler(this.Principal_Resize);
             this.menuStrip1.ResumeLayout(false);
