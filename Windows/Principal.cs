@@ -14,14 +14,17 @@ namespace Windows
 {
     public partial class Principal : Form
     {
-        private FlightPlanList llistaVuelos = new FlightPlanList();
+        private FlightPlanList listaVuelos = new FlightPlanList();
 
         private double distanciaSeguridad = 0;
         private double tiempoCiclo = 0;
 
-        public Principal()
+        private string usuario;
+        public Principal(string usuario)
         {
             InitializeComponent();
+            this.usuario = usuario;
+            this.Text = "Deconflicting Tool - Usuario:" + usuario;
         }
 
         private void introducirDatosToolStripMenuItem_Click(object sender, EventArgs e)
@@ -32,14 +35,14 @@ namespace Windows
 
             if (openFile.ShowDialog() == DialogResult.OK)
             {
-                string rutaTriada = openFile.FileName;
+                string rutaEncontrada = openFile.FileName;
 
-                bool cargadoCorrectamente = llistaVuelos.LeerDelFichero(rutaTriada);
+                bool cargadoCorrectamente = listaVuelos.LeerDelFichero(rutaEncontrada);
 
-                if (cargadoCorrectamente && llistaVuelos.GetCount() > 0)
+                if (cargadoCorrectamente && listaVuelos.GetCount() > 0)
                 {
                     // Si tot és correcte i s'han carregat vols
-                    MessageBox.Show("Se han cargado " + llistaVuelos.GetCount() + " vuelos correctamente desde el fichero!", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Se han cargado " + listaVuelos.GetCount() + " vuelos correctamente desde el fichero!", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
@@ -71,10 +74,10 @@ namespace Windows
                 return;
             }
 
-            if (llistaVuelos.GetCount() > 0)
+            if (listaVuelos.GetCount() > 0)
             {
                 // Passem la llista sencera al simulador en lloc de dos plans sueltos
-                Simulador formSim = new Simulador(llistaVuelos, this.distanciaSeguridad, this.tiempoCiclo);
+                Simulador formSim = new Simulador(listaVuelos, this.distanciaSeguridad, this.tiempoCiclo);
                 formSim.ShowDialog();
             }
             else

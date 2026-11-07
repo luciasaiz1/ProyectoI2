@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using FlightLib;
 
 namespace Windows
 {
@@ -16,7 +17,14 @@ namespace Windows
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Principal());
+            //Pedimos usuario y contraseña; solo si son correcrtos 
+            //se abre el menu principal
+
+            Login login = new Login();
+            if (login.ShowDialog() == DialogResult.OK)
+            {
+                Application.Run(new Principal(login.GetUsuario()));
+            }
         }
     }
 }
