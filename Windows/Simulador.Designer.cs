@@ -40,6 +40,7 @@
             this.button_reset = new System.Windows.Forms.Button();
             this.button_estadoActual = new System.Windows.Forms.Button();
             this.Label_Clue = new System.Windows.Forms.Label();
+            this.button_volver = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_espacioAereo)).BeginInit();
             this.SuspendLayout();
             // 
@@ -159,6 +160,7 @@
             // 
             // Label_Clue
             // 
+            this.Label_Clue.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.Label_Clue.AutoSize = true;
             this.Label_Clue.BackColor = System.Drawing.Color.Transparent;
             this.Label_Clue.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -170,12 +172,25 @@
             this.Label_Clue.Text = "Para cambiar las velocidades \r\nde los aviones, clica sobre cada avión \r\npara abri" +
     "r los datos del vuelo \r\ny editar la velocidad.";
             // 
+            // button_volver
+            // 
+            this.button_volver.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button_volver.BackColor = System.Drawing.Color.IndianRed;
+            this.button_volver.Location = new System.Drawing.Point(725, 583);
+            this.button_volver.Name = "button_volver";
+            this.button_volver.Size = new System.Drawing.Size(112, 43);
+            this.button_volver.TabIndex = 11;
+            this.button_volver.Text = "Volver al incio";
+            this.button_volver.UseVisualStyleBackColor = false;
+            this.button_volver.Click += new System.EventHandler(this.button_volver_Click);
+            // 
             // Simulador
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSteelBlue;
             this.ClientSize = new System.Drawing.Size(914, 671);
+            this.Controls.Add(this.button_volver);
             this.Controls.Add(this.Label_Clue);
             this.Controls.Add(this.button_estadoActual);
             this.Controls.Add(this.button_reset);
@@ -211,5 +226,6 @@
         private System.Windows.Forms.Button button_reset;
         private System.Windows.Forms.Button button_estadoActual;
         private System.Windows.Forms.Label Label_Clue;
+        private System.Windows.Forms.Button button_volver;
     }
 }

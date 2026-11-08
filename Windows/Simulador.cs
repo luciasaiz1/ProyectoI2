@@ -537,5 +537,10 @@ namespace Windows
         {
             estilo.PintarFondo(e.Graphics, this.ClientRectangle);
         }
+
+        private void button_volver_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }
