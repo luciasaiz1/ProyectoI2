@@ -73,14 +73,6 @@ namespace Windows
             FlightPlan vueloActual = llistaVuelos.GetFlightPlan(e.RowIndex);
 
             //calculamos el índice del otro vuelo: cogemos el siguiente vuelo en la lista, y si nos pasamos, volvemos al primero
-            int indiceOtro = e.RowIndex + 1;
-
-            if (indiceOtro >= llistaVuelos.GetCount())
-            {
-                indiceOtro = 0;
-            }
-
-            FlightPlan otroVuelo = llistaVuelos.GetFlightPlan(indiceOtro);
 
             //si solo hay un vuelo en la lista, no podemos calcular distancia con otro
             if (llistaVuelos.GetCount() <= 1)
@@ -89,7 +81,7 @@ namespace Windows
                 return;
             }
 
-            DistanciaVuelo form = new DistanciaVuelo(vueloActual, otroVuelo);
+            DistanciaVuelo form = new DistanciaVuelo(vueloActual, llistaVuelos);
             form.ShowDialog();
         }
 

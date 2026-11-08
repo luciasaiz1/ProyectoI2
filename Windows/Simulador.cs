@@ -41,7 +41,7 @@ namespace Windows
             this.llistaVuelos.RestartAll();
 
 
-            label_info.Text = "Distancia de Seguridad: " + this.distanciaSeguridad + " | Tiempo ciclo: " + this.tiempoCiclo;
+            Label_Info.Text = "Distancia de Seguridad: " + this.distanciaSeguridad + " | Tiempo ciclo: " + this.tiempoCiclo;
 
             RevisarConflictoInicial();
             CalcularLimitesMundo();
@@ -200,8 +200,8 @@ namespace Windows
 
             if (hayConflictoGeneral)
             {
-                Conflictolabel.Text = "¡CONFLICTO! Distancia mín:" + minDistanciaGlobal.ToString("F2");
-                Conflictolabel.ForeColor = Color.Red;
+                Label_Conflicto.Text = "¡CONFLICTO! Distancia mín:" + minDistanciaGlobal.ToString("F2");
+                Label_Conflicto.ForeColor = Color.Red;
                 AvisarConflicto(vuelosEnConflicto
                     );
             }
@@ -209,11 +209,11 @@ namespace Windows
             else
             {
                 if (llistaVuelos.GetCount() > 1)
-                    Conflictolabel.Text = "Sin conflicto. Distancia mín:" + minDistanciaGlobal.ToString("F2");
+                    Label_Conflicto.Text = "Sin conflicto. Distancia mín:" + minDistanciaGlobal.ToString("F2");
                 else
-                    Conflictolabel.Text = "Simulación activa (1 solo vuelo).";
+                    Label_Conflicto.Text = "Simulación activa (1 solo vuelo).";
 
-                Conflictolabel.ForeColor = Color.Green;
+                Label_Conflicto.ForeColor = Color.Green;
                 avisoMostrado = false;
             }
 
@@ -230,7 +230,7 @@ namespace Windows
 
             if (todosHanLlegado && llistaVuelos.GetCount() > 0)
             {
-                button_automático.Enabled = false;
+                button_auto.Enabled = false;
                 button_mover.Enabled = false;
                 reloj.Stop();
                 if (!mensajeLlegadaMostrado)
@@ -314,19 +314,19 @@ namespace Windows
             }
         }
 
-        private void button_automático_Click(object sender, EventArgs e)
+        private void button_auto_Click(object sender, EventArgs e)
         {
-            if (button_automático.Text == "Automatico")
+            if (button_auto.Text == "Automatico")
             {
                 RevisarConflictoInicial(); //Comprobamos si hay conflicto antes de mover los aviones
-                button_automático.Text = "Parar";
+                button_auto.Text = "Parar";
                 button_mover.Enabled = false; //where  Enabled = false pone el boton en gris para que no se pueda clicar sobre él.
                 reloj.Interval = 100;
                 reloj.Start();
             }
             else
             {
-                button_automático.Text = "Automatico";
+                button_auto.Text = "Automatico";
                 button_mover.Enabled = true; //where  Enabled = true pone el boton en color para que se pueda clicar sobre él.
                 reloj.Stop();
             }
@@ -411,13 +411,13 @@ namespace Windows
                 ColocarAvion(llistaPictures[i], llistaVuelos.GetFlightPlan(i));
             }
 
-            button_automático.Text = "Automatico";
-            button_automático.Enabled = true;
+            button_auto.Text = "Automatico";
+            button_auto.Enabled = true;
             button_mover.Enabled = true;
 
             avisoMostrado = false;
-            Conflictolabel.Text = "Simulación reiniciada. Pulsa \"Mover\" o \"Automatico\".";
-            Conflictolabel.ForeColor = Color.Purple;
+            Label_Conflicto.Text = "Simulación reiniciada. Pulsa \"Mover\" o \"Automatico\".";
+            Label_Conflicto.ForeColor = Color.Purple;
 
             pictureBox_espacioAereo.Invalidate(); //redibuja trayectorias y circulos
 

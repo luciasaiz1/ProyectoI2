@@ -34,7 +34,7 @@ namespace FlightLib
         // retorna la distancia entre los dos Postion
         {
             double resultado = Math.Sqrt((x - b.x) * (x - b.x) + (y - b.y) * (y - b.y));
-            return resultado;
+            return Math.Round(resultado, 2);
         }
 
 

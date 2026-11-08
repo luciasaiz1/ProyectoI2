@@ -30,16 +30,16 @@
         {
             this.components = new System.ComponentModel.Container();
             this.pictureBox_espacioAereo = new System.Windows.Forms.PictureBox();
-            this.label_info = new System.Windows.Forms.Label();
-            this.Conflictolabel = new System.Windows.Forms.Label();
+            this.Label_Info = new System.Windows.Forms.Label();
+            this.Label_Conflicto = new System.Windows.Forms.Label();
             this.button_mover = new System.Windows.Forms.Button();
-            this.button_automático = new System.Windows.Forms.Button();
+            this.button_auto = new System.Windows.Forms.Button();
             this.reloj = new System.Windows.Forms.Timer(this.components);
             this.button_conflicto = new System.Windows.Forms.Button();
             this.button_datos = new System.Windows.Forms.Button();
             this.button_reset = new System.Windows.Forms.Button();
             this.button_estadoActual = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.Label_Clue = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_espacioAereo)).BeginInit();
             this.SuspendLayout();
             // 
@@ -58,29 +58,29 @@
             this.pictureBox_espacioAereo.TabIndex = 0;
             this.pictureBox_espacioAereo.TabStop = false;
             // 
-            // label_info
+            // Label_Info
             // 
-            this.label_info.AutoSize = true;
-            this.label_info.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label_info.Location = new System.Drawing.Point(25, 56);
-            this.label_info.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label_info.Name = "label_info";
-            this.label_info.Size = new System.Drawing.Size(37, 15);
-            this.label_info.TabIndex = 1;
-            this.label_info.Text = "label1";
-            this.label_info.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.Label_Info.AutoSize = true;
+            this.Label_Info.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Label_Info.Location = new System.Drawing.Point(25, 56);
+            this.Label_Info.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.Label_Info.Name = "Label_Info";
+            this.Label_Info.Size = new System.Drawing.Size(37, 15);
+            this.Label_Info.TabIndex = 1;
+            this.Label_Info.Text = "label1";
+            this.Label_Info.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // Conflictolabel
+            // Label_Conflicto
             // 
-            this.Conflictolabel.AutoSize = true;
-            this.Conflictolabel.BackColor = System.Drawing.Color.Transparent;
-            this.Conflictolabel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Conflictolabel.ForeColor = System.Drawing.Color.Purple;
-            this.Conflictolabel.Location = new System.Drawing.Point(22, 21);
-            this.Conflictolabel.Name = "Conflictolabel";
-            this.Conflictolabel.Size = new System.Drawing.Size(282, 17);
-            this.Conflictolabel.TabIndex = 3;
-            this.Conflictolabel.Text = "Pulsa \"Mover\" o \"Automático\" para empezar";
+            this.Label_Conflicto.AutoSize = true;
+            this.Label_Conflicto.BackColor = System.Drawing.Color.Transparent;
+            this.Label_Conflicto.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Label_Conflicto.ForeColor = System.Drawing.Color.Purple;
+            this.Label_Conflicto.Location = new System.Drawing.Point(22, 21);
+            this.Label_Conflicto.Name = "Label_Conflicto";
+            this.Label_Conflicto.Size = new System.Drawing.Size(282, 17);
+            this.Label_Conflicto.TabIndex = 3;
+            this.Label_Conflicto.Text = "Pulsa \"Mover\" o \"Automático\" para empezar";
             // 
             // button_mover
             // 
@@ -93,17 +93,17 @@
             this.button_mover.UseVisualStyleBackColor = true;
             this.button_mover.Click += new System.EventHandler(this.button_mover_Click);
             // 
-            // button_automático
+            // button_auto
             // 
-            this.button_automático.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_automático.Location = new System.Drawing.Point(690, 110);
-            this.button_automático.Margin = new System.Windows.Forms.Padding(2);
-            this.button_automático.Name = "button_automático";
-            this.button_automático.Size = new System.Drawing.Size(200, 40);
-            this.button_automático.TabIndex = 5;
-            this.button_automático.Text = "Automatico";
-            this.button_automático.UseVisualStyleBackColor = true;
-            this.button_automático.Click += new System.EventHandler(this.button_automático_Click);
+            this.button_auto.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button_auto.Location = new System.Drawing.Point(690, 110);
+            this.button_auto.Margin = new System.Windows.Forms.Padding(2);
+            this.button_auto.Name = "button_auto";
+            this.button_auto.Size = new System.Drawing.Size(200, 40);
+            this.button_auto.TabIndex = 5;
+            this.button_auto.Text = "Automatico";
+            this.button_auto.UseVisualStyleBackColor = true;
+            this.button_auto.Click += new System.EventHandler(this.button_auto_Click);
             // 
             // reloj
             // 
@@ -157,17 +157,17 @@
             this.button_estadoActual.UseVisualStyleBackColor = true;
             this.button_estadoActual.Click += new System.EventHandler(this.button_estadoActual_Click);
             // 
-            // label1
+            // Label_Clue
             // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.Indigo;
-            this.label1.Location = new System.Drawing.Point(687, 507);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(206, 60);
-            this.label1.TabIndex = 10;
-            this.label1.Text = "Para cambiar las velocidades \r\nde los aviones, clica sobre cada avión \r\npara abri" +
+            this.Label_Clue.AutoSize = true;
+            this.Label_Clue.BackColor = System.Drawing.Color.Transparent;
+            this.Label_Clue.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Label_Clue.ForeColor = System.Drawing.Color.Indigo;
+            this.Label_Clue.Location = new System.Drawing.Point(687, 507);
+            this.Label_Clue.Name = "Label_Clue";
+            this.Label_Clue.Size = new System.Drawing.Size(206, 60);
+            this.Label_Clue.TabIndex = 10;
+            this.Label_Clue.Text = "Para cambiar las velocidades \r\nde los aviones, clica sobre cada avión \r\npara abri" +
     "r los datos del vuelo \r\ny editar la velocidad.";
             // 
             // Simulador
@@ -176,15 +176,15 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSteelBlue;
             this.ClientSize = new System.Drawing.Size(914, 671);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.Label_Clue);
             this.Controls.Add(this.button_estadoActual);
             this.Controls.Add(this.button_reset);
             this.Controls.Add(this.button_datos);
             this.Controls.Add(this.button_conflicto);
-            this.Controls.Add(this.button_automático);
+            this.Controls.Add(this.button_auto);
             this.Controls.Add(this.button_mover);
-            this.Controls.Add(this.Conflictolabel);
-            this.Controls.Add(this.label_info);
+            this.Controls.Add(this.Label_Conflicto);
+            this.Controls.Add(this.Label_Info);
             this.Controls.Add(this.pictureBox_espacioAereo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(2);
@@ -201,15 +201,15 @@
         #endregion
 
         private System.Windows.Forms.PictureBox pictureBox_espacioAereo;
-        private System.Windows.Forms.Label label_info;
-        private System.Windows.Forms.Label Conflictolabel;
+        private System.Windows.Forms.Label Label_Info;
+        private System.Windows.Forms.Label Label_Conflicto;
         private System.Windows.Forms.Button button_mover;
-        private System.Windows.Forms.Button button_automático;
+        private System.Windows.Forms.Button button_auto;
         private System.Windows.Forms.Timer reloj;
         private System.Windows.Forms.Button button_conflicto;
         private System.Windows.Forms.Button button_datos;
         private System.Windows.Forms.Button button_reset;
         private System.Windows.Forms.Button button_estadoActual;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label Label_Clue;
     }
 }

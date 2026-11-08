@@ -14,13 +14,29 @@ namespace Windows
 {
     public partial class DistanciaVuelo : Form
     {
-        public DistanciaVuelo(FlightPlan vuelo, FlightPlan otro)
+        public DistanciaVuelo(FlightPlan vuelo, FlightPlanList lista)
         {
             InitializeComponent();
             this.Text = "Distancia del vuelo " + vuelo.GetId(); // titulo de la ventana
-            
-            double distancia = vuelo.Distance(otro); // metodo que ya habíamos hecho en FlightPlan
-            label_distancia.Text = "Distancia entre el vuelo " + vuelo.GetId() + " y el vuelo " + otro.GetId() + ": " + distancia.ToString("F2");
+            label_distancia.Text = "Distancias al vuelo " + vuelo.GetId();
+
+            dataGridView_vuelos.ReadOnly = true; 
+            dataGridView_vuelos.AllowUserToAddRows = false; 
+            dataGridView_vuelos.ColumnCount = 3;
+            dataGridView_vuelos.RowCount = lista.GetCount(); 
+            dataGridView_vuelos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+
+            dataGridView_vuelos.Columns[0].HeaderText = "Identificador";
+            dataGridView_vuelos.Columns[1].HeaderText = "Compañía";
+            dataGridView_vuelos.Columns[2].HeaderText = "Distancia";
+
+            for (int i = 0; i < lista.GetCount(); i++)
+            {
+                dataGridView_vuelos.Rows[i].Cells[0].Value = lista.GetFlightPlan(i).GetId();
+                dataGridView_vuelos.Rows[i].Cells[1].Value = lista.GetFlightPlan(i).GetCompany();
+                dataGridView_vuelos.Rows[i].Cells[2].Value = vuelo.Distance(lista.GetFlightPlan(i));
+            }
+
         }
     }
 }
