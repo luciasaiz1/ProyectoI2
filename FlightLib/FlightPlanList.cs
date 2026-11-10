@@ -163,6 +163,31 @@ namespace FlightLib
             }
             W.Close();
         }
+        public FlightPlanList Clone()
+        {
+            FlightPlanList copia = new FlightPlanList();
+
+            foreach (FlightPlan vuelo in llistaVuelos)
+            {
+                copia.AddFlightPlan(vuelo.Clone());
+            }
+
+            return copia;
+        }
+        public void RestoreFrom(FlightPlanList estado)
+        {
+            for (int i = 0; i < llistaVuelos.Count; i++)
+            {
+                FlightPlan actual = llistaVuelos[i];
+                FlightPlan guardado = estado.GetFlightPlan(i);
+
+                actual.SetCurrentPosition(new Position(
+                    guardado.GetCurrentPosition().GetX(),
+                    guardado.GetCurrentPosition().GetY()));
+
+                actual.SetVelocidad(guardado.GetVelocidad());
+            }
+        }
     }
 }
 

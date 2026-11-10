@@ -348,5 +348,22 @@ namespace FlightLib
             }
             Console.WriteLine("******************************");
         }
+        public FlightPlan Clone()
+        {
+            FlightPlan copia = new FlightPlan(
+                this.id,
+                this.initialPosition.GetX(),
+                this.initialPosition.GetY(),
+                this.finalPosition.GetX(),
+                this.finalPosition.GetY(),
+                this.velocidad,
+                this.company);
+
+            copia.SetCurrentPosition(new Position(
+                this.currentPosition.GetX(),
+                this.currentPosition.GetY()));
+
+            return copia;
+        }
     }
 }

@@ -88,7 +88,7 @@
             // 
             this.button_mover.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button_mover.Location = new System.Drawing.Point(920, 74);
-            this.button_mover.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button_mover.Margin = new System.Windows.Forms.Padding(4);
             this.button_mover.Name = "button_mover";
             this.button_mover.Size = new System.Drawing.Size(267, 49);
             this.button_mover.TabIndex = 4;
@@ -116,7 +116,7 @@
             // 
             this.button_conflicto.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button_conflicto.Location = new System.Drawing.Point(920, 348);
-            this.button_conflicto.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button_conflicto.Margin = new System.Windows.Forms.Padding(4);
             this.button_conflicto.Name = "button_conflicto";
             this.button_conflicto.Size = new System.Drawing.Size(267, 49);
             this.button_conflicto.TabIndex = 6;
@@ -181,7 +181,7 @@
             this.button_volver.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button_volver.BackColor = System.Drawing.Color.IndianRed;
             this.button_volver.Location = new System.Drawing.Point(967, 718);
-            this.button_volver.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button_volver.Margin = new System.Windows.Forms.Padding(4);
             this.button_volver.Name = "button_volver";
             this.button_volver.Size = new System.Drawing.Size(149, 53);
             this.button_volver.TabIndex = 11;
