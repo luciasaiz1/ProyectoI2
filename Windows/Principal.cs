@@ -16,6 +16,7 @@ namespace Windows
     {
         private Estilo estilo = new Estilo();
         private FlightPlanList listaVuelos = new FlightPlanList();
+        private Stack<FlightPlanList> stackVuelos = new Stack<FlightPlanList>();
 
         private double distanciaSeguridad = 0;
         private double tiempoCiclo = 0;
@@ -80,7 +81,7 @@ namespace Windows
             if (listaVuelos.GetCount() > 0)
             {
                 // Passem la llista sencera al simulador en lloc de dos plans sueltos
-                Simulador formSim = new Simulador(listaVuelos, this.distanciaSeguridad, this.tiempoCiclo);
+                Simulador formSim = new Simulador(listaVuelos, stackVuelos, this.distanciaSeguridad, this.tiempoCiclo);
                 formSim.ShowDialog();
             }
             else
@@ -100,6 +101,10 @@ namespace Windows
         private void Principal_Resize(object sender, EventArgs e)
         {
             this.Invalidate();
+        }
+        private void SetStackVuelos(Stack<FlightPlanList> stack)
+        {
+            this.stackVuelos = stack;
         }
     }
 }

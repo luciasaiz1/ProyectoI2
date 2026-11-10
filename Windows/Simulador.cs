@@ -22,6 +22,7 @@ namespace Windows
 
         // Llista de PictureBox per representar tants avions com tinguem
         private List<PictureBox> llistaPictures = new List<PictureBox>();
+        private Stack<FlightPlanList> stackVuelos = new Stack<FlightPlanList>();
         private const int TAM_AVION = 25;
 
         private double escala = 1; //pixeles por cada unidad de las coordenadas
@@ -29,13 +30,14 @@ namespace Windows
         private double maxY = 1;
 
         //CONSTRUCTOR
-        public Simulador(FlightPlanList vuelos, double distancia, double ciclo)
+        public Simulador(FlightPlanList vuelos, Stack<FlightPlanList> stack, double distancia, double ciclo)
         {
             InitializeComponent();
 
             this.llistaVuelos = vuelos;
             this.distanciaSeguridad = distancia;
             this.tiempoCiclo = ciclo;
+            this.stackVuelos = stack;
 
 
             this.llistaVuelos.RestartAll();
@@ -541,6 +543,88 @@ namespace Windows
         private void button_volver_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void button_deshacer_Click(object sender, EventArgs e)
+        {
+            stackVuelos.Pop();
+
+            for (int i = 0; i < llistaVuelos.GetCount(); i++)
+            {
+                //movemos los dibujos a sus nuevas posiciones
+                ColocarAvion(llistaPictures[i], llistaVuelos.GetFlightPlan(i));
+            }
+
+            bool hayConflictoGeneral = false;
+
+            string vuelosEnConflicto = "";
+            //se guarda la distancia mínima global entre todos los vuelos
+            double minDistanciaGlobal = double.MaxValue;
+
+            for (int i = 0; i < llistaVuelos.GetCount(); i++)
+            {
+                for (int j = i + 1; j < llistaVuelos.GetCount(); j++)
+                {
+                    FlightPlan p1 = llistaVuelos.GetFlightPlan(i);
+                    FlightPlan p2 = llistaVuelos.GetFlightPlan(j);
+
+                    double dist = p1.Distance(p2);
+                    if (dist < minDistanciaGlobal)
+                        minDistanciaGlobal = dist;
+
+                    if (p1.ConflictoDuranteCiclo(p2, distanciaSeguridad, tiempoCiclo))
+                    {
+                        hayConflictoGeneral = true;
+                        vuelosEnConflicto = vuelosEnConflicto + p1.GetId() + " y " + p2.GetId() + "\n";
+                        //si decidimos darle que no a solucionar conflicto y simulamos,
+                        //en el momento del cruce entre los vuelos que entrarán en conflicto saltará la alarma
+                    }
+                }
+            }
+
+            if (hayConflictoGeneral)
+            {
+                Label_Conflicto.Text = "¡CONFLICTO! Distancia mín:" + minDistanciaGlobal.ToString("F2");
+                Label_Conflicto.ForeColor = Color.Red;
+                AvisarConflicto(vuelosEnConflicto
+                    );
+            }
+
+            else
+            {
+                if (llistaVuelos.GetCount() > 1)
+                    Label_Conflicto.Text = "Sin conflicto. Distancia mín:" + minDistanciaGlobal.ToString("F2");
+                else
+                    Label_Conflicto.Text = "Simulación activa (1 solo vuelo).";
+
+                Label_Conflicto.ForeColor = Color.Green;
+                avisoMostrado = false;
+            }
+
+            //comprobamos si todos los vuelos han llegado a su destino y desactivamos los botones si es así
+            bool todosHanLlegado = true;
+            for (int i = 0; i < llistaVuelos.GetCount() && todosHanLlegado; i++)
+            {
+                //si algún avión no ha llegado, ponemos false
+                if (!llistaVuelos.GetFlightPlan(i).HasArrived())
+                {
+                    todosHanLlegado = false;
+                }
+            }
+
+            if (todosHanLlegado && llistaVuelos.GetCount() > 0)
+            {
+                button_auto.Enabled = false;
+                button_mover.Enabled = false;
+                reloj.Stop();
+                if (!mensajeLlegadaMostrado)
+                {
+                    mensajeLlegadaMostrado = true;
+                    MessageBox.Show("¡Todos los vuelos han llegado a su destino! ✈️ ");
+                }
+            }
+
+            pictureBox_espacioAereo.Invalidate();
         }
     }
 }
