@@ -63,6 +63,7 @@ namespace Windows
 
             if (form.ShowDialog() == DialogResult.OK)
             {
+                MessageBox.Show("Se ha aplicado la distancia de seguridad y el tiempo de ciclo con éxito!", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.distanciaSeguridad = form.GetDistanciaSeguridad();
                 this.tiempoCiclo = form.GetTiempoCiclo();
 

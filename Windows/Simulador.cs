@@ -148,21 +148,6 @@ namespace Windows
         }
 
         //Muestra una alarma con los vuelos que esten en conflicto
-        private void AvisarConflicto(string vuelosEnConflicto)
-        {
-            if (avisoMostrado)
-                return; // ya hemos avisado de este conflicto
-            avisoMostrado = true;
-
-            // Paramos la simulacion automatica mientras sale el aviso (igual que en button2_Click)
-            bool estabaEnAutomatico = reloj.Enabled;
-            reloj.Stop(); //paramos mientras la alarma se muestra.
-
-            MessageBox.Show("¡ALARMA! Se ha perdido la distancia de seguridad (" + distanciaSeguridad + ") entre: \n\n" + vuelosEnConflicto, "Conflicto", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
-            if (estabaEnAutomatico)
-                reloj.Start();
-        }
 
         private void button_mover_Click(object sender, EventArgs e)
         {
@@ -207,8 +192,6 @@ namespace Windows
             {
                 Label_Conflicto.Text = "¡CONFLICTO! Distancia mín:" + minDistanciaGlobal.ToString("F2");
                 Label_Conflicto.ForeColor = Color.Red;
-                AvisarConflicto(vuelosEnConflicto
-                    );
             }
 
             else
@@ -420,7 +403,7 @@ namespace Windows
 
             avisoMostrado = false;
             Label_Conflicto.Text = "Simulación reiniciada. Pulsa \"Mover\" o \"Automatico\".";
-            Label_Conflicto.ForeColor = Color.Purple;
+            Label_Conflicto.ForeColor = Color.Blue;
 
             pictureBox_espacioAereo.Invalidate(); //redibuja trayectorias y circulos
 
