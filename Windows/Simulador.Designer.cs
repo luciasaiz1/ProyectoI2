@@ -50,7 +50,7 @@
             this.pictureBox_espacioAereo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox_espacioAereo.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.pictureBox_espacioAereo.BackColor = System.Drawing.Color.Black;
             this.pictureBox_espacioAereo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox_espacioAereo.Location = new System.Drawing.Point(27, 74);
             this.pictureBox_espacioAereo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);

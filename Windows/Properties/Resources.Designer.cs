@@ -63,9 +63,9 @@ namespace Windows.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap rombo {
+        internal static System.Drawing.Bitmap avion {
             get {
-                object obj = ResourceManager.GetObject("rombo", resourceCulture);
+                object obj = ResourceManager.GetObject("avion", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

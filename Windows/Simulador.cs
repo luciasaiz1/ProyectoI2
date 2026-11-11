@@ -23,6 +23,7 @@ namespace Windows
 
         // Llista de PictureBox per representar tants avions com tinguem
         private List<PictureBox> llistaPictures = new List<PictureBox>();
+        private Image imagenAvionOriginal;
         private Stack<FlightPlanList> stackVuelos = new Stack<FlightPlanList>();
         private const int TAM_AVION = 25;
 
@@ -43,6 +44,7 @@ namespace Windows
 
 
             this.llistaVuelos.RestartAll();
+            imagenAvionOriginal = new Bitmap(Properties.Resources.avion);
 
 
             Label_Info.Text = "Distancia de Seguridad: " + this.distanciaSeguridad + " | Tiempo ciclo: " + this.tiempoCiclo;
@@ -66,14 +68,6 @@ namespace Windows
                 pic.SizeMode = PictureBoxSizeMode.StretchImage;
                 pic.BackColor = Color.Transparent;
 
-                try
-                {
-                    pic.Image = Properties.Resources.rombo;
-                }
-                catch (Exception)
-                {
-                    pic.BackColor = Color.Blue;
-                }
 
                 ColocarAvion(pic, plan);
 
@@ -106,10 +100,25 @@ namespace Windows
         private void ColocarAvion(PictureBox pic, FlightPlan plan)
         {
             Position pos = plan.GetCurrentPosition();
+            Position destino = plan.GetFinalPosition();
 
-            //Restamos la mitad del tamaño del avión para centrarlo en la posición
-            int x = (int)pixelPantalla(pos.GetX()) - TAM_AVION / 2;
-            int y = (int)pixelPantalla(pos.GetY()) - TAM_AVION / 2;
+            double dx = destino.GetX() - pos.GetX();
+            double dy = destino.GetY() - pos.GetY();
+
+            float angulo = (float)(Math.Atan2(dy, dx) * 180 / Math.PI);
+
+            Bitmap imagenRotada = RotarImagen(imagenAvionOriginal, angulo);
+
+            if (pic.Image != null)
+            {
+                pic.Image.Dispose();
+            }
+
+            pic.Image = imagenRotada;
+
+            int x = (int)pixelPantalla(pos.GetX()) - pic.Width / 2;
+            int y = (int)pixelPantalla(pos.GetY()) - pic.Height / 2;
+
             pic.Location = new Point(x, y);
         }
 
@@ -547,6 +556,21 @@ namespace Windows
             }
 
             pictureBox_espacioAereo.Invalidate();
+        }
+        private Bitmap RotarImagen(Image imagen, float angulo)
+        {
+            Bitmap resultado = new Bitmap(imagen.Width, imagen.Height);
+
+            using (Graphics g = Graphics.FromImage(resultado))
+            {
+                g.TranslateTransform(imagen.Width / 2f, imagen.Height / 2f);
+                g.RotateTransform(angulo);
+                g.TranslateTransform(-imagen.Width / 2f, -imagen.Height / 2f);
+
+                g.DrawImage(imagen, new Point(0, 0));
+            }
+
+            return resultado;
         }
     }
 }

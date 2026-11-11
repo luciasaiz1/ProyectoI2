@@ -103,9 +103,5 @@ namespace Windows
         {
             this.Invalidate();
         }
-        private void SetStackVuelos(Stack<FlightPlanList> stack)
-        {
-            this.stackVuelos = stack;
-        }
     }
 }
