@@ -27,6 +27,9 @@ namespace Windows
             InitializeComponent();
             this.usuario = usuario;
             this.Text = "Deconflicting Tool - Menú principal ⋅ Usuario: " + usuario;
+
+            // Obre la finestra maximizada a pantalla completa
+            this.WindowState = FormWindowState.Maximized;
         }
 
         private void introducirDatosToolStripMenuItem_Click(object sender, EventArgs e)
@@ -102,6 +105,24 @@ namespace Windows
         private void Principal_Resize(object sender, EventArgs e)
         {
             this.Invalidate();
+        }
+
+        private void introducirDatosManualmenteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FlightPlanAdder form = new FlightPlanAdder();
+            form.ShowDialog();
+
+            FlightPlan p1 = form.GetPlan1();
+            FlightPlan p2 = form.GetPlan2();
+
+            if (p1 != null && p2 != null)
+            {
+                listaVuelos.Clear(); // 
+                listaVuelos.AddFlightPlan(p1);
+                listaVuelos.AddFlightPlan(p2);
+
+                MessageBox.Show("Los 2 vuelos se han guardado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
     }
 }

@@ -199,14 +199,14 @@ namespace Windows
 
             if (hayConflictoGeneral)
             {
-                Label_Conflicto.Text = "¡CONFLICTO! Distancia mín:" + minDistanciaGlobal.ToString("F2");
+                Label_Conflicto.Text = "¡CONFLICTO! Distancia mín: " + minDistanciaGlobal.ToString("F2");
                 Label_Conflicto.ForeColor = Color.Red;
             }
 
             else
             {
                 if (llistaVuelos.GetCount() > 1)
-                    Label_Conflicto.Text = "Sin conflicto. Distancia mín:" + minDistanciaGlobal.ToString("F2");
+                    Label_Conflicto.Text = "Sin conflicto. Distancia mín: " + minDistanciaGlobal.ToString("F2");
                 else
                     Label_Conflicto.Text = "Simulación activa (1 solo vuelo).";
 
@@ -233,7 +233,7 @@ namespace Windows
                 if (!mensajeLlegadaMostrado)
                 {
                     mensajeLlegadaMostrado = true;
-                    MessageBox.Show("¡Todos los vuelos han llegado a su destino! ✈️ ");
+                    MessageBox.Show("¡Todos los vuelos han llegado a su destino!");
                 }
             }
 
@@ -284,7 +284,7 @@ namespace Windows
             }
             else
             {
-                using (Pen lapiz = new Pen(Color.White, 1))
+                using (Pen lapiz = new Pen(Color.LimeGreen, 1))
                 {
                     g.DrawEllipse(lapiz, centroX - radio, centroY - radio, radio * 2, radio * 2);
                 }

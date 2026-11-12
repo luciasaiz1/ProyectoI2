@@ -11,7 +11,8 @@ namespace Windows
 {
     public class Estilo
     {
-        private Color fondo = Color.FromArgb(235, 243, 248);
+        private Color fondo = Color.FromArgb(240, 240, 240);
+
 
         public void PintarFondo(Graphics g, Rectangle zona)
         {
