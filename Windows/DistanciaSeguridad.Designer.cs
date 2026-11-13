@@ -39,22 +39,22 @@
             // label1
             // 
             this.label1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(38, 33);
+            this.label1.Location = new System.Drawing.Point(47, 22);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(166, 24);
+            this.label1.Size = new System.Drawing.Size(148, 24);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Distancia de Seguridad";
+            this.label1.Text = "Distancia de seguridad";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label2
             // 
             this.label2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(210, 33);
+            this.label2.Location = new System.Drawing.Point(234, 22);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(166, 24);
+            this.label2.Size = new System.Drawing.Size(122, 24);
             this.label2.TabIndex = 1;
-            this.label2.Text = "Tiempo de Ciclo";
+            this.label2.Text = "Tiempo de ciclo";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // textBox_distancia
@@ -69,10 +69,10 @@
             // textBox_tiempoCiclo
             // 
             this.textBox_tiempoCiclo.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox_tiempoCiclo.Location = new System.Drawing.Point(252, 59);
+            this.textBox_tiempoCiclo.Location = new System.Drawing.Point(251, 59);
             this.textBox_tiempoCiclo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox_tiempoCiclo.Name = "textBox_tiempoCiclo";
-            this.textBox_tiempoCiclo.Size = new System.Drawing.Size(80, 26);
+            this.textBox_tiempoCiclo.Size = new System.Drawing.Size(81, 26);
             this.textBox_tiempoCiclo.TabIndex = 3;
             // 
             // button_aceptar
@@ -81,10 +81,10 @@
             this.button_aceptar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button_aceptar.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_aceptar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.button_aceptar.Location = new System.Drawing.Point(133, 107);
+            this.button_aceptar.Location = new System.Drawing.Point(78, 107);
             this.button_aceptar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button_aceptar.Name = "button_aceptar";
-            this.button_aceptar.Size = new System.Drawing.Size(152, 31);
+            this.button_aceptar.Size = new System.Drawing.Size(254, 31);
             this.button_aceptar.TabIndex = 4;
             this.button_aceptar.Text = "Aceptar";
             this.button_aceptar.UseVisualStyleBackColor = false;
@@ -92,14 +92,14 @@
             // 
             // button1
             // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(44)))), ((int)(((byte)(89)))));
+            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(116)))), ((int)(((byte)(139)))));
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.ForeColor = System.Drawing.Color.Snow;
-            this.button1.Location = new System.Drawing.Point(133, 153);
+            this.button1.Location = new System.Drawing.Point(78, 153);
             this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(152, 31);
+            this.button1.Size = new System.Drawing.Size(254, 31);
             this.button1.TabIndex = 5;
             this.button1.Text = "Predeterminado";
             this.button1.UseVisualStyleBackColor = false;
