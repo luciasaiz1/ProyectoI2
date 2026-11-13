@@ -65,7 +65,9 @@
             // Label_Info
             // 
             this.Label_Info.AutoSize = true;
+            this.Label_Info.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(116)))), ((int)(((byte)(139)))));
             this.Label_Info.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Label_Info.ForeColor = System.Drawing.Color.White;
             this.Label_Info.Location = new System.Drawing.Point(33, 69);
             this.Label_Info.Name = "Label_Info";
             this.Label_Info.Size = new System.Drawing.Size(46, 18);

@@ -216,16 +216,16 @@ namespace Windows
 
             if (hayConflictoGeneral)
             {
-                Label_Conflicto.Text = "¡CONFLICTO! Distancia mín:" + minDistanciaGlobal.ToString("F2");
+                Label_Conflicto.Text = "¡CONFLICTO! Distancia mínima: " + minDistanciaGlobal.ToString("F2");
                 Label_Conflicto.ForeColor = Color.Red;
             }
 
             else
             {
                 if (llistaVuelos.GetCount() > 1)
-                    Label_Conflicto.Text = "Sin conflicto. Distancia mín:" + minDistanciaGlobal.ToString("F2");
+                    Label_Conflicto.Text = "Sin conflicto. Distancia mínima: " + minDistanciaGlobal.ToString("F2");
                 else
-                    Label_Conflicto.Text = "Simulación activa (1 solo vuelo).";
+                    Label_Conflicto.Text = "Simulación activa (1 solo vuelo)";
 
                 Label_Conflicto.ForeColor = Color.Green;
                 avisoMostrado = false;
@@ -250,7 +250,7 @@ namespace Windows
                 if (!mensajeLlegadaMostrado)
                 {
                     mensajeLlegadaMostrado = true;
-                    MessageBox.Show("¡Todos los vuelos han llegado a su destino! ✈️ ");
+                    MessageBox.Show("¡Todos los vuelos han llegado a su destino!");
                 }
             }
 
@@ -416,7 +416,7 @@ namespace Windows
 
             avisoMostrado = false;
             Label_Conflicto.Text = "Simulación reiniciada. Pulsa \"Mover\" o \"Automático\".";
-            Label_Conflicto.ForeColor = Color.Blue;
+            Label_Conflicto.ForeColor = Color.FromArgb(11, 25, 44);
 
             pictureBox_espacioAereo.Invalidate(); //redibuja trayectorias y circulos
 
@@ -554,9 +554,10 @@ namespace Windows
 
             for (int i = 0; i < llistaVuelos.GetCount(); i++)
             {
-                ColocarAvion(
-                    llistaPictures[i],
-                    llistaVuelos.GetFlightPlan(i));
+                ColocarAvion(llistaPictures[i],llistaVuelos.GetFlightPlan(i));
+                button_auto.Enabled = true;
+                button_auto.Text = "Automático";
+                button_mover.Enabled = true;
             }
 
             pictureBox_espacioAereo.Invalidate();
