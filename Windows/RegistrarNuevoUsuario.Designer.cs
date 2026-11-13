@@ -36,23 +36,25 @@
             this.label1 = new System.Windows.Forms.Label();
             this.textBox_NuevaPassword = new System.Windows.Forms.TextBox();
             this.button_registrar = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // palabrarecuperacion
             // 
-            this.palabrarecuperacion.AutoSize = true;
             this.palabrarecuperacion.BackColor = System.Drawing.Color.Transparent;
             this.palabrarecuperacion.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.palabrarecuperacion.Location = new System.Drawing.Point(207, 125);
+            this.palabrarecuperacion.Location = new System.Drawing.Point(207, 131);
             this.palabrarecuperacion.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.palabrarecuperacion.Name = "palabrarecuperacion";
             this.palabrarecuperacion.Size = new System.Drawing.Size(203, 23);
             this.palabrarecuperacion.TabIndex = 15;
-            this.palabrarecuperacion.Text = "Palabra de recuperación";
             // 
             // textBox_recuperacion
             // 
-            this.textBox_recuperacion.Location = new System.Drawing.Point(211, 152);
+            this.textBox_recuperacion.Location = new System.Drawing.Point(211, 158);
             this.textBox_recuperacion.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_recuperacion.Name = "textBox_recuperacion";
             this.textBox_recuperacion.Size = new System.Drawing.Size(199, 22);
@@ -68,7 +70,6 @@
             // 
             // label_usuario
             // 
-            this.label_usuario.AutoSize = true;
             this.label_usuario.BackColor = System.Drawing.Color.Transparent;
             this.label_usuario.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_usuario.Location = new System.Drawing.Point(206, 54);
@@ -76,7 +77,6 @@
             this.label_usuario.Name = "label_usuario";
             this.label_usuario.Size = new System.Drawing.Size(81, 25);
             this.label_usuario.TabIndex = 11;
-            this.label_usuario.Text = "Usuario";
             // 
             // label_password
             // 
@@ -91,7 +91,6 @@
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(207, 201);
@@ -99,7 +98,6 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(154, 23);
             this.label1.TabIndex = 16;
-            this.label1.Text = "Nueva Contraseña";
             // 
             // textBox_NuevaPassword
             // 
@@ -125,11 +123,62 @@
             this.button_registrar.UseVisualStyleBackColor = false;
             this.button_registrar.Click += new System.EventHandler(this.button_registrar_Click);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.Color.Transparent;
+            this.label2.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(210, 54);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(77, 25);
+            this.label2.TabIndex = 19;
+            this.label2.Text = "Usuario";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.Color.Transparent;
+            this.label3.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(206, 128);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(217, 25);
+            this.label3.TabIndex = 20;
+            this.label3.Text = "Palabra de recuperación";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.Color.Transparent;
+            this.label4.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(210, 198);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(77, 25);
+            this.label4.TabIndex = 21;
+            this.label4.Text = "Nueva contraseña";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.BackColor = System.Drawing.Color.Transparent;
+            this.label5.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(210, 198);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(109, 25);
+            this.label5.TabIndex = 21;
+            this.label5.Text = "Contraseña";
+            // 
             // RegistrarNuevoUsuario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(628, 388);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.button_registrar);
             this.Controls.Add(this.textBox_NuevaPassword);
             this.Controls.Add(this.label1);
@@ -160,5 +209,9 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBox_NuevaPassword;
         private System.Windows.Forms.Button button_registrar;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
     }
 }

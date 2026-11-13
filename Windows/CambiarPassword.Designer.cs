@@ -70,7 +70,7 @@
             // textBox_usuario2
             // 
             this.textBox_usuario2.Location = new System.Drawing.Point(211, 65);
-            this.textBox_usuario2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox_usuario2.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_usuario2.Name = "textBox_usuario2";
             this.textBox_usuario2.Size = new System.Drawing.Size(205, 22);
             this.textBox_usuario2.TabIndex = 2;
@@ -78,7 +78,7 @@
             // textBox_palabra
             // 
             this.textBox_palabra.Location = new System.Drawing.Point(211, 151);
-            this.textBox_palabra.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox_palabra.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_palabra.Name = "textBox_palabra";
             this.textBox_palabra.Size = new System.Drawing.Size(205, 22);
             this.textBox_palabra.TabIndex = 3;
@@ -86,7 +86,7 @@
             // textBox_nuevapassword
             // 
             this.textBox_nuevapassword.Location = new System.Drawing.Point(211, 240);
-            this.textBox_nuevapassword.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox_nuevapassword.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_nuevapassword.Name = "textBox_nuevapassword";
             this.textBox_nuevapassword.Size = new System.Drawing.Size(205, 22);
             this.textBox_nuevapassword.TabIndex = 4;
@@ -99,9 +99,9 @@
             this.label3.Location = new System.Drawing.Point(206, 211);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(175, 25);
+            this.label3.Size = new System.Drawing.Size(167, 25);
             this.label3.TabIndex = 5;
-            this.label3.Text = "Nueva Contraseña:";
+            this.label3.Text = "Nueva contraseña";
             // 
             // button_cambiarpassword
             // 
@@ -110,7 +110,7 @@
             this.button_cambiarpassword.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_cambiarpassword.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.button_cambiarpassword.Location = new System.Drawing.Point(202, 298);
-            this.button_cambiarpassword.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button_cambiarpassword.Margin = new System.Windows.Forms.Padding(4);
             this.button_cambiarpassword.Name = "button_cambiarpassword";
             this.button_cambiarpassword.Size = new System.Drawing.Size(221, 38);
             this.button_cambiarpassword.TabIndex = 6;
@@ -132,7 +132,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.Name = "CambiarPassword";
             this.Text = "CambiarContraseña";

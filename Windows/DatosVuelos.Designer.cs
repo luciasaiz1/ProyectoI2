@@ -37,7 +37,7 @@
             // 
             // dataGridView_vuelos
             // 
-            this.dataGridView_vuelos.BackgroundColor = System.Drawing.SystemColors.HotTrack;
+            this.dataGridView_vuelos.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(116)))), ((int)(((byte)(139)))));
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -55,8 +55,8 @@
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridView_vuelos.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dataGridView_vuelos.Location = new System.Drawing.Point(8, 10);
-            this.dataGridView_vuelos.Margin = new System.Windows.Forms.Padding(2);
+            this.dataGridView_vuelos.Location = new System.Drawing.Point(11, 12);
+            this.dataGridView_vuelos.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dataGridView_vuelos.Name = "dataGridView_vuelos";
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
@@ -68,18 +68,18 @@
             this.dataGridView_vuelos.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridView_vuelos.RowHeadersWidth = 51;
             this.dataGridView_vuelos.RowTemplate.Height = 24;
-            this.dataGridView_vuelos.Size = new System.Drawing.Size(495, 130);
+            this.dataGridView_vuelos.Size = new System.Drawing.Size(660, 160);
             this.dataGridView_vuelos.TabIndex = 0;
             // 
             // DatosVuelos
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.ClientSize = new System.Drawing.Size(512, 149);
+            this.BackColor = System.Drawing.SystemColors.Control;
+            this.ClientSize = new System.Drawing.Size(683, 183);
             this.Controls.Add(this.dataGridView_vuelos);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MaximizeBox = false;
             this.Name = "DatosVuelos";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;

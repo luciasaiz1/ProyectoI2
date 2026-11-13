@@ -36,27 +36,30 @@
             // label_distancia
             // 
             this.label_distancia.AutoSize = true;
-            this.label_distancia.Location = new System.Drawing.Point(11, 9);
+            this.label_distancia.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold);
+            this.label_distancia.Location = new System.Drawing.Point(11, 18);
             this.label_distancia.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label_distancia.Name = "label_distancia";
-            this.label_distancia.Size = new System.Drawing.Size(38, 15);
+            this.label_distancia.Size = new System.Drawing.Size(61, 25);
             this.label_distancia.TabIndex = 0;
             this.label_distancia.Text = "label1";
             // 
             // dataGridView_vuelos
             // 
+            this.dataGridView_vuelos.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(116)))), ((int)(((byte)(139)))));
             this.dataGridView_vuelos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView_vuelos.Location = new System.Drawing.Point(14, 38);
+            this.dataGridView_vuelos.Location = new System.Drawing.Point(16, 55);
             this.dataGridView_vuelos.Name = "dataGridView_vuelos";
-            this.dataGridView_vuelos.Size = new System.Drawing.Size(351, 167);
+            this.dataGridView_vuelos.RowHeadersWidth = 51;
+            this.dataGridView_vuelos.Size = new System.Drawing.Size(313, 314);
             this.dataGridView_vuelos.TabIndex = 1;
             // 
             // DistanciaVuelo
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.ClientSize = new System.Drawing.Size(378, 217);
+            this.BackColor = System.Drawing.SystemColors.Control;
+            this.ClientSize = new System.Drawing.Size(359, 401);
             this.Controls.Add(this.dataGridView_vuelos);
             this.Controls.Add(this.label_distancia);
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));

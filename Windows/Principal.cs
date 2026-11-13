@@ -78,7 +78,7 @@ namespace Windows
             //proteccion: si faltan parametros, avisamos y no abrimos el simulador
             if (this.tiempoCiclo <= 0 || this.distanciaSeguridad <= 0)
             {
-                MessageBox.Show("Introduce primero la distancia de seguridad y el tiempo de ciclo (menu: Parametros)");
+                MessageBox.Show("Introduce primero la distancia de seguridad y el tiempo de ciclo (Menú > Parámetros)");
                 return;
             }
 
@@ -90,7 +90,7 @@ namespace Windows
             }
             else
             {
-                MessageBox.Show("Introduce o carga primero los datos de los vuelos desde un fichero.");
+                MessageBox.Show("Introduce o carga primero los datos de los vuelos.");
             }
 
 

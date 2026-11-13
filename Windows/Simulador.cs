@@ -313,7 +313,7 @@ namespace Windows
 
         private void button_auto_Click(object sender, EventArgs e)
         {
-            if (button_auto.Text == "Automatico")
+            if (button_auto.Text == "Automático")
             {
                 RevisarConflictoInicial(); //Comprobamos si hay conflicto antes de mover los aviones
                 button_auto.Text = "Parar";
@@ -323,7 +323,7 @@ namespace Windows
             }
             else
             {
-                button_auto.Text = "Automatico";
+                button_auto.Text = "Automático";
                 button_mover.Enabled = true; //where  Enabled = true pone el boton en color para que se pueda clicar sobre él.
                 reloj.Stop();
             }
