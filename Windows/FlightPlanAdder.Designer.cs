@@ -44,6 +44,7 @@
             this.name_company = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button_aceptar
@@ -52,12 +53,12 @@
             this.button_aceptar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button_aceptar.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_aceptar.ForeColor = System.Drawing.Color.Snow;
-            this.button_aceptar.Location = new System.Drawing.Point(52, 362);
+            this.button_aceptar.Location = new System.Drawing.Point(53, 363);
             this.button_aceptar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button_aceptar.Name = "button_aceptar";
             this.button_aceptar.Size = new System.Drawing.Size(274, 31);
             this.button_aceptar.TabIndex = 0;
-            this.button_aceptar.Text = "Aceptar";
+            this.button_aceptar.Text = "Añadir vuelo";
             this.button_aceptar.UseVisualStyleBackColor = false;
             this.button_aceptar.Click += new System.EventHandler(this.button_aceptar_Click);
             // 
@@ -186,7 +187,7 @@
             // 
             this.name_company.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.name_company.Location = new System.Drawing.Point(192, 315);
-            this.name_company.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.name_company.Margin = new System.Windows.Forms.Padding(4);
             this.name_company.Name = "name_company";
             this.name_company.Size = new System.Drawing.Size(134, 26);
             this.name_company.TabIndex = 14;
@@ -204,11 +205,11 @@
             // 
             // button1
             // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(44)))), ((int)(((byte)(89)))));
+            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(116)))), ((int)(((byte)(139)))));
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.ForeColor = System.Drawing.Color.Snow;
-            this.button1.Location = new System.Drawing.Point(52, 397);
+            this.button1.Location = new System.Drawing.Point(52, 482);
             this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(274, 31);
@@ -217,12 +218,27 @@
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(44)))), ((int)(((byte)(89)))));
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.ForeColor = System.Drawing.Color.Snow;
+            this.button2.Location = new System.Drawing.Point(53, 408);
+            this.button2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(274, 31);
+            this.button2.TabIndex = 17;
+            this.button2.Text = "Guardar y cerrar";
+            this.button2.UseVisualStyleBackColor = false;
+            // 
             // FlightPlanAdder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(389, 449);
+            this.ClientSize = new System.Drawing.Size(389, 524);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.name_company);
@@ -265,5 +281,6 @@
         private System.Windows.Forms.TextBox name_company;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
     }
 }
