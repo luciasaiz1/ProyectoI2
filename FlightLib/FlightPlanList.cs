@@ -58,6 +58,75 @@ namespace FlightLib
             }
         }
 
+        public bool[,] ObtenerMatrizConflictos(double distanciaSeguridad, double horizonte)
+        {
+            int cantidadVuelos = llistaVuelos.Count;
+            bool[,] matriz = new bool[cantidadVuelos, cantidadVuelos];
+
+            for (int i = 0; i < cantidadVuelos; i++)
+            {
+                for (int j = i + 1; j < cantidadVuelos; j++)
+                {
+                    bool conflicto = llistaVuelos[i].DistanciaMinima(llistaVuelos[j], horizonte) < distanciaSeguridad;
+                    matriz[i, j] = conflicto;
+                    matriz[j, i] = conflicto;
+                }
+            }
+
+            return matriz;
+        }
+
+        public bool ResolverConflictos(double distanciaSeguridad, double tiempoCiclo)
+        {
+            int maxPasadas = llistaVuelos.Count * llistaVuelos.Count;
+            bool huboCambios = true;
+            int pasada = 0;
+
+            while (huboCambios && pasada < maxPasadas)
+            {
+                huboCambios = false;
+                bool[,] matriz = ObtenerMatrizConflictos(distanciaSeguridad, double.PositiveInfinity);
+
+                for (int i = 0; i < llistaVuelos.Count; i++)
+                {
+                    for (int j = i + 1; j < llistaVuelos.Count; j++)
+                    {
+                        if (!matriz[i, j])
+                            continue;
+
+                        FlightPlan primero = llistaVuelos[i];
+                        FlightPlan segundo = llistaVuelos[j];
+                        double velocidadSegundo = segundo.GetVelocidad();
+
+                        segundo.ResolverConflicto(primero, distanciaSeguridad, tiempoCiclo);
+                        if (Math.Abs(segundo.GetVelocidad() - velocidadSegundo) > 0.000001)
+                        {
+                            huboCambios = true;
+                            continue;
+                        }
+
+                        double velocidadPrimero = primero.GetVelocidad();
+                        primero.ResolverConflicto(segundo, distanciaSeguridad, tiempoCiclo);
+                        if (Math.Abs(primero.GetVelocidad() - velocidadPrimero) > 0.000001)
+                            huboCambios = true;
+                    }
+                }
+
+                pasada++;
+            }
+
+            bool[,] conflictosFinales = ObtenerMatrizConflictos(distanciaSeguridad, double.PositiveInfinity);
+            for (int i = 0; i < llistaVuelos.Count; i++)
+            {
+                for (int j = i + 1; j < llistaVuelos.Count; j++)
+                {
+                    if (conflictosFinales[i, j])
+                        return false;
+                }
+            }
+
+            return true;
+        }
         public void EscribeConsola()
         {
             foreach (FlightPlan vol in llistaVuelos)
