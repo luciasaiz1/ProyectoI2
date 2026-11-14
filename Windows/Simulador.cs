@@ -301,7 +301,7 @@ namespace Windows
             }
             else
             {
-                using (Pen lapiz = new Pen(Color.White, 1))
+                using (Pen lapiz = new Pen(Color.LimeGreen, 1))
                 {
                     g.DrawEllipse(lapiz, centroX - radio, centroY - radio, radio * 2, radio * 2);
                 }
