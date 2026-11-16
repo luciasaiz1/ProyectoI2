@@ -115,7 +115,7 @@ namespace Windows
             FlightPlanList lista = form.GetPlanLista();
             listaVuelos = lista;
 
-            MessageBox.Show("Los 2 vuelos se han guardado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Los " + listaVuelos.GetCount() + " vuelos se han guardado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

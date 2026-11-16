@@ -30,8 +30,8 @@ namespace Windows
 
         private void button1_Click(object sender, EventArgs e)
         {
-            plan1 = new FlightPlan("VY2986", 0, 200, 400, 200, 60, "Vueling");
-            plan2 = new FlightPlan("IB412", 200, 0, 200, 400, 60, "Iberia");
+            plan1 = new FlightPlan("VY2986", 0, 0, 2600, 1400, 60, "Vueling");
+            plan2 = new FlightPlan("IB412", 0, 1400, 2600, 0, 60, "Iberia");
             listaPlanes.AddFlightPlan(plan1);
             listaPlanes.AddFlightPlan(plan2);
             Close();
@@ -78,7 +78,7 @@ namespace Windows
             }
         }
 
-        private void button_guardar_Click(object sender, EventArgs e)
+        private void button_salir_Click(object sender, EventArgs e)
         {
             Close();
         }

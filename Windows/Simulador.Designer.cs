@@ -196,7 +196,7 @@
             this.button_volver.Location = new System.Drawing.Point(920, 718);
             this.button_volver.Margin = new System.Windows.Forms.Padding(4);
             this.button_volver.Name = "button_volver";
-            this.button_volver.Size = new System.Drawing.Size(257, 53);
+            this.button_volver.Size = new System.Drawing.Size(267, 53);
             this.button_volver.TabIndex = 11;
             this.button_volver.Text = "Volver al Menú";
             this.button_volver.UseVisualStyleBackColor = false;
