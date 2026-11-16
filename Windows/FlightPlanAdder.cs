@@ -32,6 +32,8 @@ namespace Windows
         {
             plan1 = new FlightPlan("VY2986", 0, 200, 400, 200, 60, "Vueling");
             plan2 = new FlightPlan("IB412", 200, 0, 200, 400, 60, "Iberia");
+            listaPlanes.AddFlightPlan(plan1);
+            listaPlanes.AddFlightPlan(plan2);
             Close();
         }
 
@@ -54,28 +56,21 @@ namespace Windows
                     MessageBox.Show("Las posiciones deben ser valores positivos");
                     return;
                 }
-                if (plan1 == null)
-                {
-                    //Recogemos los datos que se han introducido
-                    plan1 = new FlightPlan(textBox_Id.Text, Convert.ToDouble(textBox_currentPositionX.Text), Convert.ToDouble(textBox_currentPositionY.Text), Convert.ToDouble(textBox_finalPositionX.Text), Convert.ToDouble(textBox_finalPositionY.Text), Convert.ToDouble(textBox_velocidad.Text), name_company.Text);
 
-                    //Vaciamos el TextBox para poder escribir los datos del segundo avión
-                    textBox_Id.Text = "";
-                    textBox_currentPositionX.Text = "";
-                    textBox_currentPositionY.Text = "";
-                    textBox_finalPositionX.Text = "";
-                    textBox_finalPositionY.Text = "";
-                    textBox_velocidad.Text = "";
-                    name_company.Text = "";
+                //Recogemos los datos que se han introducido
+                plan1 = new FlightPlan(textBox_Id.Text, Convert.ToDouble(textBox_currentPositionX.Text), Convert.ToDouble(textBox_currentPositionY.Text), Convert.ToDouble(textBox_finalPositionX.Text), Convert.ToDouble(textBox_finalPositionY.Text), Convert.ToDouble(textBox_velocidad.Text), name_company.Text);
 
-                }
-                else if (plan2 == null)
-                {
-                    //Hacemos lo mismo para el segundo plan de vuelo
-                    plan2 = new FlightPlan(textBox_Id.Text, Convert.ToDouble(textBox_currentPositionX.Text), Convert.ToDouble(textBox_currentPositionY.Text), Convert.ToDouble(textBox_finalPositionX.Text), Convert.ToDouble(textBox_finalPositionY.Text), Convert.ToDouble(textBox_velocidad.Text), name_company.Text);
+                //Vaciamos el TextBox para poder escribir los datos del segundo avión
+                textBox_Id.Text = "";
+                textBox_currentPositionX.Text = "";
+                textBox_currentPositionY.Text = "";
+                textBox_finalPositionX.Text = "";
+                textBox_finalPositionY.Text = "";
+                textBox_velocidad.Text = "";
+                name_company.Text = "";
 
-                   
-                }
+                listaPlanes.AddFlightPlan(plan1);
+
             }
             catch (FormatException)
             {
