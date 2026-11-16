@@ -250,7 +250,7 @@ namespace Windows
                 if (!mensajeLlegadaMostrado)
                 {
                     mensajeLlegadaMostrado = true;
-                    MessageBox.Show("¡Todos los vuelos han llegado a su destino!");
+                    MessageBox.Show("¡Todos los vuelos han llegado a su destino!", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
 

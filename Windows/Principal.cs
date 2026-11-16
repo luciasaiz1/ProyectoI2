@@ -78,7 +78,7 @@ namespace Windows
             //proteccion: si faltan parametros, avisamos y no abrimos el simulador
             if (this.tiempoCiclo <= 0 || this.distanciaSeguridad <= 0)
             {
-                MessageBox.Show("Introduce primero la distancia de seguridad y el tiempo de ciclo (Menú > Parámetros)");
+                MessageBox.Show("Introduce primero la distancia de seguridad y el tiempo de ciclo (Opciones > Parámetros)", "Falta de datos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -90,10 +90,8 @@ namespace Windows
             }
             else
             {
-                MessageBox.Show("Introduce o carga primero los datos de los vuelos.");
+                MessageBox.Show("Introduce o carga primero los datos de los vuelos.","Falta de datos",MessageBoxButtons.OK,MessageBoxIcon.Warning);
             }
-
-
 
         }
 
@@ -115,7 +113,10 @@ namespace Windows
             FlightPlanList lista = form.GetPlanLista();
             listaVuelos = lista;
 
-            MessageBox.Show("Los " + listaVuelos.GetCount() + " vuelos se han guardado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            if (listaVuelos.GetCount() > 0)
+            {
+                MessageBox.Show("Se han añadido " + listaVuelos.GetCount() + " vuelos correctamente!", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
     }
 }
