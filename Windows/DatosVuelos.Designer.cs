@@ -68,7 +68,7 @@
             this.dataGridView_vuelos.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridView_vuelos.RowHeadersWidth = 51;
             this.dataGridView_vuelos.RowTemplate.Height = 24;
-            this.dataGridView_vuelos.Size = new System.Drawing.Size(660, 160);
+            this.dataGridView_vuelos.Size = new System.Drawing.Size(808, 245);
             this.dataGridView_vuelos.TabIndex = 0;
             // 
             // DatosVuelos
@@ -76,7 +76,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(683, 183);
+            this.ClientSize = new System.Drawing.Size(831, 268);
             this.Controls.Add(this.dataGridView_vuelos);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
