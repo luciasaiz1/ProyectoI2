@@ -176,9 +176,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="aviones con varios conflictos.txt" />
-    <Content Include="bin\Debug\aviones con varios conflictos.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="fichero vuelos con errores.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -188,6 +185,9 @@
     <EmbeddedResource Include="Resources\avion.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Debug\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
