@@ -176,6 +176,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="aviones con varios conflictos.txt" />
+    <Content Include="bin\Debug\aviones con varios conflictos.txt" />
     <Content Include="fichero vuelos con errores.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
