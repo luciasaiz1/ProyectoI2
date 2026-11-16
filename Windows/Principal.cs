@@ -112,14 +112,8 @@ namespace Windows
             FlightPlanAdder form = new FlightPlanAdder();
             form.ShowDialog();
 
-            FlightPlan p1 = form.GetPlan1();
-            FlightPlan p2 = form.GetPlan2();
-
-            if (p1 != null && p2 != null)
-            {
-                listaVuelos.Clear(); // 
-                listaVuelos.AddFlightPlan(p1);
-                listaVuelos.AddFlightPlan(p2);
+            FlightPlanList lista = form.GetPlanLista();
+            listaVuelos = lista;
 
                 MessageBox.Show("Los 2 vuelos se han guardado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
