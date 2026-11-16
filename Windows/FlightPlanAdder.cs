@@ -14,6 +14,7 @@ namespace Windows
 {
     public partial class FlightPlanAdder : Form
     {
+        FlightPlanList listaPlanes = new FlightPlanList();
         FlightPlan plan1;
         FlightPlan plan2;
 
@@ -22,17 +23,19 @@ namespace Windows
             InitializeComponent();
         }
 
-        public FlightPlan GetPlan1()
+        public FlightPlanList GetPlanLista()
         {
-            return this.plan1;
+            return this.listaPlanes;
         }
 
-        public FlightPlan GetPlan2()
+        private void button1_Click(object sender, EventArgs e)
         {
-            return this.plan2;
+            plan1 = new FlightPlan("VY2986", 0, 200, 400, 200, 60, "Vueling");
+            plan2 = new FlightPlan("IB412", 200, 0, 200, 400, 60, "Iberia");
+            Close();
         }
 
-        private void button_aceptar_Click(object sender, EventArgs e)
+        private void button_añadir_Click(object sender, EventArgs e)
         {
             try
             {
@@ -70,8 +73,8 @@ namespace Windows
                 {
                     //Hacemos lo mismo para el segundo plan de vuelo
                     plan2 = new FlightPlan(textBox_Id.Text, Convert.ToDouble(textBox_currentPositionX.Text), Convert.ToDouble(textBox_currentPositionY.Text), Convert.ToDouble(textBox_finalPositionX.Text), Convert.ToDouble(textBox_finalPositionY.Text), Convert.ToDouble(textBox_velocidad.Text), name_company.Text);
-                 
-                    Close();
+
+                   
                 }
             }
             catch (FormatException)
@@ -80,13 +83,9 @@ namespace Windows
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void button_guardar_Click(object sender, EventArgs e)
         {
-            plan1 = new FlightPlan("VY2986", 0, 200, 400, 200, 60, "Vueling");
-            plan2 = new FlightPlan("IB412", 200, 0, 200, 400, 60, "Iberia");
             Close();
         }
-
-       
     }
 }
