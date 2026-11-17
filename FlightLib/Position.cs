@@ -8,30 +8,31 @@ namespace FlightLib
 {
     public class Position
     {
-        // Atributos
-        double x; // coordenada X (2D)
-        double y; // coordenada Y (2D)
+        // ATRIBUTOS
+        double x; 
+        double y;
 
-        // Constructores
-
+        // CONSTRUCTOR
         public Position(double x, double y)
         {
             this.x = x;
             this.y = y;
         }
 
-        // Metodos
-
+        // MÉTODOS
+        // Getters y Setters
         public double GetX()
-        // getter del atributo x
-        { return x; }
+        { 
+            return x;
+        }
 
         public double GetY()
-        // getter del atributo y
-        { return y; }
+        { 
+            return y;
+        }
 
+        // Retorna la distancia entre las posición que llama al método y la posición que se pasa como parámetro
         public double Distancia(Position b)
-        // retorna la distancia entre los dos Postion
         {
             double resultado = Math.Sqrt((x - b.x) * (x - b.x) + (y - b.y) * (y - b.y));
             return Math.Round(resultado, 2);

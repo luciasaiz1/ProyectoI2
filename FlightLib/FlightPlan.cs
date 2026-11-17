@@ -9,17 +9,15 @@ namespace FlightLib
 {
     public class FlightPlan
     {
-        // Atributos
-
-        string id; // identificador
-        Position initialPosition; //posicion inicial
-        Position currentPosition; // posicion actual
-        Position finalPosition; // posicion final
+        // ATRIBUTOS
+        Position initialPosition; 
+        Position currentPosition; 
+        Position finalPosition; 
         double velocidad;
+        string company;
+        string id;
 
-        string company; //compañia aerea
-
-        // Constructures
+        // CONSTRUCTOR
         public FlightPlan(string id, double cpx, double cpy, double fpx, double fpy, double velocidad, string company)
         {
             this.id = id;
@@ -30,7 +28,8 @@ namespace FlightLib
             this.company = company;
         }
 
-        //Getters i Setters
+        // MÉTODOS
+        // Getters y Setters
         public void SetId(string id)
         {
             this.id = id;
@@ -90,32 +89,30 @@ namespace FlightLib
             return this.company;
         }
 
-
-        // Metodos
-
-        public void Move(double tiempo)
         // Mueve el vuelo a la posición correspondiente a viajar durante el tiempo que se recibe como parámetro
+        public void Move(double tiempo)
         {
 
-            //Si el avion ya llego a su destin, no se mueve
-            if (this.HasArrived())
+            if (this.HasArrived()) // Si el avión ya llegó a su destino no se mueve
+
             {
                 return;
             }
-            //Calculamos la distancia recorrida en el tiempo dado
-            double distancia = tiempo * this.velocidad / 60;
 
-            //Calculamos las razones trigonométricas
+            double distancia = tiempo * this.velocidad / 60; // Calculamos la distancia recorrida en el tiempo dado
+
+
+            // Calculamos las razones trigonométricas
             double hipotenusa = Math.Sqrt((finalPosition.GetX() - currentPosition.GetX()) * (finalPosition.GetX() - currentPosition.GetX()) + (finalPosition.GetY() - currentPosition.GetY()) * (finalPosition.GetY() - currentPosition.GetY()));
             double coseno = (finalPosition.GetX() - currentPosition.GetX()) / hipotenusa;
             double seno = (finalPosition.GetY() - currentPosition.GetY()) / hipotenusa;
 
-            //Caculamos la nueva posición del vuelo
+            // Caculamos la nueva posición del vuelo
             double x = currentPosition.GetX() + distancia * coseno;
             double y = currentPosition.GetY() + distancia * seno;
 
 
-            // QUE NO SE PASE DEL DESTINO
+            // Comprobamos si ha llegado al destino o no
             Position nextPosition = new Position(x, y);
             if (currentPosition.Distancia(nextPosition) < hipotenusa)
             {
@@ -128,15 +125,14 @@ namespace FlightLib
             }
         }
 
-        // METODO VUELO HA LLEGADO A SU DESTINO
-
+        // Si ha llegado al destino devuelve true, si no, devuelve false
         public bool HasArrived()
         {
             return this.currentPosition.Distancia(this.finalPosition) < 0.0001;
         }
 
 
-        // DETECTAR CONFLICTO
+        // Devuelve true si la distancia entre los vuelos es menor que la distancia de seguridad
         public bool Conflicto(FlightPlan b, double DistanciaSeguridad)
         {
             bool conflicto = false;
@@ -146,12 +142,56 @@ namespace FlightLib
             return conflicto;
         }
 
-        //ANTICIPAR CONFLICTO
-        //metodo analítico con derivada
-        //(calcula la fórmula de la distancia entre aviones en funcion del tiempo y busca su minimo con la derivada.
-        //funciona igual con un tiempo de ciclo de 1 o de 1000).
+        public void Restart()
+        {
+            //mueve el avión a la posición inicial
+            this.currentPosition = new Position(this.initialPosition.GetX(), this.initialPosition.GetY());
+        }
 
-            private double TiempoHastaDestino()
+        public double Distance(FlightPlan plan)
+        {
+            //devuelve la distancia con el plan de vuelo recibido como argumento
+            double distance = this.currentPosition.Distancia(plan.GetCurrentPosition());
+            return distance;
+        }
+
+
+        public void EscribeConsola()
+        // escribe en consola los datos del plan de vuelo
+        {
+            Console.WriteLine("******************************");
+            Console.WriteLine("Datos del vuelo: ");
+            Console.WriteLine("Identificador: {0}", id);
+
+            // 2 DECIMALES
+            Console.WriteLine("Velocidad: {0:F2}", velocidad);
+            Console.WriteLine("Posición actual: ({0:F2},{1:F2})", currentPosition.GetX(), currentPosition.GetY());
+            if (this.HasArrived())
+            {
+                Console.WriteLine("Ha llegado al destino");
+            }
+            Console.WriteLine("******************************");
+        }
+        public FlightPlan Clone()
+        {
+            FlightPlan copia = new FlightPlan(
+                this.id,
+                this.initialPosition.GetX(),
+                this.initialPosition.GetY(),
+                this.finalPosition.GetX(),
+                this.finalPosition.GetY(),
+                this.velocidad,
+                this.company);
+
+            copia.SetCurrentPosition(new Position(
+                this.currentPosition.GetX(),
+                this.currentPosition.GetY()));
+
+            return copia;
+        }
+
+        // MÉTODOS PARA ANTICIPAR CONFLICTO (Calcula la fórmula de la distancia entre aviones en funcion del tiempo y busca su minimo con la derivada)
+        private double TiempoHastaDestino()
         {
             if (this.HasArrived() || this.velocidad <= 0)
                 return 0;
@@ -268,8 +308,6 @@ namespace FlightLib
                 }
                 return minimo;
 
-
-
             }
 
             //Devuelve true si, manteniendo las velocidades los vuelos entraran en conflicto
@@ -290,8 +328,6 @@ namespace FlightLib
             return distanciaMinima < distanciaSeguridad;
         }
         
-    
-
 
         // Baja la velocidad de este vuelo un 10% cada vez hasta que ya no haya conflicto.
         // Devuelve true si lo consigue. Si no lo consigue (porque, por ejemplo, los dos vuelos empiezan muy juntos), deja la velocidad como estaba.
@@ -314,56 +350,6 @@ namespace FlightLib
                 return false;
             }
             return true;
-        }
-
-
-
-        public void Restart()
-        {
-            //mueve el avión a la posición inicial
-            this.currentPosition = new Position(this.initialPosition.GetX(), this.initialPosition.GetY());
-        }
-
-        public double Distance(FlightPlan plan)
-        {
-            //devuelve la distancia con el plan de vuelo recibido como argumento
-            double distance = this.currentPosition.Distancia(plan.GetCurrentPosition());
-            return distance;
-        }
-
-
-        public void EscribeConsola()
-        // escribe en consola los datos del plan de vuelo
-        {
-            Console.WriteLine("******************************");
-            Console.WriteLine("Datos del vuelo: ");
-            Console.WriteLine("Identificador: {0}", id);
-
-            // 2 DECIMALES
-            Console.WriteLine("Velocidad: {0:F2}", velocidad);
-            Console.WriteLine("Posición actual: ({0:F2},{1:F2})", currentPosition.GetX(), currentPosition.GetY());
-            if (this.HasArrived())
-            {
-                Console.WriteLine("Ha llegado al destino");
-            }
-            Console.WriteLine("******************************");
-        }
-        public FlightPlan Clone()
-        {
-            FlightPlan copia = new FlightPlan(
-                this.id,
-                this.initialPosition.GetX(),
-                this.initialPosition.GetY(),
-                this.finalPosition.GetX(),
-                this.finalPosition.GetY(),
-                this.velocidad,
-                this.company);
-
-            copia.SetCurrentPosition(new Position(
-                this.currentPosition.GetX(),
-                this.currentPosition.GetY()));
-
-            return copia;
         }
     }
 }
