@@ -11,7 +11,35 @@ namespace FlightLib
 {
     public class FlightPlanList
     {
+        // ATRIBUTOS
         private List<FlightPlan> llistaVuelos = new List<FlightPlan>();
+        private string erroresLectura = "";
+
+        // CONSTRUCTOR
+        public FlightPlan GetFlightPlan(int i)
+        {
+            if (i < 0 || i >= llistaVuelos.Count)
+                return null;
+            else
+                return llistaVuelos[i];
+        }
+
+        // MÉTODOS
+        // Getters y Setters
+        public int GetCount()
+        {
+            return llistaVuelos.Count;
+        }
+        public List<FlightPlan> GetVuelos()
+        {
+            return llistaVuelos;
+        }
+        public string GetErroresLectura()
+        {
+            return erroresLectura;
+        }
+
+        // Añade el FlightPlan del parámetro p a la lista, devolviendo si se añadió correctamente 
         public int AddFlightPlan(FlightPlan p)
         {
             if (p != null)
@@ -21,28 +49,43 @@ namespace FlightLib
             }
             return -1;
         }
+        // Devuelve una copia de la lista de vuelos
+        public FlightPlanList Clone()
+        {
+            FlightPlanList copia = new FlightPlanList();
 
-        public FlightPlan GetFlightPlan(int i)
-        {
-            if (i < 0 || i >= llistaVuelos.Count)
-                return null;
-            else
-                return llistaVuelos[i];
-        }
-        public int GetCount()
-        {
-            return llistaVuelos.Count;
-        }
-        public List<FlightPlan> GetVuelos()
-        {
-            return llistaVuelos;
-        }
+            foreach (FlightPlan vuelo in llistaVuelos)
+            {
+                copia.AddFlightPlan(vuelo.Clone());
+            }
 
+            return copia;
+        }
+        // Restaura el estado de los vuelos de la lista al estado del parámetro
+        public void RestoreFrom(FlightPlanList estado)
+        {
+            for (int i = 0; i < llistaVuelos.Count; i++)
+            {
+                FlightPlan actual = llistaVuelos[i];
+                FlightPlan guardado = estado.GetFlightPlan(i);
+                actual.SetCurrentPosition(new Position(guardado.GetCurrentPosition().GetX(),guardado.GetCurrentPosition().GetY()));
+                actual.SetVelocidad(guardado.GetVelocidad());
+            }
+        }
+        // ???
         public void Clear()
         {
             llistaVuelos.Clear();
         }
-
+        // Muestra por consola la información de todos los vuelos de la lista (para testing) ???
+        public void EscribeConsola()
+        {
+            foreach (FlightPlan vol in llistaVuelos)
+            {
+                vol.EscribeConsola();
+            }
+        }
+        // Mueve todos los vuelos de la lista el tiempo indicado en el parámetro
         public void Move(double tiempo)
         {
             foreach (FlightPlan vol in llistaVuelos)
@@ -50,6 +93,7 @@ namespace FlightLib
                 vol.Move(tiempo);
             }
         }
+        // Reinicia todos los vuelos de la lista a su posición y velocidad originales
         public void RestartAll() 
         {
             foreach (FlightPlan vol in llistaVuelos)
@@ -57,7 +101,7 @@ namespace FlightLib
                 vol.Restart();
             }
         }
-
+        // Devuelve una matriz de booleanos indicando si hay conflicto entre los vuelos de la lista ???
         public bool[,] ObtenerMatrizConflictos(double distanciaSeguridad, double horizonte)
         {
             int cantidadVuelos = llistaVuelos.Count;
@@ -75,7 +119,7 @@ namespace FlightLib
 
             return matriz;
         }
-
+        // Resuelve los conflictos entre los vuelos de la lista, devolviendo si se han resuelto todos correctamente
         public bool ResolverConflictos(double distanciaSeguridad, double tiempoCiclo)
         {
             int maxPasadas = llistaVuelos.Count * llistaVuelos.Count;
@@ -121,33 +165,15 @@ namespace FlightLib
                 for (int j = i + 1; j < llistaVuelos.Count; j++)
                 {
                     if (conflictosFinales[i, j])
+                    {
                         return false;
+                    }
                 }
             }
 
             return true;
         }
-        public void EscribeConsola()
-        {
-            foreach (FlightPlan vol in llistaVuelos)
-            {
-                vol.EscribeConsola();
-            }
-        }
-
-        private string erroresLectura = "";
-
-        //devuelve un texto con los errores encontrados en la ultima lectura de fichero
-        public string GetErroresLectura()
-        {
-            return erroresLectura;
-        }
-
-        //Lee los planes de vuelo de nuestro fichero de texto
-        //una linea por vuelo, 7 datos separados por espacios.
-
-        //Parametros dados: ruta del fichero. Devuelve true si todas las lineas son correctas; si alguna falla, la lista queda vacía
-
+        // Lee los vuelos de un fichero de texto, devolviendo si se han leído correctamente 
         public bool LeerDelFichero(string nombreFichero)
         {
             llistaVuelos.Clear();
@@ -159,20 +185,17 @@ namespace FlightLib
             {
                 using (StreamReader r = new StreamReader(nombreFichero))
                 {
-
                     string linia = r.ReadLine();
                     while (linia != null)
                     {
                         numLinea++;
-                        if (linia.Trim() != "") //las lineas vacias se ignoran
+                        if (linia.Trim() != "") //las lineas vacias se ignoran ???
                         {
-
                             string[] trozos = linia.Trim().Split(' ');
-
                             if (trozos.Length != 7)
-
+                            {
                                 erroresLectura = erroresLectura + "Linea " + numLinea + ": tiene " + trozos.Length + " datos en vez de 7.\n";
-
+                            }
                             else
                             {
                                 try
@@ -199,7 +222,6 @@ namespace FlightLib
                             }
                         }
                         linia = r.ReadLine();
-
                     }
                 }
             }
@@ -215,47 +237,22 @@ namespace FlightLib
             if(erroresLectura != "")
 
             {
-                llistaVuelos.Clear(); //si hay errores no cargamos nada, para no simular con errores y datos incompletos
+                llistaVuelos.Clear();
                 return false;
             }
             return true;
         }
-
+        // Guarda los vuelos de la lista en un fichero de texto
         public void GuardarEnFichero(string nombreFichero)
         {
             StreamWriter W = new StreamWriter(nombreFichero);
             foreach (FlightPlan vol in llistaVuelos)
             {
-                // Format per línia: ID PosXIni PosYIni PosXFin PosYFin Velocitat Companyia
+                // Formato de las lineas: ID PosXIni PosYIni PosXFin PosYFin Velocidad Compañia
                 string linia = vol.GetId() + " " + vol.GetInitialPosition().GetX() + " " + vol.GetInitialPosition().GetY() + " " + vol.GetFinalPosition().GetX() + " " + vol.GetFinalPosition().GetY() + " " + vol.GetVelocidad() + " " + vol.GetCompany();
                 W.WriteLine(linia);
             }
             W.Close();
-        }
-        public FlightPlanList Clone()
-        {
-            FlightPlanList copia = new FlightPlanList();
-
-            foreach (FlightPlan vuelo in llistaVuelos)
-            {
-                copia.AddFlightPlan(vuelo.Clone());
-            }
-
-            return copia;
-        }
-        public void RestoreFrom(FlightPlanList estado)
-        {
-            for (int i = 0; i < llistaVuelos.Count; i++)
-            {
-                FlightPlan actual = llistaVuelos[i];
-                FlightPlan guardado = estado.GetFlightPlan(i);
-
-                actual.SetCurrentPosition(new Position(
-                    guardado.GetCurrentPosition().GetX(),
-                    guardado.GetCurrentPosition().GetY()));
-
-                actual.SetVelocidad(guardado.GetVelocidad());
-            }
         }
     }
 }

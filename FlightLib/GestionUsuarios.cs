@@ -13,6 +13,7 @@ namespace FlightLib
 {
     public class GestionUsuarios
     {
+        // ATRIBUTO
         private SQLiteConnection cnx;
 
         //abrimos la base de datos de los usuarios.
