@@ -43,7 +43,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.name_company = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.button_predeterminados = new System.Windows.Forms.Button();
             this.button_salir = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -203,20 +203,20 @@
             this.label3.Text = "Compañía";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // button1
+            // button_predeterminados
             // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(116)))), ((int)(((byte)(139)))));
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.Snow;
-            this.button1.Location = new System.Drawing.Point(52, 482);
-            this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(274, 31);
-            this.button1.TabIndex = 16;
-            this.button1.Text = "2 vuelos predeterminados";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button_predeterminados.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(116)))), ((int)(((byte)(139)))));
+            this.button_predeterminados.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button_predeterminados.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_predeterminados.ForeColor = System.Drawing.Color.Snow;
+            this.button_predeterminados.Location = new System.Drawing.Point(52, 482);
+            this.button_predeterminados.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button_predeterminados.Name = "button_predeterminados";
+            this.button_predeterminados.Size = new System.Drawing.Size(274, 31);
+            this.button_predeterminados.TabIndex = 16;
+            this.button_predeterminados.Text = "2 vuelos predeterminados";
+            this.button_predeterminados.UseVisualStyleBackColor = false;
+            this.button_predeterminados.Click += new System.EventHandler(this.button_predeterminados_Click);
             // 
             // button_salir
             // 
@@ -240,7 +240,7 @@
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(389, 524);
             this.Controls.Add(this.button_salir);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.button_predeterminados);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.name_company);
             this.Controls.Add(this.label1);
@@ -281,7 +281,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox name_company;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button_predeterminados;
         private System.Windows.Forms.Button button_salir;
     }
 }

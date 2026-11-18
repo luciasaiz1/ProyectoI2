@@ -14,21 +14,25 @@ namespace Windows
 {
     public partial class FlightPlanAdder : Form
     {
+        // ATRIBUTOS
         FlightPlanList listaPlanes = new FlightPlanList();
         FlightPlan plan1;
         FlightPlan plan2;
 
+        // CONSTRUCTOR
         public FlightPlanAdder()
         {
             InitializeComponent();
         }
-
+        // MÉTODOS
+        // Comunicación entre forms
         public FlightPlanList GetPlanLista()
         {
             return this.listaPlanes;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        // Añade vuelos predeterminados 
+        private void button_predeterminados_Click(object sender, EventArgs e)
         {
             plan1 = new FlightPlan("VY2986", 0, 0, 2600, 1400, 60, "Vueling");
             plan2 = new FlightPlan("IB412", 0, 1400, 2600, 0, 60, "Iberia");
@@ -36,7 +40,7 @@ namespace Windows
             listaPlanes.AddFlightPlan(plan2);
             Close();
         }
-
+        // Añadir un nuevo plan de vuelo
         private void button_añadir_Click(object sender, EventArgs e)
         {
             try
@@ -57,10 +61,9 @@ namespace Windows
                     return;
                 }
 
-                //Recogemos los datos que se han introducido
                 plan1 = new FlightPlan(textBox_Id.Text, Convert.ToDouble(textBox_currentPositionX.Text), Convert.ToDouble(textBox_currentPositionY.Text), Convert.ToDouble(textBox_finalPositionX.Text), Convert.ToDouble(textBox_finalPositionY.Text), Convert.ToDouble(textBox_velocidad.Text), name_company.Text);
+                listaPlanes.AddFlightPlan(plan1);
 
-                //Vaciamos el TextBox para poder escribir los datos del segundo avión
                 textBox_Id.Text = "";
                 textBox_currentPositionX.Text = "";
                 textBox_currentPositionY.Text = "";
@@ -68,16 +71,13 @@ namespace Windows
                 textBox_finalPositionY.Text = "";
                 textBox_velocidad.Text = "";
                 name_company.Text = "";
-
-                listaPlanes.AddFlightPlan(plan1);
-
             }
             catch (FormatException)
             {
                 MessageBox.Show("Error en los datos introducidos");
             }
         }
-
+        // Cerrar ventana
         private void button_salir_Click(object sender, EventArgs e)
         {
             Close();

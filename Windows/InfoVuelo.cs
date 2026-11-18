@@ -13,48 +13,48 @@ namespace Windows
 {
     public partial class InfoVuelo : Form
     {
+        // ATRIBUTOS
         private FlightPlan plan;
-        public InfoVuelo(FlightPlan plan) //para crearme, darme un flight plan que lo llamaré plan
+
+        // CONSTRUCTOR
+        public InfoVuelo(FlightPlan plan)
         {
             InitializeComponent();
             this.plan = plan;
 
-            //Plan de vuelo que ha de mostrar
-
             Position origen = plan.GetInitialPosition();
             Position destino = plan.GetFinalPosition();
             Position actual = plan.GetCurrentPosition();
-
             label_id.Text = plan.GetId();
             label_compania.Text = plan.GetCompany();
+
             numericUpDown_velocidad.DecimalPlaces = 2;
             numericUpDown_velocidad.Minimum = 0.01m;
             numericUpDown_velocidad.Maximum = 1000;
             numericUpDown_velocidad.Value = (decimal)plan.GetVelocidad();
             this.AcceptButton = button1_aplicar;
+
             label_origen.Text = origen.GetX().ToString("F2") + " , " + origen.GetY().ToString("F2");
             label_destino.Text = destino.GetX().ToString("F2") + " , " + destino.GetY().ToString("F2");
             label_actual.Text = actual.GetX().ToString("F2") + " , " + actual.GetY().ToString("F2");
 
             if (plan.HasArrived())
+            {
                 label_estado.Text = "Ha llegado a su destino";
+            }
             else
+            {
                 label_estado.Text = "En vuelo ";
+            }
 
-            //el titulo de la ventana muestra el id del vuelo
             this.Text = "Vuelo " + plan.GetId();
         }
-
-        private void button_cerrar_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
+        // MÉTODOS
+        // Comunicación entre forms
+        // Cambiar velocidad del vuelo
         private void button1_aplicar_Click(object sender, EventArgs e)
         {
             double nueva = (double)numericUpDown_velocidad.Value;
-
-            //si no hemos cambiado la velocidad, solo cerramos (no reiniciamos la simulacion)
             if (Math.Abs(nueva - plan.GetVelocidad()) < 0.005)
             {
                 Close();
@@ -63,8 +63,11 @@ namespace Windows
 
             plan.SetVelocidad(nueva);
             this.DialogResult = DialogResult.OK; 
-
-            //Avisa al simulador que reinicie y compruebe y también cierra la ventana
+        }
+        // Cerrar ventana
+        private void button_cerrar_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

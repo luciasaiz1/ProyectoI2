@@ -15,14 +15,18 @@ namespace Windows
    
     public partial class CambiarPassword: Form
     {
-        private Estilo estilo = new Estilo();
+        // ATRIBUTO
         private GestionUsuarios gestion;
+
+        // CONSTRUCTOR
         public CambiarPassword(GestionUsuarios gestion)
         {
-          InitializeComponent();
+            InitializeComponent();
             this.gestion = gestion;
         }
 
+        // MÉTODO
+        // Cambiar la contraseña
         private void button_cambiarpassword_Click(object sender, EventArgs e)
         {
             string nombre = textBox_usuario2.Text.Trim();
@@ -34,34 +38,29 @@ namespace Windows
                 MessageBox.Show("Rellena los tres campos.", "Datos incompletos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-
             if (nombre.Contains("'") || recuperacion.Contains("'") || nueva.Contains("'"))
             {
                 MessageBox.Show("Los campos no pueden contener el caracter '", "Datos incorrectos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-
             try
             {
                 if (gestion.CambiarPassword(nombre, recuperacion, nueva))
                 {
-
                     MessageBox.Show("Contraseña cambiada correctamente. Ya puedes entrar.", "Recuperar contraseña", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Close();
                 }
                 else
                 {
                     MessageBox.Show("El usuario o la palabra de recuperacion no son correctos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
                 }
-
-                }
+            }
             catch (Exception)
             {
                 MessageBox.Show("Error al acceder a la base de datos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            }
-
         }
+
     }
+}
 

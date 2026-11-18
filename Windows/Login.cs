@@ -14,56 +14,16 @@ namespace Windows
 {
     public partial class Login : Form
     {
-        private Estilo estilo = new Estilo();
+        // ATRIBUTOS
         GestionUsuarios gestion = new GestionUsuarios();
+        private Estilo estilo = new Estilo();
         private string usuarioConectado = "";
+
+        // CONSTRUCTOR
         public Login()
         {
             InitializeComponent();
         }
-
-        public string GetUsuario()
-        {
-            return usuarioConectado;
-        }
-        private void button_entrar_Click(object sender, EventArgs e)
-        {
-            string nombre = textBox_usuario.Text.Trim();
-            string password = textBox_password.Text;
-
-            string error = ValidarCampos(nombre, password);
-            if (error != "")
-            {
-                MessageBox.Show(error, "Datos incorrectos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            try
-            {
-                if (gestion.ComprobarLogin(nombre, password))
-                {
-                    usuarioConectado = nombre;
-                    this.DialogResult = DialogResult.OK;
-                    //Cierra el login y avisa al programa de que puede abrir el menu
-                }
-
-                else
-                {
-                    MessageBox.Show("Usuario o contraseña incorrectos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    textBox_password.Text = "";
-                    textBox_password.Focus();
-                }
-            }
-
-            catch (Exception)
-            {
-                MessageBox.Show("Error al consultar la base de datos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-        }
-
-        
-
         private void Login_Load(object sender, EventArgs e)
         {
             if (!gestion.Iniciar())
@@ -73,9 +33,37 @@ namespace Windows
             }
         }
 
-        //comprobamos los datos escritos, parámetros de nombre y contraseña.
-        //Devuelve ""si son validos, o el mensaje de error si no lo son.
+        // MÉTODOS
+        // Comunicación entre forms
+        public string GetUsuario()
+        {
+            return usuarioConectado;
+        }
+        // Registrar nuevo usuario
+        private void button_registrar_Click(object sender, EventArgs e)
+        {
+            RegistrarNuevoUsuario rnu = new RegistrarNuevoUsuario(gestion);
+            if (rnu.ShowDialog() == DialogResult.OK) // El usuario se ha registrado correctamente
+            {
+                textBox_usuario.Text = rnu.GetUsuarioRegistrado();
+                textBox_password.Text = "";
+                textBox_password.Focus();
+            }
+        }
+        // Cambiar contraseña
+        private void linkCambiarContrasena_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            CambiarPassword cc = new CambiarPassword(gestion);
+            cc.ShowDialog();
+        }
 
+        // Estética
+        private void Login_Paint(object sender, PaintEventArgs e)
+        {
+            estilo.PintarFondo(e.Graphics, this.ClientRectangle);
+        }
+
+        // Comprobar si el nombre y contraseña son correctos
         private string ValidarCampos(string nombre, string password)
         {
             if (nombre == "" || password == "")
@@ -84,33 +72,41 @@ namespace Windows
                 return "El usuario y la contraseña no pueden contener el caracter '";
             return "";
         }
-
-        private void linkCambiarContrasena_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        // Introducir usuario y contraseña
+        private void button_entrar_Click(object sender, EventArgs e)
         {
-            CambiarPassword cc = new CambiarPassword(gestion);
-
-            cc.ShowDialog(); //show dialog or form to change the password
+            string nombre = textBox_usuario.Text.Trim();
+            string password = textBox_password.Text;
+            string error = ValidarCampos(nombre, password);
+            if (error != "")
+            {
+                MessageBox.Show(error, "Datos incorrectos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            try
+            {
+                if (gestion.ComprobarLogin(nombre, password))
+                {
+                    usuarioConectado = nombre;
+                    this.DialogResult = DialogResult.OK;
+                    //Cierra el login y avisa al programa de que puede abrir el menu
+                }
+                else
+                {
+                    MessageBox.Show("Usuario o contraseña incorrectos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    textBox_password.Text = "";
+                    textBox_password.Focus();
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Error al consultar la base de datos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
+        // Cerrar formulario
         private void Login_FormClosing(object sender, FormClosingEventArgs e)
         {
             gestion.Cerrar();
-        }
-
-        private void button_registrar_Click(object sender, EventArgs e)
-        {
-            RegistrarNuevoUsuario rnu = new RegistrarNuevoUsuario(gestion);
-            if (rnu.ShowDialog() == DialogResult.OK)
-            {
-                textBox_usuario.Text = rnu.GetUsuarioRegistrado();
-                textBox_password.Text = "";
-                textBox_password.Focus();
-            }
-          
-        }
-
-        private void Login_Paint(object sender, PaintEventArgs e)
-        {
-            estilo.PintarFondo(e.Graphics, this.ClientRectangle);
         }
     }
 }
