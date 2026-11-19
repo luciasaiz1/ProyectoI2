@@ -32,7 +32,7 @@
             this.textBox_distancia = new System.Windows.Forms.TextBox();
             this.textBox_tiempoCiclo = new System.Windows.Forms.TextBox();
             this.button_aceptar = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.button_predeterminado = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -81,20 +81,20 @@
             this.button_aceptar.UseVisualStyleBackColor = false;
             this.button_aceptar.Click += new System.EventHandler(this.button_aceptar_Click);
             // 
-            // button1
+            // button_predeterminado
             // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(116)))), ((int)(((byte)(139)))));
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.Snow;
-            this.button1.Location = new System.Drawing.Point(78, 153);
-            this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(254, 31);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "Predeterminado";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button_predeterminado.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(116)))), ((int)(((byte)(139)))));
+            this.button_predeterminado.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button_predeterminado.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_predeterminado.ForeColor = System.Drawing.Color.Snow;
+            this.button_predeterminado.Location = new System.Drawing.Point(78, 153);
+            this.button_predeterminado.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button_predeterminado.Name = "button_predeterminado";
+            this.button_predeterminado.Size = new System.Drawing.Size(254, 31);
+            this.button_predeterminado.TabIndex = 5;
+            this.button_predeterminado.Text = "Predeterminado";
+            this.button_predeterminado.UseVisualStyleBackColor = false;
+            this.button_predeterminado.Click += new System.EventHandler(this.button_predeterminado_Click);
             // 
             // label1
             // 
@@ -115,7 +115,7 @@
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(428, 210);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.button_predeterminado);
             this.Controls.Add(this.button_aceptar);
             this.Controls.Add(this.textBox_tiempoCiclo);
             this.Controls.Add(this.textBox_distancia);
@@ -135,7 +135,7 @@
         private System.Windows.Forms.TextBox textBox_distancia;
         private System.Windows.Forms.TextBox textBox_tiempoCiclo;
         private System.Windows.Forms.Button button_aceptar;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button_predeterminado;
         private System.Windows.Forms.Label label1;
     }
 }

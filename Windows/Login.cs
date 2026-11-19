@@ -39,7 +39,7 @@ namespace Windows
         {
             return usuarioConectado;
         }
-        // Registrar nuevo usuario
+        // Registrar nuevo usuario en RegistrarNuevoUsuario
         private void button_registrar_Click(object sender, EventArgs e)
         {
             RegistrarNuevoUsuario rnu = new RegistrarNuevoUsuario(gestion);
@@ -88,8 +88,7 @@ namespace Windows
                 if (gestion.ComprobarLogin(nombre, password))
                 {
                     usuarioConectado = nombre;
-                    this.DialogResult = DialogResult.OK;
-                    //Cierra el login y avisa al programa de que puede abrir el menu
+                    this.DialogResult = DialogResult.OK;    //Cierra el login y avisa al programa de que puede abrir el menu
                 }
                 else
                 {

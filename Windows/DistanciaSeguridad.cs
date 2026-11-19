@@ -13,15 +13,11 @@ namespace Windows
 {
     public partial class DistanciaSeguridad : Form
     {
-        
+        // ATRIBUTOS
         private double distanciaSeguridad;
         private double tiempoCiclo;
 
-        public DistanciaSeguridad()
-        {
-            InitializeComponent();
-        }
-
+        // CONSTRUCTOR
         public DistanciaSeguridad(double distancia, double ciclo)
         {
             InitializeComponent();
@@ -29,26 +25,28 @@ namespace Windows
             this.textBox_tiempoCiclo.Text = ciclo.ToString(CultureInfo.InvariantCulture);
         }
 
+        // MÉTODOS
+        // Comunicación entre forms
         public double GetDistanciaSeguridad()
         {
             return this.distanciaSeguridad;
         }
-
         public double GetTiempoCiclo()
         {
             return this.tiempoCiclo;
         }
 
+        // Cambia el formato del número para que sea válido en la conversión a double
         private double LeerNumero(string texto)
         {
             return Convert.ToDouble(texto.Trim().Replace(',', '.'), CultureInfo.InvariantCulture);
         }
-
+        // Comprueba que el número es válido
         private bool EsValido(double numero)
         {
             return numero > 0 && numero <= 100;
         }
-
+        // Introduce los valores de distancia y ciclo
         private void button_aceptar_Click(object sender, EventArgs e)
         {
             try
@@ -60,10 +58,8 @@ namespace Windows
                 {
                     this.distanciaSeguridad = distancia;
                     this.tiempoCiclo = ciclo;
-
-                    // Indicamos que los datos se han aceptado con éxito y cerramos la ventana
                     this.DialogResult = DialogResult.OK;
-                    this.Close();
+                    this.Close();   // Cerrar el formulario y volver al menú principal
                 }
                 else
                 {
@@ -76,13 +72,13 @@ namespace Windows
 
             }
         }
-
-        private void button1_Click(object sender, EventArgs e)
+        // Añade valores predeterminados a distancia y ciclo
+        private void button_predeterminado_Click(object sender, EventArgs e)
         {
             distanciaSeguridad = 40;
             tiempoCiclo = 10;
             this.DialogResult = DialogResult.OK;
-            this.Close();
+            this.Close();   // Cerrar el formulario y volver al menú principal
         }
     }
 }
