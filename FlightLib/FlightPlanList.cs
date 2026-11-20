@@ -72,12 +72,12 @@ namespace FlightLib
                 actual.SetVelocidad(guardado.GetVelocidad());
             }
         }
-        // ???
+        // Elimina todos los vuelos de la lista
         public void Clear()
         {
             llistaVuelos.Clear();
         }
-        // Muestra por consola la información de todos los vuelos de la lista (para testing) ???
+        // Escribe en la consola los datos de todos los vuelos de la lista
         public void EscribeConsola()
         {
             foreach (FlightPlan vol in llistaVuelos)
@@ -101,7 +101,7 @@ namespace FlightLib
                 vol.Restart();
             }
         }
-        // Devuelve una matriz de booleanos indicando si hay conflicto entre los vuelos de la lista ???
+        // Devuelve una matriz de booleanos indicando si hay conflicto entre cada par de vuelos de la lista
         public bool[,] ObtenerMatrizConflictos(double distanciaSeguridad, double horizonte)
         {
             int cantidadVuelos = llistaVuelos.Count;
@@ -189,7 +189,7 @@ namespace FlightLib
                     while (linia != null)
                     {
                         numLinea++;
-                        if (linia.Trim() != "") //las lineas vacias se ignoran ???
+                        if (linia.Trim() != "") // Solo si la línea no está vacía la procesamos
                         {
                             string[] trozos = linia.Trim().Split(' ');
                             if (trozos.Length != 7)
