@@ -159,7 +159,6 @@ namespace FlightLib
         public void EscribeConsola()
         // escribe en consola los datos del plan de vuelo
         {
-            Console.WriteLine("******************************");
             Console.WriteLine("Datos del vuelo: ");
             Console.WriteLine("Identificador: {0}", id);
 
@@ -170,7 +169,6 @@ namespace FlightLib
             {
                 Console.WriteLine("Ha llegado al destino");
             }
-            Console.WriteLine("******************************");
         }
         public FlightPlan Clone()
         {
@@ -191,6 +189,7 @@ namespace FlightLib
         }
 
         // MÉTODOS PARA ANTICIPAR CONFLICTO (Calcula la fórmula de la distancia entre aviones en funcion del tiempo y busca su minimo con la derivada)
+        // Tiempo que le falta a este vuelo para llegar a su destino (en minutos). Si ya ha llegado, devuelve 0. Si la velocidad es 0, devuelve 0.
         private double TiempoHastaDestino()
         {
             if (this.HasArrived() || this.velocidad <= 0)
@@ -200,7 +199,7 @@ namespace FlightLib
             return distanciaRestante / velocidadPorUnidadTiempo;
         }
 
-        //componente X del vector velocidad (0 si el avion esta quieto)
+        // Componente X del vector velocidad (0 si el avion está quieto). Devuelve la velocidad en unidades de distancia por minuto.
         private double VelocidadX()
         {
             if (this.TiempoHastaDestino() == 0)
@@ -211,6 +210,7 @@ namespace FlightLib
             return (this.velocidad / 60) * coseno;
         }
 
+        // Componente Y del vector velocidad. Devuelve la velocidad en unidades de distancia por minuto.
         private double VelocidadY()
         {
             if (this.TiempoHastaDestino() == 0)
@@ -220,23 +220,25 @@ namespace FlightLib
             double seno = (this.finalPosition.GetY() - this.currentPosition.GetY()) / distanciasRestante;
             return (this.velocidad / 60) * seno;
         }
-
-        //distancia minima entre dos aviones que se mueven en linea recta durante [0, duracion]
-        // (d0x, d0y) = posicion relativa al principio del intervalo (B-A)
-        //(wx,wy) = velocidad relativa
-        //dsquared (t) = (d0x +wxt) squared + (d0y +wyt)squared
-        //Derivada = 0 -> t* = -(d0x* wx + d0y* wy) / (wxsquared + wysquared)
-
+        
+        // Calcula la distancia mínima entre dos móviles en movimiento rectilíneo uniforme dentro de un intervalo
+        // Parámetros:
+        //   d0x, d0y: componentes de la posición relativa inicial (B - A)
+        //   wx, wy: componentes de la velocidad relativa (vB - vA)
+        //   duracion: duración máxima del intervalo de observación
+        // Devuelve la menor distancia alcanzada durante el intervalo [0, duracion]
         private double DistanciaMinimaEnIntervalo(double d0x, double d0y, double wx, double wy, double duracion)
         {
+            // (d0x, d0y) = posicion relativa al principio del intervalo (B-A)
+            //(wx,wy) = velocidad relativa
+
             double w2 = wx * wx + wy * wy;
             double t = 0; //si la velocidad relativa es cero, la distancia no cambio, miramos t= 0.
 
             if (w2 > 0)
             {
-                t = -(d0x * wx + d0y * wy) / w2; //momento maximo de acercamiento
+                t = -(d0x * wx + d0y * wy) / w2; // Instante de mínimo acercamiento obtenido igualando a cero la derivada de d^2(t)
 
-                //el minimo tiene que estar dentro del intervalo [0,duracion]
                 if (t < 0)
                     t = 0;
                 if (t > duracion)
@@ -250,13 +252,10 @@ namespace FlightLib
         }
 
 
-            //distancia minima entre vuelo y el vuelo b desde ahora hasta "horizonte" unidades de tiempo.
-            //tiene dos fases: 1) los dos aviones vuelan. 
-            //2) uno ya ha aterrizado y el otro sigue.
-            //
-            public double DistanciaMinima(FlightPlan b, double horizonte)
+        // Distancia mínima entre vuelo y el vuelo "b" desde ahora hasta "horizonte" unidades de tiempo.
+        public double DistanciaMinima(FlightPlan b, double horizonte)
             {
-                //datos de cada avion
+                // Datos de cada avión
                 double vax = this.VelocidadX();
                 double vay = this.VelocidadY();
                 double vbx = b.VelocidadX();
@@ -264,7 +263,7 @@ namespace FlightLib
                 double tA = this.TiempoHastaDestino();
                 double tB = b.TiempoHastaDestino();
 
-                //--------Fase 2: los dos vuelan (hasta que llegue el primero)
+                // Fase 1: Los dos aviones vuelan (hasta que aterriza el primero o se alcanza el horizonte)
                 double T = Math.Min(tA, tB);
                 if (T > horizonte)
                     T = horizonte;
@@ -274,20 +273,20 @@ namespace FlightLib
 
                 double minimo = DistanciaMinimaEnIntervalo(d0x, d0y, vbx - vax, vby - vay, T);
 
-                //------------Fase 2: el primero ya ha llegado, el otro sigue---------
+                // Fase 2: El primero ya ha llegado y el otro sigue
                 double duracion2 = Math.Max(tA, tB) - T;
                 if (T + duracion2 > horizonte)
                     duracion2 = horizonte - T;
 
                 if (duracion2 > 0)
                 {
-                    //Posiciones de los dos aviones en el instante T
+                    // Posiciones de los dos aviones en el instante T
                     double ax = this.currentPosition.GetX() + vax * T;
                     double ay = this.currentPosition.GetY() + vay * T;
                     double bx = b.currentPosition.GetX() + vbx * T;
                     double by = b.currentPosition.GetY() + vby * T;
 
-                    //Ahora solo se mueve el que toddavia no ha llegado
+                    //Ahora solo se mueve el que todavía no ha llegado
                     double wx, wy;
                     if(tA > tB)
                     {
@@ -310,43 +309,39 @@ namespace FlightLib
 
             }
 
-            //Devuelve true si, manteniendo las velocidades los vuelos entraran en conflicto
-            //tiempo ciclo ya no es 100 % necesario pues el hecho de si entran en conflicto o no ya no depende de tiempocicloo pero igual lo dejamos para que el simualdor siga funcionando
-
-            public bool AnticiparConflicto(FlightPlan b, double distanciaSeguridad, double tiempoCiclo)
+        // Comprueba si dos vuelos el vuelo y el vuelo "b" entraran en conflicto en algún punto de la ruta,
+        // devuelve true si entran en conflicto, false si no. La distancia de seguridad se pasa como parámetro
+        public bool AnticiparConflicto(FlightPlan b, double distanciaSeguridad, double tiempoCiclo)
         {
             double distanciaMinima = this.DistanciaMinima(b, double.PositiveInfinity);
             return distanciaMinima < distanciaSeguridad;
         }
 
-        //Devuelve true si los vuelos entran en conflicto DURANTE el proximo ciclo
-        //aunque al final del ciclo ya se hayan separado. Sirve para el simulador.
-
+        // Devuelve true si los vuelos entran en conflicto durante el próximo ciclo de simulación.
         public bool ConflictoDuranteCiclo(FlightPlan b, double distanciaSeguridad, double tiempoCiclo)
         {
             double distanciaMinima = this.DistanciaMinima(b, tiempoCiclo);
             return distanciaMinima < distanciaSeguridad;
         }
-        
 
-        // Baja la velocidad de este vuelo un 10% cada vez hasta que ya no haya conflicto.
-        // Devuelve true si lo consigue. Si no lo consigue (porque, por ejemplo, los dos vuelos empiezan muy juntos), deja la velocidad como estaba.
+        // Intenta evitar el conflicto reduciendo progresivamente la velocidad del vuelo un 10% (máximo 20 iteraciones). Devuelve true si lo consigue
+        // Si no lo consigue (porque, por ejemplo, los dos vuelos empiezan muy juntos), deja la velocidad como estaba
         public bool ResolverConflicto(FlightPlan b, double distanciaSeguridad, double tiempoCiclo)
         {
             double velocidadOriginal = this.velocidad; // la guardamos por si no se puede resolver
             int intentos = 0;
-            bool conflicto = this.AnticiparConflicto(b, distanciaSeguridad, tiempoCiclo); //este metodo devuelve true si hay conflicto, false si no lo hay
+            bool conflicto = this.AnticiparConflicto(b, distanciaSeguridad, tiempoCiclo); 
 
-            while (conflicto && intentos < 20) // maximo 20 intentos para no quedarnos en un bucle infinito
+            while (conflicto && intentos < 20) // Máximo 20 intentos para no quedarnos en un bucle infinito
             {
-                this.velocidad = this.velocidad * 0.9; // bajamos la velocidad un 10%
-                conflicto = this.AnticiparConflicto(b, distanciaSeguridad, tiempoCiclo); //devuelve true o false
+                this.velocidad = this.velocidad * 0.9; // Bajamos la velocidad un 10%
+                conflicto = this.AnticiparConflicto(b, distanciaSeguridad, tiempoCiclo);
                 intentos++;
             }
 
             if (conflicto)
             {
-                this.velocidad = velocidadOriginal; // no se ha podido: dejamos la velocidad como estaba
+                this.velocidad = velocidadOriginal; // No se ha podido: dejamos la velocidad original
                 return false;
             }
             return true;
