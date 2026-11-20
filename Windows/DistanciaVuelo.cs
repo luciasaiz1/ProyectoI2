@@ -14,10 +14,11 @@ namespace Windows
 {
     public partial class DistanciaVuelo : Form
     {
+        // CONSTRUCTOR
         public DistanciaVuelo(FlightPlan vuelo, FlightPlanList lista)
         {
             InitializeComponent();
-            this.Text = "Distancia del vuelo " + vuelo.GetId(); // titulo de la ventana
+            this.Text = "Distancia del vuelo " + vuelo.GetId();
             label_distancia.Text = "Distancias al vuelo " + vuelo.GetId();
 
             dataGridView_vuelos.ReadOnly = true; 

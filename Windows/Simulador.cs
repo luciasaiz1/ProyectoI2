@@ -13,21 +13,19 @@ namespace Windows
 {
     public partial class Simulador : Form
     {
+        // ATRIBUTOS
         private Estilo estilo = new Estilo();
         private FlightPlanList llistaVuelos;
         private double distanciaSeguridad;
         private double tiempoCiclo;
-        private bool conflictoRevisado = false; // variable para controlar si ya hemos REVISADO el conflicto inicial
-        private bool avisoMostrado = false; // variable para controlar si ya hemos MOSTRADO el aviso de conflicto
-        private bool mensajeLlegadaMostrado = false; // variable para controlar si ya hemos MOSTRADO el mensaje de llegada de todos los vuelos
-
-        // Llista de PictureBox per representar tants avions com tinguem
+        private bool conflictoRevisado = false; 
+        private bool avisoMostrado = false; 
+        private bool mensajeLlegadaMostrado = false; 
         private List<PictureBox> llistaPictures = new List<PictureBox>();
         private Image imagenAvionOriginal;
         private Stack<FlightPlanList> stackVuelos = new Stack<FlightPlanList>();
         private const int TAM_AVION = 25;
-
-        private double escala = 1; //pixeles por cada unidad de las coordenadas
+        private double escala = 1;
         private double maxX = 1;
         private double maxY = 1;
 
@@ -41,11 +39,8 @@ namespace Windows
             this.tiempoCiclo = ciclo;
             this.stackVuelos = stack;
             this.stackVuelos.Clear();
-
-
             this.llistaVuelos.RestartAll();
             imagenAvionOriginal = new Bitmap(Properties.Resources.avion);
-
 
             Label_Info.Text = "Distancia de Seguridad: " + this.distanciaSeguridad + " | Tiempo ciclo: " + this.tiempoCiclo;
 
@@ -55,6 +50,7 @@ namespace Windows
             MostrarAvionesIniciales();
         }
 
+        // MÉTODOS
         private void MostrarAvionesIniciales()
         {
             llistaPictures.Clear();
@@ -316,10 +312,8 @@ namespace Windows
             InfoVuelo info = new InfoVuelo(plan);
             if (info.ShowDialog() == DialogResult.OK)
             {
-                ReiniciarSimulacion();
                 conflictoRevisado = true;
                 ComprobarNuevasVelocidades();
-
             }
 
             else if (estabaEnAutomatico)
