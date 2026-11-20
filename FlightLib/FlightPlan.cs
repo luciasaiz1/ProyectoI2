@@ -14,6 +14,7 @@ namespace FlightLib
         Position currentPosition; 
         Position finalPosition; 
         double velocidad;
+        double initialvelocidad;
         string company;
         string id;
 
@@ -25,6 +26,7 @@ namespace FlightLib
             this.currentPosition = new Position(cpx, cpy);
             this.finalPosition = new Position(fpx, fpy);
             this.velocidad = velocidad;
+            this.initialvelocidad = velocidad;
             this.company = company;
         }
 
@@ -146,6 +148,7 @@ namespace FlightLib
         {
             //mueve el avión a la posición inicial
             this.currentPosition = new Position(this.initialPosition.GetX(), this.initialPosition.GetY());
+            this.velocidad = this.initialvelocidad;
         }
 
         public double Distance(FlightPlan plan)
