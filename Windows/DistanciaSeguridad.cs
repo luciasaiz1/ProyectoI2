@@ -41,11 +41,7 @@ namespace Windows
         {
             return Convert.ToDouble(texto.Trim().Replace(',', '.'), CultureInfo.InvariantCulture);
         }
-        // Comprueba que el número es válido
-        private bool EsValido(double numero)
-        {
-            return numero > 0 && numero <= 100;
-        }
+      
         // Introduce los valores de distancia y ciclo
         private void button_aceptar_Click(object sender, EventArgs e)
         {
@@ -54,7 +50,7 @@ namespace Windows
                 double distancia = LeerNumero(textBox_distancia.Text);
                 double ciclo = LeerNumero(textBox_tiempoCiclo.Text);
 
-                if (EsValido(distancia) && EsValido(ciclo))
+                if ((distancia>=25 && distancia<=100) && (ciclo>=1 && ciclo<=50))
                 {
                     this.distanciaSeguridad = distancia;
                     this.tiempoCiclo = ciclo;
@@ -63,7 +59,7 @@ namespace Windows
                 }
                 else
                 {
-                    MessageBox.Show("Ambos valores deben ser números mayores que cero y menores o iguales a 100.");
+                    MessageBox.Show("La distancia de seguridad ha de ser un número entre 25 y 100, y el tiempo de ciclo ha de ser un número entre 1 y 50.");
                 }
             }
             catch (FormatException)

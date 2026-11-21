@@ -82,13 +82,13 @@ namespace Windows
 
         private void pic_Click(object sender, EventArgs e)
         {
-            //"sender" nos dice qué PictureBox ha sido clicado
+            // "sender" nos dice qué PictureBox ha sido clickado
             PictureBox picClicada = (PictureBox)sender;
 
-            //recuperamos el plan de vuelo que teníamos guardado en el Tag del PictureBox
+            // Recuperamos el plan de vuelo que teníamos guardado en el Tag del PictureBox
             FlightPlan avioSeleccionat = (FlightPlan)picClicada.Tag;
 
-            //abrimos la ventana de información de este avión
+            // Abrimos la ventana de información de este avión
             AbrirInfoVuelo(avioSeleccionat);
         }
 
@@ -120,7 +120,7 @@ namespace Windows
         private void RevisarConflictoInicial()
         {
             if (conflictoRevisado)
-                return; // solo se pregunta la primera vez
+                return; // Solo se pregunta la primera vez
             conflictoRevisado = true;
 
             bool[,] matriz = llistaVuelos.ObtenerMatrizConflictos(distanciaSeguridad, double.PositiveInfinity);
@@ -167,7 +167,7 @@ namespace Windows
             return vuelosEnConflicto;
         }
 
-        //Muestra una alarma con los vuelos que esten en conflicto
+        // Muestra una alarma con los vuelos que esten en conflicto
 
         private void button_mover_Click(object sender, EventArgs e)
         {
@@ -177,17 +177,17 @@ namespace Windows
             llistaVuelos.Move(tiempoCiclo);
             for (int i = 0; i < llistaVuelos.GetCount(); i++)
             {
-                //movemos los dibujos a sus nuevas posiciones
+                // Movemos los dibujos a sus nuevas posiciones
                 ColocarAvion(llistaPictures[i], llistaVuelos.GetFlightPlan(i));
             }
 
             DistanciasLabel();
 
-            //comprobamos si todos los vuelos han llegado a su destino y desactivamos los botones si es así
+            // Comprobamos si todos los vuelos han llegado a su destino y desactivamos los botones si es así
             bool todosHanLlegado = true;
             for (int i = 0; i < llistaVuelos.GetCount() && todosHanLlegado; i++)
             {
-                //si algún avión no ha llegado, ponemos false
+                // Si algún avión no ha llegado, ponemos false
                 if (!llistaVuelos.GetFlightPlan(i).HasArrived())
                 {
                     todosHanLlegado = false;
@@ -217,8 +217,8 @@ namespace Windows
                 Trajectories(plan, e.Graphics);
 
                 Position p = plan.GetCurrentPosition();
-                SecurityDistance(e.Graphics, pixelPantalla((float)p.GetX()), pixelPantalla((float)p.GetY()), pixelPantalla((float)distanciaSeguridad / 2), plan); //distanciaSeguridad/2 porque el radio es la mitad de la distancia de seguridad
-            }
+                SecurityDistance(e.Graphics, pixelPantalla((float)p.GetX()), pixelPantalla((float)p.GetY()), pixelPantalla((float)(distanciaSeguridad)/ 2), plan); //distanciaSeguridad/2 porque el radio es la mitad de la distancia de seguridad 
+            }                                                                                                                                                         
         }
 
         private void Trajectories(FlightPlan plan, Graphics g)
@@ -524,11 +524,8 @@ namespace Windows
         private void DistanciasLabel()
         {
             bool hayConflictoGeneral = false;
-
             string vuelosEnConflicto = "";
-            //se guarda la distancia mínima global entre todos los vuelos
             double minDistanciaGlobal = double.MaxValue;
-            bool[,] matriz = llistaVuelos.ObtenerMatrizConflictos(distanciaSeguridad, tiempoCiclo);
 
             for (int i = 0; i < llistaVuelos.GetCount(); i++)
             {
@@ -541,12 +538,11 @@ namespace Windows
                     if (dist < minDistanciaGlobal)
                         minDistanciaGlobal = dist;
 
-                    if (matriz[i, j])
+                    // Usamos Conflicto(...) en lugar de la matriz con tiempoCiclo
+                    if (p1.Conflicto(p2, distanciaSeguridad))
                     {
                         hayConflictoGeneral = true;
                         vuelosEnConflicto = vuelosEnConflicto + p1.GetId() + " y " + p2.GetId() + "\n";
-                        //si decidimos darle que no a solucionar conflicto y simulamos,
-                        //en el momento del cruce entre los vuelos que entrarán en conflicto saltará la alarma
                     }
                 }
             }
@@ -556,7 +552,6 @@ namespace Windows
                 Label_Conflicto.Text = "¡CONFLICTO! Distancia mínima: " + minDistanciaGlobal.ToString("F2");
                 Label_Conflicto.ForeColor = Color.Red;
             }
-
             else
             {
                 if (llistaVuelos.GetCount() > 1)
