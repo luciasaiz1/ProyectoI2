@@ -16,17 +16,19 @@ namespace FlightLib
         // ATRIBUTO
         private SQLiteConnection cnx;
 
-        //abrimos la base de datos de los usuarios.
-        //Devuelve true si se ha podido abrir y false si el fichero no existe o hay un error.
-
+        // Abrimos la base de datos de los usuarios
+        // Devuelve true si se ha podido abrir y false si el fichero no existe o hay un error
         public bool Iniciar()
         {
-            if (!File.Exists("usuarios.db"))
-                return false; //SQLite crearia una base vacía sin avisarnos; lo comprobaremos antes
-            try
+            string rutaDB = "..\\..\\usuarios.db"; // Subimos dos niveles desde bin\Debug para apuntar directo al usuarios.db del proyecto Windows
 
+
+            if (!File.Exists(rutaDB))
+                return false;
+
+            try
             {
-                cnx = new SQLiteConnection("Data Source=usuarios.db");
+                cnx = new SQLiteConnection("Data Source=" + rutaDB);
                 cnx.Open();
                 return true;
             }
