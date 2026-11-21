@@ -17,16 +17,18 @@ namespace Windows
         private Estilo estilo = new Estilo();
         private FlightPlanList listaVuelos = new FlightPlanList();
         private Stack<FlightPlanList> stackVuelos = new Stack<FlightPlanList>();
-
         private double distanciaSeguridad = 0;
         private double tiempoCiclo = 0;
-
-        private string usuario;
         public Principal(string usuario)
         {
             InitializeComponent();
-            this.usuario = usuario;
             this.Text = "Deconflicting Tool - Menú principal ⋅ Usuario: " + usuario;
+
+            pictureBoxTutorialLeft.Image = Properties.Resources.tutorial1;
+            pictureBoxTutorialRight.Image = Properties.Resources.tutorial2;
+
+            pictureBoxTutorialLeft.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBoxTutorialRight.SizeMode = PictureBoxSizeMode.Zoom;
 
             // Obre la finestra maximizada a pantalla completa
             this.WindowState = FormWindowState.Maximized;

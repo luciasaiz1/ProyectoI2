@@ -19,7 +19,6 @@ namespace Windows
         private double distanciaSeguridad;
         private double tiempoCiclo;
         private bool conflictoRevisado = false; 
-        private bool avisoMostrado = false; 
         private bool mensajeLlegadaMostrado = false; 
         private List<PictureBox> llistaPictures = new List<PictureBox>();
         private Image imagenAvionOriginal;
@@ -371,7 +370,6 @@ namespace Windows
                 button_auto.Enabled = true;
                 button_mover.Enabled = true;
 
-                avisoMostrado = false;
                 Label_Conflicto.Text = "Simulación reiniciada. Pulsa \"Mover\" o \"Automático\".";
                 Label_Conflicto.ForeColor = Color.FromArgb(11, 25, 44);
 
@@ -567,7 +565,6 @@ namespace Windows
                     Label_Conflicto.Text = "Simulación activa (1 solo vuelo)";
 
                 Label_Conflicto.ForeColor = Color.Green;
-                avisoMostrado = false;
             }
         }
         private Bitmap RotarImagen(Image imagen, float angulo)
