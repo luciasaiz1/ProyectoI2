@@ -47,17 +47,17 @@ namespace Windows
             {
                 if (Convert.ToInt64(textBox_velocidad.Text) < 0)
                 {
-                    MessageBox.Show("La velocidad debe ser un valor positivo");
+                    MessageBox.Show("La velocidad debe ser un valor positivo", "Conflictos", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
                 if (Convert.ToInt64(textBox_velocidad.Text) > 1000)
                 {
-                    MessageBox.Show("La velocidad debe ser un valor menor");
+                    MessageBox.Show("La velocidad debe ser un valor menor", "Conflictos", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
                 if (Convert.ToInt32(textBox_currentPositionX.Text) < 0 || Convert.ToInt32(textBox_currentPositionY.Text) < 0 || Convert.ToInt32(textBox_finalPositionX.Text) < 0 || Convert.ToInt32(textBox_finalPositionY.Text) < 0)
                 {
-                    MessageBox.Show("Las posiciones deben ser valores positivos");
+                    MessageBox.Show("Las posiciones deben ser valores positivos", "Conflictos", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
 
@@ -74,7 +74,7 @@ namespace Windows
             }
             catch (FormatException)
             {
-                MessageBox.Show("Error en los datos introducidos");
+                MessageBox.Show("Error en los datos introducidos", "Conflictos", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
         // Cerrar ventana
