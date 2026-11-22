@@ -59,12 +59,12 @@ namespace Windows
                 }
                 else
                 {
-                    MessageBox.Show("La distancia de seguridad ha de ser un número entre 25 y 100, y el tiempo de ciclo ha de ser un número entre 1 y 50.", "Conflictos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("La distancia de seguridad ha de ser un número entre 25 y 100, y el tiempo de ciclo ha de ser un número entre 1 y 50.", "Conflictos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
             catch (FormatException)
             {
-                MessageBox.Show("Error en los datos: escribe únicamente números enteros o decimales (ej. 5 o 2.5).", "Conflictos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Error en los datos: escribe únicamente números enteros o decimales (ej. 5 o 2.5).", "Conflictos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
             }
         }
