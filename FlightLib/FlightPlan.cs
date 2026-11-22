@@ -169,6 +169,7 @@ namespace FlightLib
 
             return copia;
         }
+
         // Conflictos y anticipación de conflictos
         // Devuelve true si la distancia entre dos vuelos es menor que la distancia de seguridad
         public bool Conflicto(FlightPlan b, double DistanciaSeguridad)

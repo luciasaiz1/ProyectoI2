@@ -137,7 +137,9 @@ namespace FlightLib
                     for (int j = i + 1; j < llistaVuelos.Count; j++)
                     {
                         if (!matriz[i, j])
+                        {
                             continue;
+                        }
 
                         FlightPlan primero = llistaVuelos[i];
                         FlightPlan segundo = llistaVuelos[j];
@@ -153,7 +155,9 @@ namespace FlightLib
                         double velocidadPrimero = primero.GetVelocidad();
                         primero.ResolverConflicto(segundo, distanciaSeguridad, tiempoCiclo);
                         if (Math.Abs(primero.GetVelocidad() - velocidadPrimero) > 0.000001)
+                        {
                             huboCambios = true;
+                        }
                     }
                 }
 
