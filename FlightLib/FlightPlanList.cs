@@ -101,6 +101,8 @@ namespace FlightLib
                 vol.Restart();
             }
         }
+
+        // Conflictos
         // Devuelve una matriz de booleanos indicando si hay conflicto entre cada par de vuelos de la lista
         public bool[,] ObtenerMatrizConflictos(double distanciaSeguridad, double horizonte)
         {
@@ -116,7 +118,6 @@ namespace FlightLib
                     matriz[j, i] = conflicto;
                 }
             }
-
             return matriz;
         }
         // Resuelve los conflictos entre los vuelos de la lista, devolviendo si se han resuelto todos correctamente

@@ -11,13 +11,14 @@ namespace Windows
 {
     public class Estilo
     {
+        // ATRIBUTO
         private Color fondo = Color.FromArgb(240, 240, 240);
 
-
+        // CONSTRUCTOR
         public void PintarFondo(Graphics g, Rectangle zona)
         {
             if (zona.Width == 0 || zona.Height == 0)
-                return; //ventana miinimizada: no hay nada que pintar
+                return; //No hay nada que pintar
 
             using (SolidBrush pincel = new SolidBrush(fondo))
             {

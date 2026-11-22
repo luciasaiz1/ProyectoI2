@@ -88,7 +88,7 @@ namespace Windows
                 if (gestion.ComprobarLogin(nombre, password))
                 {
                     usuarioConectado = nombre;
-                    this.DialogResult = DialogResult.OK;    //Cierra el login y avisa al programa de que puede abrir el menu
+                    this.DialogResult = DialogResult.OK;    //Cierra el login y avisa al programa de que puede abrir el menú
                 }
                 else
                 {
