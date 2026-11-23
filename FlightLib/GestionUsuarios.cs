@@ -46,8 +46,8 @@ namespace FlightLib
             }
         }
 
-        //El siguiente metodo indicará si existe usuario con ese nombre;
-        //Parametro: nombre del usuario. Devuelve true si existe
+        // El siguiente metodo indicará si existe usuario con ese nombre;
+        // Parámetro: nombre del usuario. Devuelve true si existe
         public bool ExisteUsuario(string nombre)
         {
             DataTable dt = new DataTable();
@@ -57,8 +57,8 @@ namespace FlightLib
             return dt.Rows.Count == 1;
         }
 
-        //Comprobamos si el nombre y contraseña son correctos
-        //devuelve true si coinciden con el usuario registrado
+        // Comprobamos si el nombre y contraseña son correctos
+        // Devuelve true si coinciden con el usuario registrado
 
         public bool ComprobarLogin(string nombre, string password)
         {
@@ -69,8 +69,8 @@ namespace FlightLib
             return dt.Rows.Count == 1;
         }
 
-        //Registrar un usuario nuevo
-        //Parametros: nombre, palabra de recuperacion y password, devuelve 0 si se ha registrado con exito, -1 si ya existe y -2 si ha habido un error
+        // Registrar un usuario nuevo
+        // Parámetros: nombre, palabra de recuperación y contraseña, devuelve 0 si se ha registrado con éxito, -1 si ya existe y -2 si ha habido un error
         public int Registrar(string nombre, string password, string recuperacion)
         {
             if (ExisteUsuario(nombre))
@@ -86,7 +86,7 @@ namespace FlightLib
                 return - 2;
         }
 
-        //Metodo boolean para cambiar contraseña, parametros: nombre, palabra de recuperacion y  nueva contraseña
+        // Método boolean para cambiar contraseña, parámetros: nombre, palabra de recuperación y nueva contraseña
         public bool CambiarPassword(string nombre, string recuperacion, string nuevaPassword)
         {
             string sql = "UPDATE usuarios SET password = '" + nuevaPassword + "' WHERE nombre = '" + nombre + "' AND recuperacion = '" + recuperacion + "'";
