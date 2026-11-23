@@ -24,6 +24,7 @@ namespace Windows
         private Image imagenAvionOriginal;
         private Stack<FlightPlanList> stackVuelos = new Stack<FlightPlanList>();
         private const int TAM_AVION = 25;
+        private bool mostrarIds = false;
         private double escala = 1;
         private double maxX = 1;
         private double maxY = 1;
@@ -205,7 +206,31 @@ namespace Windows
 
                 Position p = plan.GetCurrentPosition();
                 SecurityDistance(e.Graphics, pixelPantalla((float)p.GetX()), pixelPantalla((float)p.GetY()), pixelPantalla((float)(distanciaSeguridad) / 2), plan); //distanciaSeguridad/2 porque el radio es la mitad de la distancia de seguridad 
+
+                if (mostrarIds)
+                {
+                    string id = plan.GetId();
+                    SizeF tamTexto = e.Graphics.MeasureString(id, this.Font);
+
+                    float x = pixelPantalla(p.GetX()) - tamTexto.Width / 2;
+                    float y = pixelPantalla(p.GetY()) - TAM_AVION / 2f - tamTexto.Height;
+
+                    e.Graphics.DrawString(id, this.Font, Brushes.White, x, y);
+                }
             }
+        }
+        private void button_IDs_Click(object sender, EventArgs e)
+        {
+            mostrarIds = !mostrarIds;
+            if (mostrarIds)
+            {
+                button_IDs.Text = "Ocultar IDs";
+            }
+            else
+            {
+                button_IDs.Text = "Mostrar IDs";
+            }
+            pictureBox_espacioAereo.Invalidate();
         }
         // Muestra los aviones en su posición inicial y los dibuja en el espacio aéreo
         private void MostrarAvionesIniciales()
