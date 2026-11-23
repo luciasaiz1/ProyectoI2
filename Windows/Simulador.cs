@@ -438,7 +438,7 @@ namespace Windows
             pictureBox_espacioAereo.Invalidate();
         }
 
-        // Otro botones
+        // Otros botones
         // Pregunta si hay conflicto y ofrece solucionarlo 
         private void button_conflicto_Click(object sender, EventArgs e)
         {
