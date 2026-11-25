@@ -44,6 +44,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.numericUpDown_velocidad = new System.Windows.Forms.NumericUpDown();
             this.button1_aplicar = new System.Windows.Forms.Button();
+            this.button_info_compañias = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_velocidad)).BeginInit();
             this.SuspendLayout();
             // 
@@ -126,7 +127,7 @@
             this.button_cerrar.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_cerrar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.button_cerrar.Location = new System.Drawing.Point(97, 429);
-            this.button_cerrar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button_cerrar.Margin = new System.Windows.Forms.Padding(4);
             this.button_cerrar.Name = "button_cerrar";
             this.button_cerrar.Size = new System.Drawing.Size(249, 31);
             this.button_cerrar.TabIndex = 8;
@@ -227,7 +228,7 @@
             // numericUpDown_velocidad
             // 
             this.numericUpDown_velocidad.Location = new System.Drawing.Point(199, 137);
-            this.numericUpDown_velocidad.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.numericUpDown_velocidad.Margin = new System.Windows.Forms.Padding(4);
             this.numericUpDown_velocidad.Name = "numericUpDown_velocidad";
             this.numericUpDown_velocidad.Size = new System.Drawing.Size(81, 22);
             this.numericUpDown_velocidad.TabIndex = 20;
@@ -239,7 +240,7 @@
             this.button1_aplicar.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1_aplicar.ForeColor = System.Drawing.Color.White;
             this.button1_aplicar.Location = new System.Drawing.Point(313, 134);
-            this.button1_aplicar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button1_aplicar.Margin = new System.Windows.Forms.Padding(4);
             this.button1_aplicar.Name = "button1_aplicar";
             this.button1_aplicar.Size = new System.Drawing.Size(100, 28);
             this.button1_aplicar.TabIndex = 21;
@@ -247,12 +248,28 @@
             this.button1_aplicar.UseVisualStyleBackColor = false;
             this.button1_aplicar.Click += new System.EventHandler(this.button1_aplicar_Click);
             // 
+            // button_info_compañias
+            // 
+            this.button_info_compañias.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(116)))), ((int)(((byte)(139)))));
+            this.button_info_compañias.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button_info_compañias.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_info_compañias.ForeColor = System.Drawing.Color.White;
+            this.button_info_compañias.Location = new System.Drawing.Point(313, 78);
+            this.button_info_compañias.Margin = new System.Windows.Forms.Padding(4);
+            this.button_info_compañias.Name = "button_info_compañias";
+            this.button_info_compañias.Size = new System.Drawing.Size(100, 28);
+            this.button_info_compañias.TabIndex = 22;
+            this.button_info_compañias.Text = "Información";
+            this.button_info_compañias.UseVisualStyleBackColor = false;
+            this.button_info_compañias.Click += new System.EventHandler(this.button_info_compañias_Click);
+            // 
             // InfoVuelo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(439, 506);
+            this.Controls.Add(this.button_info_compañias);
             this.Controls.Add(this.button1_aplicar);
             this.Controls.Add(this.numericUpDown_velocidad);
             this.Controls.Add(this.label6);
@@ -271,7 +288,7 @@
             this.Controls.Add(this.label_id);
             this.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.Name = "InfoVuelo";
             this.Text = "Informacion de Vuelo";
@@ -299,5 +316,6 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.NumericUpDown numericUpDown_velocidad;
         private System.Windows.Forms.Button button1_aplicar;
+        private System.Windows.Forms.Button button_info_compañias;
     }
 }

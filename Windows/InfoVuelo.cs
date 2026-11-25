@@ -69,5 +69,12 @@ namespace Windows
         {
             this.Close();
         }
+
+        private void button_info_compañias_Click(object sender, EventArgs e)
+        {
+            InfoCompañia c = new InfoCompañia();
+            c.SetInfo(plan.GetCompany(), "+34 123 456 789", plan.GetCompany()+"@gmail.com");
+            c.Show();
+        }
     }
 }

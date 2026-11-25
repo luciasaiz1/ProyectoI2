@@ -34,12 +34,49 @@ namespace Windows
         // Añade vuelos predeterminados 
         private void button_predeterminados_Click(object sender, EventArgs e)
         {
+            if (!RegistrarCompañiaSiNoExiste("Vueling") || !RegistrarCompañiaSiNoExiste("Iberia"))
+                return;
+
             plan1 = new FlightPlan("VY2986", 0, 0, 2600, 1400, 60, "Vueling");
             plan2 = new FlightPlan("IB412", 0, 1400, 2600, 0, 60, "Iberia");
             listaPlanes.AddFlightPlan(plan1);
             listaPlanes.AddFlightPlan(plan2);
             Close();
         }
+
+        private bool RegistrarCompañiaSiNoExiste(string nombre)
+        {
+            nombre = (nombre ?? "").Trim();
+            if (nombre.Length == 0)
+                return true;
+
+            GestionCompañias gestion = new GestionCompañias();
+            if (!gestion.Iniciar())
+            {
+                MessageBox.Show("No se ha podido abrir la base de datos de compañías.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            try
+            {
+                int resultado = gestion.RegistrarCompañia(nombre, "", "","");
+                if (resultado == 0 || resultado == -1)
+                    return true;
+
+                MessageBox.Show("No se ha podido guardar la compañía en la base de datos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al guardar la compañía: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            finally
+            {
+                gestion.Cerrar();
+            }
+        }
+
         // Añadir un nuevo plan de vuelo
         private void button_añadir_Click(object sender, EventArgs e)
         {
@@ -61,7 +98,11 @@ namespace Windows
                     return;
                 }
 
-                plan1 = new FlightPlan(textBox_Id.Text, Convert.ToDouble(textBox_currentPositionX.Text), Convert.ToDouble(textBox_currentPositionY.Text), Convert.ToDouble(textBox_finalPositionX.Text), Convert.ToDouble(textBox_finalPositionY.Text), Convert.ToDouble(textBox_velocidad.Text), name_company.Text);
+                string nombreCompañia = name_company.Text.Trim();
+                if (!RegistrarCompañiaSiNoExiste(nombreCompañia))
+                    return;
+
+                plan1 = new FlightPlan(textBox_Id.Text, Convert.ToDouble(textBox_currentPositionX.Text), Convert.ToDouble(textBox_currentPositionY.Text), Convert.ToDouble(textBox_finalPositionX.Text), Convert.ToDouble(textBox_finalPositionY.Text), Convert.ToDouble(textBox_velocidad.Text), nombreCompañia);
                 listaPlanes.AddFlightPlan(plan1);
 
                 textBox_Id.Text = "";
