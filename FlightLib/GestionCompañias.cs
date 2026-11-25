@@ -39,8 +39,6 @@ namespace FlightLib
             }
         }
 
-
-
         public void Cerrar()
         {
             if (cnx != null)
@@ -151,6 +149,15 @@ namespace FlightLib
             int filas = command.ExecuteNonQuery();
 
             return filas == 1;
+        }
+        public bool BorrarTodasLasCompañias()
+        {
+            string sql = "DELETE FROM compañias";
+
+            using (SQLiteCommand command = new SQLiteCommand(sql, cnx))
+            {
+                return command.ExecuteNonQuery() >= 0;
+            }
         }
     }
 }

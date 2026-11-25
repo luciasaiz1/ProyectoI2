@@ -72,9 +72,49 @@ namespace Windows
 
         private void button_info_compañias_Click(object sender, EventArgs e)
         {
-            InfoCompañia c = new InfoCompañia();
-            c.SetInfo(plan.GetCompany(), "+34 123 456 789", plan.GetCompany()+"@gmail.com");
-            c.Show();
+            string telefono = "123 456 789";
+            string correo = plan.GetCompany() + "@gmail.com";
+
+            GestionCompañias gestion = new GestionCompañias();
+
+            if (gestion.Iniciar())
+            {
+                try
+                {
+                    DataTable datos = gestion.GetCompañias();
+
+                    foreach (DataRow fila in datos.Rows)
+                    {
+                        if (fila["nombre"].ToString() == plan.GetCompany())
+                        {
+                            string telefonoGuardado =
+                                fila["telefono"].ToString();
+
+                            string correoGuardado =
+                                fila["correo"].ToString();
+
+                            if (!string.IsNullOrWhiteSpace(telefonoGuardado))
+                                telefono = telefonoGuardado;
+
+                            if (!string.IsNullOrWhiteSpace(correoGuardado))
+                                correo = correoGuardado;
+
+                            break;
+                        }
+                    }
+                }
+                finally
+                {
+                    gestion.Cerrar();
+                }
+            }
+
+            InfoCompañia c = new InfoCompañia(plan);
+
+            c.SetInfo(plan.GetCompany(),telefono,correo);
+            c.ShowDialog();
+
+            label_compania.Text = plan.GetCompany();
         }
     }
 }

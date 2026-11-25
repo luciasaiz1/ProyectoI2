@@ -507,6 +507,20 @@ namespace Windows
                 reloj.Start();
             }
         }
+        private void button_compañias_Click(object sender, EventArgs e)
+        {
+            bool estabaEnAutomatico = reloj.Enabled;
+            reloj.Stop();
+
+            DatosCompañias form = new DatosCompañias(llistaVuelos);
+            form.ShowDialog();
+
+            // Si estaba en automático, seguimos
+            if (estabaEnAutomatico)
+            {
+                reloj.Start();
+            }
+        }
         // Resetea la simulación a su estado inicial
         private void button_reset_Click(object sender, EventArgs e)
         {

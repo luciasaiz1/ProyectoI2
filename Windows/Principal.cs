@@ -53,6 +53,50 @@ namespace Windows
                 MessageBox.Show("Se han añadido " + listaVuelos.GetCount() + " vuelos correctamente!", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
+        private bool RegistrarCompañiaSiNoExiste(string nombre)
+        {
+            nombre = (nombre ?? "").Trim();
+
+            if (nombre.Length == 0)
+                return true;
+
+            GestionCompañias gestion = new GestionCompañias();
+
+            if (!gestion.Iniciar())
+            {
+                MessageBox.Show(
+                    "No se ha podido abrir la base de datos de compañías.",
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+
+                return false;
+            }
+
+            try
+            {
+                int resultado = gestion.RegistrarCompañia(nombre,"","","");
+
+                if (resultado == 0 || resultado == -1)
+                    return true;
+
+                MessageBox.Show(
+                    "No se ha podido guardar la compañía en la base de datos.","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+
+                return false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al guardar la compañía: " + ex.Message,"Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+
+                return false;
+            }
+            finally
+            {
+                gestion.Cerrar();
+            }
+        }
+
         // Introducir datos de vuelos desde un fichero
         private void introducirDatosToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -69,11 +113,14 @@ namespace Windows
 
                 if (cargadoCorrectamente && listaVuelos.GetCount() > 0)
                 {
-                    MessageBox.Show("Se han cargado " + listaVuelos.GetCount() + " vuelos correctamente desde el fichero!", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                else
-                {
-                    MessageBox.Show("No se han podido cargar los vuelos. Revisa el fichero: \n\n" + listaVuelos.GetErroresLectura(), "Error de formato en el fichero", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    for (int i = 0; i < listaVuelos.GetCount(); i++)
+                    {
+                        FlightPlan vuelo = listaVuelos.GetFlightPlan(i);
+
+                        if (!RegistrarCompañiaSiNoExiste(vuelo.GetCompany()))
+                            return;
+                    }
+                    MessageBox.Show("Se han cargado " + listaVuelos.GetCount() +" vuelos correctamente desde el fichero!","Éxito",MessageBoxButtons.OK,MessageBoxIcon.Information);
                 }
             }
         }
